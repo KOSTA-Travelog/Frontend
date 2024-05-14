@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import styled from 'styled-components';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const FixedHeaderDiv = styled.main`
   background: #fff;
@@ -14,7 +14,7 @@ const TitleStyleA = styled.a`
   font-size: 1.5em;
   display: flex;
   flex-direction: row;
-  color: #5C7CFA;
+  color: #5c7cfa;
 `;
 
 const HeaderWrapperDiv = styled.div`
@@ -25,16 +25,17 @@ const HeaderWrapperDiv = styled.div`
   padding: 1rem;
 `;
 export default function Header() {
-
-  return (<header>
-    <FixedHeaderDiv>
-      <HeaderWrapperDiv>
-        <TitleStyleA href="/">
-          <i className="bi bi-airplane-fill"></i>
-          <b>Trevelog</b>
-        </TitleStyleA>
-        <i className="bi bi-bell"></i>
-      </HeaderWrapperDiv>
-    </FixedHeaderDiv>
-  </header>)
+  return (
+    <header>
+      <FixedHeaderDiv>
+        <HeaderWrapperDiv>
+          <TitleStyleA href="/">
+            <i className="bi bi-airplane-fill"></i>
+            <b>Trevelog</b>
+          </TitleStyleA>
+          <i className="bi bi-bell"></i>
+        </HeaderWrapperDiv>
+      </FixedHeaderDiv>
+    </header>
+  );
 }

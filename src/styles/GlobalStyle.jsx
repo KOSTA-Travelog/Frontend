@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import normalize from "styled-normalize";
-import Palette from "./Palette.jsx";
+import { createGlobalStyle } from 'styled-components';
+import normalize from 'styled-normalize';
+import Palette from './Palette.jsx';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -26,5 +26,11 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
     padding: 0;
   }
+
+  button {
+    border: none;
+    background-color: ${Palette.BodyPrimary};
+  }
+  
 `;
 export default GlobalStyle;

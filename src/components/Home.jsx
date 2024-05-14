@@ -1,6 +1,7 @@
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
-import styled from "styled-components";
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import styled from 'styled-components';
+import Modal from './Modal.jsx';
 
 const rendering = () => {
   const result = [];
@@ -14,6 +15,11 @@ const AppStyle = styled.body`
   flex-direction: column;
   align-items: center;
 `;
+
+const props = {
+  text: '삭제하기',
+  type: 'delete',
+};
 export default function Home() {
   return (
     <>
@@ -21,15 +27,16 @@ export default function Home() {
         <Header />
         <main
           style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "0 auto",
-            justifyContent: "space-between",
+            display: 'flex',
+            flexDirection: 'column',
+            margin: '0 auto',
+            justifyContent: 'space-between',
           }}
         >
           <h1>Hello World</h1>
           {rendering()}
         </main>
+
         <Footer />
       </AppStyle>
     </>

@@ -3,6 +3,6 @@ import { styled } from 'styled-components';
 
 
 export default function ConfirmDeleteModal() {
-  return (
+  return ()
    
 }
