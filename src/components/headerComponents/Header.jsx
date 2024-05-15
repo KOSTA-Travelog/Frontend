@@ -20,29 +20,20 @@ const HeaderWrapperDiv = styled.div`
   height: 100%;
 `;
 
-const TitleStyleA = styled.a`
-  font-size: 1.5em;
-  display: flex;
-  flex-direction: row;
-  color: #5c7cfa;
-`;
+const Header = ({title, left, right}) => (
+    <FixedHeader>
+      <HeaderWrapperDiv>
+        {left}
+        {title}
+        {right}
+      </HeaderWrapperDiv>
+    </FixedHeader>
+);
 
 Header.propTypes = {
   left: PropTypes.node,
   right: PropTypes.node,
-  title: PropTypes.string,
+  title: PropTypes.node,
 }
 
-export default function Header({title, left, right}) {
-  return (
-      <FixedHeader>
-        <HeaderWrapperDiv>
-          <TitleStyleA href="/">
-            {left || null}
-            <b>{title}</b>
-          </TitleStyleA>
-          {right || null}
-        </HeaderWrapperDiv>
-      </FixedHeader>
-  );
-}
+export default Header;

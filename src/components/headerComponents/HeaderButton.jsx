@@ -6,12 +6,10 @@ const Button = styled.button`
   color: ${props => props.color};
 `;
 
-const HeaderButton = ({icon, action, color}) => (
-    <>
-      <Button color={color} onClick={action}>
-        {icon}
-      </Button>
-    </>
+const HeaderButton = ({icon, action, color = Palette.TextPrimary}) => (
+    <Button color={color} onClick={action}>
+      {icon}
+    </Button>
 );
 
 Button.propTypes = {
@@ -20,10 +18,6 @@ Button.propTypes = {
 
 HeaderButton.propTypes = {
   icon: PropTypes.node, action: PropTypes.func, color: PropTypes.string
-}
-
-HeaderButton.defaultProps = {
-  color: Palette.TextPrimary
 }
 
 export default HeaderButton;
