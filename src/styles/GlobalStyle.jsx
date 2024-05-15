@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     font-size: 14px;
     color: ${Palette.TextPrimary};
+    overflow-x: hidden;
   }
 
   p {
@@ -25,6 +26,16 @@ const GlobalStyle = createGlobalStyle`
   ul {
     list-style: none;
     padding: 0;
+  }
+
+  button {
+    border: none;
+    background-color: ${Palette.BodyPrimary};
+  }
+
+  a {
+    color: ${Palette.TextPrimary};
+    text-decoration: none;
   }
 `;
 export default GlobalStyle;
