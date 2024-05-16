@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 
   h1, h2, h3{

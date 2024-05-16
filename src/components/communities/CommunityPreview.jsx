@@ -42,7 +42,8 @@ CommunityPreview.propTypes = {
 };
 
 const CommunityComponentsArticle = styled.article`
-  width: 22rem;
+  /* width: 22rem; */
+  width: 100%;
   height: 6.7rem;
   background: ${Palette.BodyPrimary};
   box-shadow: 0px 2px 10px rgba(231, 233, 242, 0.7);
@@ -50,19 +51,22 @@ const CommunityComponentsArticle = styled.article`
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.8rem;
   padding: 0.55rem 0.7rem 0.5rem 0.5rem;
 `;
 
 const CommunityImg = styled.img`
   background-image: url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fHww')
     center;
-  width: 5.5rem;
+  /* width: 5.5rem; */
+  width: 30%;
   height: 5.5rem;
 `;
 
 const CommunityContent = styled.article`
-  width: 15rem;
+  /* min-width: 15rem; */
+  width: 70%;
   display: flex;
   flex-direction: column;
   padding: 0.2rem 0.5rem;

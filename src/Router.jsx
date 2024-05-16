@@ -1,22 +1,23 @@
-import {createBrowserRouter} from "react-router-dom";
-import Footer from "./components/Footer.jsx";
-import Header from "./components/headerComponents/Header.jsx";
-import HomePage from "./pages/HomePage.jsx";
-import FeedPage from "./pages/FeedPage.jsx";
+import { createBrowserRouter } from 'react-router-dom';
+import Footer from './components/Footer.jsx';
+import Header from './components/headerComponents/Header.jsx';
+import HomePage from './pages/HomePage.jsx';
+import FeedPage from './pages/FeedPage.jsx';
 import Login from './pages/auth/Login.jsx';
 import Registration from './pages/auth/Registration.jsx';
 import FindAccount from './pages/auth/FindAccount.jsx';
 import FindPassword from './pages/auth/FindPassword.jsx';
-import Community from './pages/Community.jsx';
+import Community from './pages/community/Community.jsx';
+import CommunityDetails from './pages/community/CommunityDetails.jsx';
 
 const Router = createBrowserRouter([
   {
-    path: "/feed/:id",
-    element: <FeedPage/>
+    path: '/feed/:id',
+    element: <FeedPage />,
   },
   {
-    path: "/",
-    element: <HomePage/>,
+    path: '/',
+    element: <HomePage />,
   },
   {
     path: '/foo',
@@ -65,6 +66,10 @@ const Router = createBrowserRouter([
   {
     path: '/community',
     element: <Community />,
+  },
+  {
+    path: '/community/details',
+    element: <CommunityDetails />,
   },
 ]);
 

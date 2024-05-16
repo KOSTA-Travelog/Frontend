@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Palette from '../styles/Palette';
-import InputBasic from '../components/InputBasic';
-import CommunityPreview from '../components/communities/CommunityPreview';
-import CommunitySubTitle from '../components/communities/CommunitySubTitle';
-import Header, { HeaderTitle } from '../components/headerComponents/Header';
-import HeaderButton from '../components/headerComponents/HeaderButton';
+
 import { useNavigate } from 'react-router-dom';
+import CommunityPreview from '../../components/communities/CommunityPreview';
+import Header, { HeaderTitle } from '../../components/headerComponents/Header';
+import Palette from '../../styles/Palette';
+import HeaderButton from '../../components/headerComponents/HeaderButton';
+import InputBasic from '../../components/InputBasic';
+import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
+import CommunityTab from '../../components/communities/CommunityTab';
+import { useState } from 'react';
 
 const Community = () => {
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(['', '']);
 
   const MyCommunities = [
     {
@@ -25,6 +28,23 @@ const Community = () => {
       date: '2024.05.10',
     },
   ];
+  const tabMenu = ['My Communities', 'All Communities'];
+
+  const tab = tabMenu.map((menu, index) => {
+    return (
+      <CommunityTab
+        text={menu}
+        key={index}
+        selected={menu}
+        onClick={() => {
+          console.log('click', index);
+          // let arr = [...menu];
+          // arr[index] = 'selected';
+          // setMenu([...arr]);
+        }}
+      />
+    );
+  });
 
   const communityData = MyCommunities.map((community, index) => {
     return (
@@ -55,7 +75,7 @@ const Community = () => {
         }
         right={
           <HeaderButton
-            icon={<i class="bi bi-plus-circle"></i>}
+            icon={<i className="bi bi-plus-circle"></i>}
             action={() => {
               navigate('');
             }}
@@ -64,16 +84,7 @@ const Community = () => {
       />
       <CommunityTabSection>
         <InputBasic text={'Search here'} className={'searchInput'} />
-        <TabWrapper>
-          <FirstTabMenuWrapper>
-            <FirstTabMenu>My Communities</FirstTabMenu>
-            <Focus></Focus>
-          </FirstTabMenuWrapper>
-          <SecondTabMenuWrapper>
-            <SecondTabMenu>All Communities</SecondTabMenu>
-            <Focus></Focus>
-          </SecondTabMenuWrapper>
-        </TabWrapper>
+        <TabWrapper>{tab}</TabWrapper>
       </CommunityTabSection>
       <HR />
       <CommunityComponentsSection>
@@ -103,56 +114,6 @@ const CommunityWrapper = styled.div`
 const CommunityTabSection = styled.section`
   width: 100%;
   background-color: ${Palette.BodyPrimary};
-  /* position: fixed;
-  display: flex;
-  flex-direction: column;
-  height: 8rem;
-  z-index: 200; */
-`;
-
-const TabWrapper = styled.article`
-  width: 100%;
-  height: 4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 2rem;
-  align-items: center;
-`;
-
-const Focus = styled.div`
-  width: 7px;
-  height: 7px;
-  border-radius: 100%;
-  background-color: ${Palette.Primary};
-`;
-
-const FirstTabMenuWrapper = styled.div`
-  width: 8.5rem;
-  height: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FirstTabMenu = styled.div`
-  height: 1rem;
-  color: ${Palette.Primary};
-`;
-
-const SecondTabMenuWrapper = styled.div`
-  width: 8.5rem;
-  height: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SecondTabMenu = styled.div`
-  height: 1rem;
-  color: ${Palette.Primary};
 `;
 
 const CommunityComponentsSection = styled.section`
@@ -163,6 +124,16 @@ const CommunityComponentsSection = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-top: 1.2rem;
+`;
+
+const TabWrapper = styled.article`
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 2rem;
+  align-items: center;
 `;
 
 export default Community;
