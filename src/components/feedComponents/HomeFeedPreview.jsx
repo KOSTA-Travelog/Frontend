@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
 const FeedContent = styled.div`
 `
@@ -15,9 +16,13 @@ const Title = styled.div`
   display: flex;
   margin: 0.5rem;
   height: 2rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   align-items: center;
+  white-space: nowrap;
+  overflow: clip;
+  text-overflow: ellipsis;
+  max-width: 100%;
 `
 
 const FeedFooter = styled.div`
@@ -39,15 +44,13 @@ const Profile = styled.div`
   gap: 0.25rem;
 `
 
-const UserName = styled.div`
-`
-
 const FeedInfoGroup = styled.div`
   display: flex;
   gap: 0.5rem;
 `
 
 const FeedInfo = styled.div`
+  min-width: 2rem;
   display: flex;
   gap: 0.25rem;
   font-size: 1rem;
@@ -57,38 +60,45 @@ const FeedInfoIcon = styled.i`
   font-style: normal;
 `
 
-const HomeFeed = (props) => {
+const HomeFeedPreview = (props) => {
+  const navigate = useNavigate()
   return (<>
-    <FeedContent>
+    <FeedContent onClick={() => {
+      navigate(`/feed/${props.feedId}`);
+    }}>
       <FeedImage src={props.image}/>
       <Title>{props.title}</Title>
     </FeedContent>
     <FeedFooter>
       <Profile onClick={() => location.href = `/profile/${props.userName}`}>
         {<ProfileImage src={props.userImg}/>}
-        <UserName>{props.userName}</UserName>
+        <div>{props.userName}</div>
       </Profile>
       <FeedInfoGroup>
-        <FeedInfo>
+        <FeedInfo onClick={() => {
+        }}>
           <FeedInfoIcon className="bi bi-heart"/>
-          {props.likeCount}2
+          {props.likeCount}
         </FeedInfo>
-        <FeedInfo>
+        <FeedInfo onClick={() => {
+          navigate(`/feed/${props.feedId}#comment`);
+        }}>
           <FeedInfoIcon className="bi bi-chat"/>
-          {props.replyCount}2
+          {props.replyCount}
         </FeedInfo>
       </FeedInfoGroup>
     </FeedFooter>
   </>);
 }
 
-HomeFeed.propTypes = {
+HomeFeedPreview.propTypes = {
   image: PropTypes.string,
   userName: PropTypes.string,
   userImg: PropTypes.string,
   title: PropTypes.string,
   likeCount: PropTypes.number,
   replyCount: PropTypes.number,
+  feedId: PropTypes.number,
 }
 
-export default HomeFeed;
+export default HomeFeedPreview;

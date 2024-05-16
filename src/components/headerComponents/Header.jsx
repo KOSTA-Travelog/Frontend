@@ -20,12 +20,32 @@ const HeaderWrapperDiv = styled.div`
   height: 100%;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 2rem;
+  align-items: center;
+`
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+`
+
 const Header = ({title, left, right}) => (
     <FixedHeader>
       <HeaderWrapperDiv>
-        {left}
+        <ButtonWrapper>
+          {left}
+        </ButtonWrapper>
         {title}
-        {right}
+        <ButtonWrapper>
+          {right}
+        </ButtonWrapper>
       </HeaderWrapperDiv>
     </FixedHeader>
 );
@@ -34,6 +54,20 @@ Header.propTypes = {
   left: PropTypes.node,
   right: PropTypes.node,
   title: PropTypes.node,
+}
+
+export const HeaderTitle = ({align, title, action}) => (
+    <Title onClick={action} style={{
+      alignItems: align,
+    }}>
+      {title}
+    </Title>
+)
+
+HeaderTitle.propTypes = {
+  align: PropTypes.oneOf(["flex-start", "center", "flex-end"]),
+  title: PropTypes.node,
+  action: PropTypes.func,
 }
 
 export default Header;
