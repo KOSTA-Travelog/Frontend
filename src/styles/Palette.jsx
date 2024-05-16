@@ -11,5 +11,9 @@ const Palette = {
   BodyPrimary: '#FFFFFF',
   BodySecondary: '#F5F5F4',
   InputBorder: '#C9D3DB',
+  ModalBorder: '#CFCFCF',
+  HashTagYellowGreen: '#e6f9ea',
+  HashTagGreen: '#1fb881',
+  TabBorderBottom: '#e7e7e7',
 };
 export default Palette;

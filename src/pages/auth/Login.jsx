@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import Palette from '../styles/Palette';
+import Palette from '../../styles/Palette';
 import React from 'react';
-import Modal from '../components/Modal';
+import RoundButton from '../../components/RoundButton';
+import InputBasic from '../../components/InputBasic';
 
 const Login = () => {
   return (
@@ -12,20 +13,17 @@ const Login = () => {
         </LogoImgWrapper>
       </LogoWrapper>
       <LoginForm>
-        <EmailInputWrapper>
-          <LoginInput placeholder="Email" />
-        </EmailInputWrapper>
-        <PwInputWrapper>
-          <LoginInput placeholder="Password" />
-        </PwInputWrapper>
+        <InputBasic text="Email" />
+        <InputBasic text="Password" />
         <LoginBtnWrapper>
-          <LoginBtn>Log in</LoginBtn>
-          <CreateAccountBtn>Create new account</CreateAccountBtn>
+          <RoundButton text={'Log in'} type={'PrimaryRound'} />
+          <RoundButton text={'Create new accout'} type={'transparentRound'} />
         </LoginBtnWrapper>
       </LoginForm>
       <FindInfoWrapper>
         <ForgetEmailBtn>Forget account?</ForgetEmailBtn>
-        <ForgetPwBtn>Forget Password?</ForgetPwBtn>
+        <BtnDivider>Or</BtnDivider>
+        <ForgetPwBtn>Password?</ForgetPwBtn>
       </FindInfoWrapper>
     </LoginPageWrapper>
   );
@@ -56,54 +54,12 @@ const LoginForm = styled.div`
   justify-content: space-between;
 `;
 
-const EmailInputWrapper = styled.div`
-  width: 100%;
-`;
-
-const LoginInput = styled.input`
-  width: 100%;
-  height: 3.5rem;
-
-  background: ${Palette.BodyPrimary};
-  border: 1px solid ${Palette.InputBorder};
-  border-radius: 10px;
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 100%;
-
-  color: ${Palette.InputBorder};
-  padding-left: 1rem;
-`;
-
-const PwInputWrapper = styled.div`
-  width: 100%;
-`;
-
 const LoginBtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 50%;
   height: 6.5rem;
   justify-content: space-between;
-`;
-
-const LoginBtn = styled.button`
-  height: 3rem;
-  background-color: ${Palette.Primary};
-  color: ${Palette.BodyPrimary};
-  border-radius: 50px;
-`;
-
-const CreateAccountBtn = styled.button`
-  /* Button */
-
-  box-sizing: border-box;
-  height: 3rem;
-  color: ${Palette.Primary};
-  border: 1.5px solid ${Palette.Primary};
-  border-radius: 50px;
 `;
 
 const FindInfoWrapper = styled.div`
@@ -113,6 +69,8 @@ const FindInfoWrapper = styled.div`
   justify-content: space-between;
   height: 3rem;
   padding: 1rem;
+  padding-left: 3.5rem;
+  padding-right: 5em;
 `;
 
 const ForgetEmailBtn = styled.button`
@@ -120,5 +78,9 @@ const ForgetEmailBtn = styled.button`
 `;
 
 const ForgetPwBtn = styled.button`
+  color: ${Palette.InputBorder};
+`;
+
+const BtnDivider = styled.div`
   color: ${Palette.InputBorder};
 `;
