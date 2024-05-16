@@ -62,7 +62,7 @@ const Community = () => {
     <CommunityWrapper>
       <Header
         vertical={0}
-        horizontal={1.5}
+        horizontal={1.0}
         left={
           <HeaderTitle
             align={'flex-start'}

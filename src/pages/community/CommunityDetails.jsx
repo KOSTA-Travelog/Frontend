@@ -4,9 +4,35 @@ import Palette from '../../styles/Palette';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Footer from '../../components/Footer';
+import SettingModal from './SettingModal';
+import { useState } from 'react';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();
+  const [settingModal, setSettingModal] = useState({
+    manager: false,
+    member: false,
+  });
+
+  const managerSetting =
+    settingModal['manager'] === true ? (
+      <SettingModal
+        icon={<i className="bi bi-people"></i>}
+        text={'커뮤니티 관리'}
+      />
+    ) : (
+      ''
+    );
+
+  const memberSetting =
+    settingModal['member'] === true ? (
+      <SettingModal
+        icon={<i className="bi bi-arrow-bar-right"></i>}
+        text={'커뮤니티 탈퇴'}
+      />
+    ) : (
+      ''
+    );
 
   return (
     <CommunityDetailsWrapper>
@@ -70,6 +96,8 @@ const CommunityDetails = () => {
         </Contents>
       </Main>
       <Footer />
+      {managerSetting}
+      {memberSetting}
     </CommunityDetailsWrapper>
   );
 };

@@ -41,7 +41,7 @@ const FindPassword = () => {
             <InputBasic text={'Name'} />
             <InputBasic text={'Phone number'} />
           </FindPasswordInputWrapper>
-          <RoundButton text={'Find my password'} type={'PrimaryRound'} />
+          <RoundButton text={'Find password'} type={'PrimaryRound'} />
         </FindPasswordContentWrapper>
         {!isModal ? (
           ''
@@ -72,8 +72,7 @@ const Main = styled.div`
 `;
 
 const FindPasswordContentWrapper = styled.div`
-  height: 19rem;
-
+  height: 16.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
