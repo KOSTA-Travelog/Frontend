@@ -86,7 +86,7 @@ const Community = () => {
         <InputBasic text={'Search here'} className={'searchInput'} />
         <TabWrapper>{tab}</TabWrapper>
       </CommunityTabSection>
-      <HR />
+      <Hr />
       <CommunityComponentsSection>
         <CommunitySubTitle title={'My Communities'} />
         {communityData}
@@ -99,7 +99,7 @@ const Community = () => {
   );
 };
 
-const HR = styled.hr`
+const Hr = styled.hr`
   margin: 0 -2rem;
   background: ${Palette.TabBorderBottom};
   height: 1px;
