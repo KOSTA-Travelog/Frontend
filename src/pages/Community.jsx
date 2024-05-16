@@ -4,8 +4,13 @@ import Palette from '../styles/Palette';
 import InputBasic from '../components/InputBasic';
 import CommunityPreview from '../components/communities/CommunityPreview';
 import CommunitySubTitle from '../components/communities/CommunitySubTitle';
+import Header, { HeaderTitle } from '../components/headerComponents/Header';
+import HeaderButton from '../components/headerComponents/HeaderButton';
+import { useNavigate } from 'react-router-dom';
 
 const Community = () => {
+  const navigate = useNavigate();
+
   const MyCommunities = [
     {
       title: '가족 여행',
@@ -35,6 +40,28 @@ const Community = () => {
 
   return (
     <CommunityWrapper>
+      <Header
+        vertical={0}
+        horizontal={1.5}
+        left={
+          <HeaderTitle
+            align={'flex-start'}
+            title={
+              <h2 style={{ color: Palette.TextPrimary }}>
+                <b>Community</b>
+              </h2>
+            }
+          />
+        }
+        right={
+          <HeaderButton
+            icon={<i class="bi bi-plus-circle"></i>}
+            action={() => {
+              navigate('');
+            }}
+          />
+        }
+      />
       <CommunityTabSection>
         <InputBasic text={'Search here'} className={'searchInput'} />
         <TabWrapper>
