@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Palette from "../../styles/Palette.jsx";
-import Header, {HeaderTitle} from "../headerComponents/Header.jsx";
-import HeaderButton from "../headerComponents/HeaderButton.jsx";
-import Footer from "../Footer.jsx";
+import Palette from "../styles/Palette.jsx";
+import Header, {HeaderTitle} from "../components/headerComponents/Header.jsx";
+import HeaderButton from "../components/headerComponents/HeaderButton.jsx";
+import Footer from "../components/Footer.jsx";
 import {useNavigate} from "react-router-dom";
-import Feed from "../feedComponents/Feed.jsx";
+import Feed from "../components/feedComponents/Feed.jsx";
 
 const AppStyle = styled.div`
   padding: 4rem 0;

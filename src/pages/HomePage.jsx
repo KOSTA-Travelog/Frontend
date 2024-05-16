@@ -1,9 +1,9 @@
-import Header, {HeaderTitle} from "../headerComponents/Header.jsx";
-import Footer from "../Footer.jsx";
+import Header, {HeaderTitle} from "../components/headerComponents/Header.jsx";
+import Footer from "../components/Footer.jsx";
 import styled from "styled-components";
-import Palette from "../../styles/Palette.jsx";
-import HeaderButton from "../headerComponents/HeaderButton.jsx";
-import HomeFeedPreview from "../feedComponents/HomeFeedPreview.jsx";
+import Palette from "../styles/Palette.jsx";
+import HeaderButton from "../components/headerComponents/HeaderButton.jsx";
+import HomeFeedPreview from "../components/feedComponents/HomeFeedPreview.jsx";
 
 const AppStyle = styled.div`
   //margin: 4rem 0;

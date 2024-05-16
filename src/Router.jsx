@@ -1,13 +1,13 @@
 import {createBrowserRouter} from "react-router-dom";
-import Footer from "./Footer.jsx";
-import Header from "./headerComponents/Header.jsx";
-import HomePage from "./page/HomePage.jsx";
-import FeedPage from "./page/FeedPage.jsx";
-import Login from '../pages/auth/Login.jsx';
-import Registration from '../pages/auth/Registration.jsx';
-import FindAccount from '../pages/auth/FindAccount.jsx';
-import FindPassword from '../pages/auth/FindPassword.jsx';
-import Community from '../pages/Community.jsx';
+import Footer from "./components/Footer.jsx";
+import Header from "./components/headerComponents/Header.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import FeedPage from "./pages/FeedPage.jsx";
+import Login from './pages/auth/Login.jsx';
+import Registration from './pages/auth/Registration.jsx';
+import FindAccount from './pages/auth/FindAccount.jsx';
+import FindPassword from './pages/auth/FindPassword.jsx';
+import Community from './pages/Community.jsx';
 
 const Router = createBrowserRouter([
   {
