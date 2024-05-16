@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     color: ${Palette.TextPrimary};
     overflow-x: hidden;
+    font-family: sans-serif;
   }
 
   p {
