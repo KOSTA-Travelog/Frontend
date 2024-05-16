@@ -1,17 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Footer from './Footer.jsx';
-import Header from './Header.jsx';
+import {createBrowserRouter} from "react-router-dom";
+import Footer from "./Footer.jsx";
+import Header from "./headerComponents/Header.jsx";
+import HomePage from "./page/HomePage.jsx";
+import FeedPage from "./page/FeedPage.jsx";
 import Login from '../pages/auth/Login.jsx';
 import Registration from '../pages/auth/Registration.jsx';
 import FindAccount from '../pages/auth/FindAccount.jsx';
 import FindPassword from '../pages/auth/FindPassword.jsx';
 import Community from '../pages/Community.jsx';
-import HomePage from './page/HomePage.jsx';
 
 const Router = createBrowserRouter([
   {
-    path: '/',
-    element: <HomePage />,
+    path: "/feed/:id",
+    element: <FeedPage/>
+  },
+  {
+    path: "/",
+    element: <HomePage/>,
   },
   {
     path: '/foo',
