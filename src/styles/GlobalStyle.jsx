@@ -16,6 +16,8 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     font-size: 14px;
     color: ${Palette.TextPrimary};
+    overflow-x: hidden;
+    font-family: sans-serif;
   }
 
   p {
@@ -40,6 +42,10 @@ const GlobalStyle = createGlobalStyle`
     font: inherit;
     vertical-align: baseline;
   }
-  
+
+  a {
+    color: ${Palette.TextPrimary};
+    text-decoration: none;
+  }
 `;
 export default GlobalStyle;
