@@ -1,20 +1,16 @@
 import styled from 'styled-components';
+import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import InputBasic from '../../components/InputBasic';
 import RoundButton from '../../components/RoundButton';
-import Modal from '../../components/Modal';
-import { useState } from 'react';
-import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Palette from '../../styles/Palette';
 import { useNavigate } from 'react-router-dom';
 
-const FindAccount = () => {
+const CheckPassword = () => {
   const navigate = useNavigate();
 
-  const [isModal, setModal] = useState(false);
-
   return (
-    <FindAccountWrapper>
+    <PageWrapper>
       <Header
         left={
           <HeaderButton
@@ -28,48 +24,35 @@ const FindAccount = () => {
             align={'center'}
             title={
               <h2 style={{ color: Palette.TextPrimary }}>
-                <b>Find account</b>
+                <b>비밀번호 확인</b>
               </h2>
             }
           />
         }
       />
       <Main>
-        <FindAccountInputWrapper>
-          <InputBasic text={'Name'} />
-          <InputBasic text={'Phone number'} />
-        </FindAccountInputWrapper>
-        <RoundButton text={'Find account'} type={'Primary'} />
-        {!isModal ? (
-          ''
-        ) : (
-          <Modal title={'계정 확인'} description={'su******@gmail.com'} />
-        )}
+        <InputBasic text={'Password'} />
+        <RoundButton text={'확인'} type={'Primary'} />
       </Main>
-    </FindAccountWrapper>
+    </PageWrapper>
   );
 };
 
-const FindAccountWrapper = styled.div`
+const PageWrapper = styled.div`
+  width: 100%;
+  height: 80vh;
+  padding: 0 1.2rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
 `;
 
 const Main = styled.div`
-  padding: 1.2rem;
-  height: 14.5rem;
+  height: 7.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const FindAccountInputWrapper = styled.div`
-  height: 7.8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-export default FindAccount;
+export default CheckPassword;

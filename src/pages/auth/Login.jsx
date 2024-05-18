@@ -16,8 +16,8 @@ const Login = () => {
         <InputBasic text="Email" />
         <InputBasic text="Password" />
         <LoginBtnWrapper>
-          <RoundButton text={'Log in'} type={'PrimaryRound'} />
-          <RoundButton text={'Create new accout'} type={'transparentRound'} />
+          <RoundButton text={'Log in'} type={'Primary'} />
+          <RoundButton text={'Create new accout'} type={'transparent'} />
         </LoginBtnWrapper>
       </LoginForm>
       <FindInfoWrapper>

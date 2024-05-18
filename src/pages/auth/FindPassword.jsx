@@ -41,7 +41,7 @@ const FindPassword = () => {
             <InputBasic text={'Name'} />
             <InputBasic text={'Phone number'} />
           </FindPasswordInputWrapper>
-          <RoundButton text={'Find password'} type={'PrimaryRound'} />
+          <RoundButton text={'Find password'} type={'Primary'} />
         </FindPasswordContentWrapper>
         {!isModal ? (
           ''

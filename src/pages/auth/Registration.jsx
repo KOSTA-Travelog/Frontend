@@ -49,7 +49,7 @@ const Registration = () => {
             />
           ))}
           <SignUpBtnWrapper>
-            <RoundButton text={'Sign up'} type={'PrimaryRound'} />
+            <RoundButton text={'Sign up'} type={'Primary'} />
           </SignUpBtnWrapper>
         </RegistrationFormWrapper>
       </Main>

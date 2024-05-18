@@ -10,6 +10,7 @@ import FindPassword from './pages/auth/FindPassword.jsx';
 import Community from './pages/community/Community.jsx';
 import CommunityDetail from './pages/community/CommunityDetail.jsx';
 import CommunityWrite from './pages/community/CommunityWrite';
+import CheckPassword from './pages/myPage/CheckPassword.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const Router = createBrowserRouter([
   {
     path: '/community/write',
     element: <CommunityWrite />,
+  },
+  {
+    path: '/myPage/checkPassword',
+    element: <CheckPassword />,
   },
 ]);
 

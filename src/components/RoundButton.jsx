@@ -17,12 +17,12 @@ const RoundPrimaryBtn = styled.button`
   height: 3rem;
   border-radius: 50px;
 
-  &.PrimaryRound {
+  &.Primary {
     background-color: ${Palette.Primary};
     color: ${Palette.BodyPrimary};
   }
 
-  &.transparentRound {
+  &.transparent {
     color: ${Palette.Primary};
     border: 1.5px solid ${Palette.Primary};
   }
