@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
 
+<<<<<<< HEAD
 const ProfileStatusItem = (props) => {
   return (
     <InfoWrapper>
@@ -10,6 +11,16 @@ const ProfileStatusItem = (props) => {
         <Count>{props.count}</Count>
       </ItemWrapper>
       {props.separate && <DividerVertical></DividerVertical>}
+=======
+const ProfileStatusItem = ({ item, count, separate }) => {
+  return (
+    <InfoWrapper>
+      <ItemWrapper>
+        <Item>{item}</Item>
+        <Count>{count}</Count>
+      </ItemWrapper>
+      {separate && <DividerVertical></DividerVertical>}
+>>>>>>> 64abec6 ([TASK] ProfileStatusItem component)
     </InfoWrapper>
   );
 };
@@ -55,6 +66,8 @@ const ItemWrapper = styled.div`
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  width: 33%;
 `;
 
 const Item = styled.p``;
@@ -63,6 +76,7 @@ const Count = styled.p``;
 
 const DividerVertical = styled.div`
   border-left: thin solid ${Palette.Divider};
+  width: 1px;
 `;
 
 export { ProfileStatus, ProfileStatusItem };
