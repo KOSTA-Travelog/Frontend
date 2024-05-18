@@ -5,6 +5,8 @@ import Palette from '../../styles/Palette';
 import { useNavigate } from 'react-router-dom';
 import Profile from '../../components/myPage/Profile';
 import { ProfileStatus } from '../../components/myPage/ProfileStatusItem';
+import Footer from '../../components/Footer';
+import PostImages from '../../components/communities/communityDetails/PostImages';
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -46,6 +48,8 @@ const MyProfile = () => {
       <Main>
         <Profile {...myInfo} />
         <ProfileStatus />
+        <PostImages />
+        <Footer />
       </Main>
     </PageWrapper>
   );
@@ -54,14 +58,14 @@ const MyProfile = () => {
 const PageWrapper = styled.div`
   margin: 4rem 0;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 1.2rem;
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 `;
 
 export default MyProfile;

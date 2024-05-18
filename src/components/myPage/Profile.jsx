@@ -33,8 +33,7 @@ Profile.prototype = {
 };
 
 const ProfileWrapper = styled.div`
-  min-height: 29vh;
-  padding: 1.2rem 3rem;
+  min-height: 24vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,7 +42,7 @@ const ProfileWrapper = styled.div`
 
 const InformationWrapper = styled.div`
   width: 100%;
-  min-height: 10.5vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

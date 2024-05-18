@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 
@@ -13,7 +12,8 @@ const PostPreviewImage = (props) => {
 };
 
 const Post = styled.div`
-  width: 8rem;
+  /* width: 8rem; */
+  width: 33%;
   aspect-ratio: 1;
   background-size: cover;
 `;

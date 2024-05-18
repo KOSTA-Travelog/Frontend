@@ -29,13 +29,18 @@ const Hr = styled.hr`
   background: ${Palette.Divider};
   height: 1px;
   border: 0;
-  width: 100%;
+  width: 90%;
 `;
 
 const CountPosts = styled.p`
   color: ${Palette.Divider};
-  min-width: 25%;
+  width: 12%;
   padding-right: 0.2rem;
+  text-align: center;
+
+  @media (max-width: 800px) {
+    width: 30%;
+  }
 `;
 
 export default Divider;
