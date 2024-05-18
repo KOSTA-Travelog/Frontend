@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import HashTag from '../../HashTag';
 import Palette from '../../../styles/Palette';
@@ -51,7 +50,8 @@ const IntroductionWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  gap: 1.2rem;
 `;
 
 const CommunityImg = styled.img`

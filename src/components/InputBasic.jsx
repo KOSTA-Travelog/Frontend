@@ -6,18 +6,33 @@ import Palette from '../styles/Palette';
 const InputBasic = (props) => {
   return (
     <InputWrapper>
-      <InputStyle placeholder={props.text} className={props.type} />
+      {props.searchIcon && <SearchIcon className="bi bi-search"></SearchIcon>}
+      <InputStyle
+        placeholder={props.text}
+        style={{ height: `${props.height}rem` }}
+        className={props.searchIcon && 'search'}
+      />
     </InputWrapper>
   );
 };
 
 InputBasic.propTypes = {
   text: PropTypes.string,
-  type: PropTypes.string,
+  height: PropTypes.number,
+  searchIcon: PropTypes.bool,
 };
 
 const InputWrapper = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SearchIcon = styled.i`
+  position: relative;
+  left: 1.7rem;
 `;
 
 const InputStyle = styled.input`
@@ -36,8 +51,10 @@ const InputStyle = styled.input`
   color: ${Palette.InputBorder};
   padding-left: 1rem;
 
-  &.searchInput {
-    height: 3rem;
+  &.search {
+    &::placeholder {
+      padding-left: 1.2rem;
+    }
   }
 `;
 

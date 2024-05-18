@@ -99,19 +99,21 @@ const Community = () => {
           />
         }
       />
-      <CommunityTabSection>
-        <InputBasic text={'Search here'} className={'searchInput'} />
-        <TabWrapper>{tab}</TabWrapper>
-      </CommunityTabSection>
-      <Hr />
-      <CommunityComponentsSection>
-        <CommunitySubTitle title={'My Communities'} />
-        {myCommunities}
-      </CommunityComponentsSection>
-      <CommunityComponentsSection>
-        <CommunitySubTitle title={'All Communities'} />
-        {AllCommunities}
-      </CommunityComponentsSection>
+      <Main>
+        <CommunityTabSection>
+          <InputBasic text={'Search here'} height={3} searchIcon={true} />
+          <TabWrapper>{tab}</TabWrapper>
+        </CommunityTabSection>
+        <Hr />
+        <CommunityComponentsSection>
+          <CommunitySubTitle title={'My Communities'} />
+          {myCommunities}
+        </CommunityComponentsSection>
+        <CommunityComponentsSection>
+          <CommunitySubTitle title={'All Communities'} />
+          {AllCommunities}
+        </CommunityComponentsSection>
+      </Main>
     </CommunityWrapper>
   );
 };
@@ -126,6 +128,10 @@ const Hr = styled.hr`
 const CommunityWrapper = styled.div`
   width: 100%;
   padding: 0 1rem;
+`;
+
+const Main = styled.div`
+  margin: 4rem 0;
 `;
 
 const CommunityTabSection = styled.section`
