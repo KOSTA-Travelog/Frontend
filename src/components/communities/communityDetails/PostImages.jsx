@@ -4,7 +4,7 @@ import PostPreviewImage from './PostPreviewImage';
 
 const PostImages = () => {
   const postImage =
-    'https://images.unsplash.com/photo-1527142879-95b61a0b8226?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+    'https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
   return (
     <Contents>
       <PostRow>

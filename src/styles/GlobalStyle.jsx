@@ -48,5 +48,10 @@ const GlobalStyle = createGlobalStyle`
     color: ${Palette.TextPrimary};
     text-decoration: none;
   }
+  pre{
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+  }
 `;
 export default GlobalStyle;

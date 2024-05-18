@@ -12,6 +12,7 @@ import CommunityDetail from './pages/community/CommunityDetail.jsx';
 import CommunityWrite from './pages/community/CommunityWrite';
 import CheckPassword from './pages/myPage/CheckPassword.jsx';
 import DeleteAccount from './pages/myPage/DeleteAccount.jsx';
+import MyProfile from './pages/myPage/MyProfile.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const Router = createBrowserRouter([
   {
     path: '/myPage/deleteAccount',
     element: <DeleteAccount />,
+  },
+  {
+    path: '/myPage/profile',
+    element: <MyProfile />,
   },
 ]);
 
