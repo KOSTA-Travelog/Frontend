@@ -9,6 +9,7 @@ import FindAccount from './pages/auth/FindAccount.jsx';
 import FindPassword from './pages/auth/FindPassword.jsx';
 import Community from './pages/community/Community.jsx';
 import CommunityDetails from './pages/community/CommunityDetails.jsx';
+import CommunityWrite from './pages/community/CommunityWrite';
 
 const Router = createBrowserRouter([
   {
@@ -28,18 +29,6 @@ const Router = createBrowserRouter([
     element: <Header />,
   },
   {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/registration',
-    element: <Registration />,
-  },
-  {
-    path: '/findAccount',
-    element: <FindAccount />,
-  },
-  {
     path: '/foo',
     element: <Footer />,
   },
@@ -48,19 +37,19 @@ const Router = createBrowserRouter([
     element: <Header />,
   },
   {
-    path: '/login',
+    path: '/auth/login',
     element: <Login />,
   },
   {
-    path: '/registration',
+    path: '/auth/registration',
     element: <Registration />,
   },
   {
-    path: '/findAccount',
+    path: '/auth/findAccount',
     element: <FindAccount />,
   },
   {
-    path: '/findPassword',
+    path: '/auth/findPassword',
     element: <FindPassword />,
   },
   {
@@ -70,6 +59,10 @@ const Router = createBrowserRouter([
   {
     path: '/community/details',
     element: <CommunityDetails />,
+  },
+  {
+    path: '/community/write',
+    element: <CommunityWrite />,
   },
 ]);
 

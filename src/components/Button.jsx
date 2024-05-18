@@ -1,25 +1,40 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Palette from '../styles/Palette';
 
-const StyleButton = styled.div`
+const StyleButton = styled.button`
   position: relative;
+  width: 100%;
   height: 2.6rem;
   border: none;
   border-radius: 4px;
   text-align: center;
-  background-color: '#5C7CFA';
-  color: 'FFFFFF';
+  background-color: ${Palette.Primary};
+  color: ${Palette.BodyPrimary};
 
-  &.delete {
-    background-color: '#FC4957';
-  }
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
 `;
 
-Button.propTypes = {
-  type: PropTypes.string,
-  text: PropTypes.string,
+const Button = (props) => {
+  return (
+    <StyleButton
+      style={{
+        backgroundColor: `${props.color}`,
+        height: `${props.height}rem`,
+      }}
+    >
+      {props.text}
+    </StyleButton>
+  );
 };
 
-export default function Button(props) {
-  return <StyleButton className={props.type}>{props.text}</StyleButton>;
-}
+Button.propTypes = {
+  color: PropTypes.string,
+  text: PropTypes.string,
+  height: PropTypes.number,
+};
+
+export default Button;

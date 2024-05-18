@@ -4,8 +4,8 @@ import Palette from '../../styles/Palette';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Footer from '../../components/Footer';
-import SettingModal from './SettingModal';
 import { useState } from 'react';
+import SettingModal from '../../components/communities/Modals/SettingModal';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();
