@@ -49,7 +49,20 @@ const Community = () => {
     );
   });
 
-  const communityData = MyCommunities.map((community, index) => {
+  const myCommunities = MyCommunities.map((community, index) => {
+    return (
+      <CommunityPreview
+        title={community['title']}
+        countMember={community['countMember']}
+        description={community['description']}
+        date={community['date']}
+        key={index}
+        hashTag={community['hashTag']}
+      />
+    );
+  });
+
+  const AllCommunities = MyCommunities.map((community, index) => {
     return (
       <CommunityPreview
         title={community['title']}
@@ -93,18 +106,18 @@ const Community = () => {
       <Hr />
       <CommunityComponentsSection>
         <CommunitySubTitle title={'My Communities'} />
-        {communityData}
+        {myCommunities}
       </CommunityComponentsSection>
       <CommunityComponentsSection>
         <CommunitySubTitle title={'All Communities'} />
-        {communityData}
+        {AllCommunities}
       </CommunityComponentsSection>
     </CommunityWrapper>
   );
 };
 
 const Hr = styled.hr`
-  margin: 0 -2rem;
+  margin: 0 -1rem;
   background: ${Palette.TabBorderBottom};
   height: 1px;
   border: 0;

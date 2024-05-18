@@ -11,7 +11,14 @@ const CommunityPreview = (props) => {
 
   return (
     <CommunityComponentsArticle>
-      <CommunityImg />
+      <CommunityImg
+        style={{
+          backgroundImage:
+            'url(' +
+            'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' +
+            ')',
+        }}
+      />
       <CommunityContent>
         <CommunityTitleAreaWrapper>
           <CommunityTitleWrapper>
@@ -44,6 +51,7 @@ CommunityPreview.propTypes = {
   countMember: PropTypes.number,
   date: PropTypes.string,
   hashTag: PropTypes.array,
+  image: PropTypes.image,
 };
 
 const CommunityComponentsArticle = styled.article`
@@ -62,11 +70,10 @@ const CommunityComponentsArticle = styled.article`
 `;
 
 const CommunityImg = styled.img`
-  background-image: url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fHww')
-    center;
   /* width: 5.5rem; */
   width: 30%;
   height: 5.5rem;
+  background-size: cover;
 `;
 
 const CommunityContent = styled.article`
