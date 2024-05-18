@@ -15,7 +15,7 @@ const PostPreviewImage = (props) => {
 const Post = styled.div`
   width: 8rem;
   aspect-ratio: 1;
-  object-fit: contain;
+  background-size: cover;
 `;
 
 PostPreviewImage.prototype = {

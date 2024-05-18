@@ -12,7 +12,6 @@ const Introduction = (props) => {
   return (
     <IntroductionWrapper>
       <CommunityImg
-        // src={props.communityImage}
         style={{
           backgroundImage: 'url(' + `${props.communityImage}` + ')',
         }}
@@ -60,8 +59,7 @@ const CommunityImg = styled.img`
   height: 6.5rem;
   background-image: center;
   border-radius: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
+  background-size: cover;
 `;
 
 const ContentsWrapper = styled.div`

@@ -102,11 +102,11 @@ const Line = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 1.2rem;
   margin: 1rem;
 `;
 const Hr = styled.hr`
-  margin: 0 -2rem;
+  margin: 0 -1rem;
   background: ${Palette.TextSecondary};
   height: 1px;
   border: 0;
@@ -116,6 +116,7 @@ const Hr = styled.hr`
 const CountPosts = styled.p`
   color: ${Palette.TextSecondary};
   min-width: 25%;
+  padding-right: 0.2rem;
 `;
 
 const CommunityDetailsWrapper = styled.div`
