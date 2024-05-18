@@ -8,7 +8,7 @@ import Registration from './pages/auth/Registration.jsx';
 import FindAccount from './pages/auth/FindAccount.jsx';
 import FindPassword from './pages/auth/FindPassword.jsx';
 import Community from './pages/community/Community.jsx';
-import CommunityDetails from './pages/community/CommunityDetails.jsx';
+import CommunityDetail from './pages/community/CommunityDetail.jsx';
 import CommunityWrite from './pages/community/CommunityWrite';
 
 const Router = createBrowserRouter([
@@ -58,7 +58,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/community/details',
-    element: <CommunityDetails />,
+    element: <CommunityDetail />,
   },
   {
     path: '/community/write',
