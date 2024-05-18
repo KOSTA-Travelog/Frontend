@@ -2,16 +2,6 @@ import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
 
-<<<<<<< HEAD
-const ProfileStatusItem = (props) => {
-  return (
-    <InfoWrapper>
-      <ItemWrapper>
-        <Item>{props.item}</Item>
-        <Count>{props.count}</Count>
-      </ItemWrapper>
-      {props.separate && <DividerVertical></DividerVertical>}
-=======
 const ProfileStatusItem = ({ item, count, separate }) => {
   return (
     <InfoWrapper>
@@ -20,7 +10,6 @@ const ProfileStatusItem = ({ item, count, separate }) => {
         <Count>{count}</Count>
       </ItemWrapper>
       {separate && <DividerVertical></DividerVertical>}
->>>>>>> 64abec6 ([TASK] ProfileStatusItem component)
     </InfoWrapper>
   );
 };
