@@ -8,6 +8,7 @@ import { useState } from 'react';
 import SettingModal from '../../components/communities/Modals/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
+import Divider from '../../components/communities/communityDetails/Divider';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();
@@ -83,10 +84,7 @@ const CommunityDetails = () => {
       />
       <Main>
         <Introduction {...community} countMember={countMember} />
-        <Line>
-          <Hr />
-          <CountPosts>게시글 2222건</CountPosts>
-        </Line>
+        <Divider number={2222} />
         <PostImages />
       </Main>
       <Footer />
@@ -95,29 +93,6 @@ const CommunityDetails = () => {
     </CommunityDetailsWrapper>
   );
 };
-
-const Line = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  margin: 1rem;
-`;
-const Hr = styled.hr`
-  margin: 0 -1rem;
-  background: ${Palette.TextSecondary};
-  height: 1px;
-  border: 0;
-  width: 100%;
-`;
-
-const CountPosts = styled.p`
-  color: ${Palette.TextSecondary};
-  min-width: 25%;
-  padding-right: 0.2rem;
-`;
 
 const CommunityDetailsWrapper = styled.div`
   width: 100%;

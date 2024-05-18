@@ -59,7 +59,7 @@ const Router = createBrowserRouter([
     element: <Community />,
   },
   {
-    path: '/community/details',
+    path: '/community/detail',
     element: <CommunityDetail />,
   },
   {
