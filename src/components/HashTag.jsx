@@ -20,6 +20,7 @@ const HashTagWrapper = styled.div`
   background-color: ${Palette.HashTagYellowGreen};
   align-items: center;
   padding: 0 0.5rem;
+  justify-content: center;
 `;
 
 const HashtagText = styled.p`

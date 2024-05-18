@@ -137,6 +137,11 @@ const HashTagWrapper = styled.div`
 
 const CommunityDateWrapper = styled.div``;
 
-const CommunityEnrollDate = styled.p``;
+const CommunityEnrollDate = styled.p`
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 100%;
+`;
 
 export default CommunityPreview;
