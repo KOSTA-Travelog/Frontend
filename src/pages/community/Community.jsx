@@ -9,6 +9,7 @@ import InputBasic from '../../components/InputBasic';
 import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
 import CommunityTab from '../../components/communities/CommunityTab';
 import { useState } from 'react';
+import HashTag from '../../components/HashTag';
 
 const Community = () => {
   const navigate = useNavigate();
@@ -20,12 +21,14 @@ const Community = () => {
       countMember: 4,
       description: '5월의 여수 여행',
       date: '2024.05.10',
+      hashTag: ['#여수', '#바다'],
     },
     {
       title: '가족 여행2',
       countMember: 4,
       description: '5월의 부산 여행',
       date: '2024.05.10',
+      hashTag: ['#여수', '#바다'],
     },
   ];
   const tabMenu = ['My Communities', 'All Communities'];
@@ -54,6 +57,7 @@ const Community = () => {
         description={community['description']}
         date={community['date']}
         key={index}
+        hashTag={community['hashTag']}
       />
     );
   });

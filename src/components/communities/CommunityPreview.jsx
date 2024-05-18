@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Palette from '../../styles/Palette';
-import HashTag from '../HashTag';
 import { PropTypes } from 'prop-types';
+import HashTag from '../HashTag';
 
 const CommunityPreview = (props) => {
+  const hashtagList = props.hashTag.map((tag, index) => {
+    return <HashTag text={tag} key={index} />;
+  });
+
   return (
     <CommunityComponentsArticle>
       <CommunityImg />
@@ -24,7 +28,7 @@ const CommunityPreview = (props) => {
           <CommunityDescription>{props.description}</CommunityDescription>
         </CommunityDescriptionWrapper>
         <CommunityHashTagDateWrapper>
-          <HashTag text={'#여수'} />
+          <HashTagWrapper>{hashtagList}</HashTagWrapper>
           <CommunityDateWrapper>
             <CommunityEnrollDate>{props.date}</CommunityEnrollDate>
           </CommunityDateWrapper>
@@ -39,6 +43,7 @@ CommunityPreview.propTypes = {
   description: PropTypes.string,
   countMember: PropTypes.number,
   date: PropTypes.string,
+  hashTag: PropTypes.array,
 };
 
 const CommunityComponentsArticle = styled.article`
@@ -123,6 +128,12 @@ const CommunityDescriptionWrapper = styled.div`
 `;
 
 const CommunityDescription = styled.p``;
+
+const HashTagWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+`;
 
 const CommunityDateWrapper = styled.div``;
 
