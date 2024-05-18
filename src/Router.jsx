@@ -4,7 +4,7 @@ import Header from './components/headerComponents/Header.jsx';
 import HomePage from './pages/HomePage.jsx';
 import FeedPage from './pages/FeedPage.jsx';
 import Login from './pages/auth/Login.jsx';
-import Registration from './pages/auth/Registration.jsx';
+import CreateAccount from './pages/auth/CreateAccount.jsx';
 import FindAccount from './pages/auth/FindAccount.jsx';
 import FindPassword from './pages/auth/FindPassword.jsx';
 import Community from './pages/community/Community.jsx';
@@ -42,8 +42,8 @@ const Router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/auth/registration',
-    element: <Registration />,
+    path: '/auth/createAccount',
+    element: <CreateAccount />,
   },
   {
     path: '/auth/findAccount',

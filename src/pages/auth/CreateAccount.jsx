@@ -6,7 +6,7 @@ import HeaderButton from '../../components/headerComponents/HeaderButton';
 import { useNavigate } from 'react-router-dom';
 import Palette from '../../styles/Palette';
 
-const Registration = () => {
+const CreateAccount = () => {
   const navigate = useNavigate();
 
   const inputList = [
@@ -33,7 +33,7 @@ const Registration = () => {
             align={'center'}
             title={
               <h2 style={{ color: Palette.TextPrimary }}>
-                <b>Find password</b>
+                <b>Create account</b>
               </h2>
             }
           />
@@ -84,4 +84,4 @@ const SignUpBtnWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export default Registration;
+export default CreateAccount;
