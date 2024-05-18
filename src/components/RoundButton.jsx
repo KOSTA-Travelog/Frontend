@@ -4,12 +4,17 @@ import Palette from '../styles/Palette';
 import { PropTypes } from 'prop-types';
 
 const RoundButton = (props) => {
-  return <RoundPrimaryBtn className={props.type}>{props.text}</RoundPrimaryBtn>;
+  return (
+    <RoundPrimaryBtn className={props.type} onClick={props.action}>
+      {props.text}
+    </RoundPrimaryBtn>
+  );
 };
 
 RoundButton.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
+  action: PropTypes.func,
 };
 
 const RoundPrimaryBtn = styled.button`

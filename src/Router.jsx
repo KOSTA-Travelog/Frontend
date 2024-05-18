@@ -11,6 +11,7 @@ import Community from './pages/community/Community.jsx';
 import CommunityDetail from './pages/community/CommunityDetail.jsx';
 import CommunityWrite from './pages/community/CommunityWrite';
 import CheckPassword from './pages/myPage/CheckPassword.jsx';
+import DeleteAccount from './pages/myPage/DeleteAccount.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const Router = createBrowserRouter([
   {
     path: '/myPage/checkPassword',
     element: <CheckPassword />,
+  },
+  {
+    path: '/myPage/deleteAccount',
+    element: <DeleteAccount />,
   },
 ]);
 
