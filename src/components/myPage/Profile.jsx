@@ -1,14 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
+import ProfileImg from './ProfileImg';
 
 const Profile = (props) => {
   return (
     <ProfileWrapper>
-      <ProfileImageWrapper>
-        <ProfileImg />
-      </ProfileImageWrapper>
+      <ProfileImg />
       <InformationWrapper>
         <NicknameWrapper>
           <Nickname>{props.nickname}</Nickname>
@@ -47,19 +45,6 @@ const InformationWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`;
-
-const ProfileImageWrapper = styled.div`
-  width: 6.5rem;
-  height: 1rem;
-`;
-
-const ProfileImg = styled.img`
-  width: 100%;
-  background-image: url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  aspect-ratio: 1;
-  background-size: cover;
-  border-radius: 100px;
 `;
 
 const NicknameWrapper = styled.div`
