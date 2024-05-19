@@ -62,7 +62,12 @@ const EditUserData = () => {
       />
       <Main>
         <ProfileWrapper>
+          <ImgWRapper>
+            <i className="bi bi-pencil-fill"></i>
+          </ImgWRapper>
+
           <ProfileImg />
+
           <Email>ssssssssss@gmail.com</Email>
         </ProfileWrapper>
         <InputItemWrapper>{inputItemList}</InputItemWrapper>
@@ -100,6 +105,24 @@ const ProfileWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+`;
+
+const ImgWRapper = styled.div`
+  width: 6.5rem;
+  height: 6.5rem;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: 100px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: ${Palette.TextSecondary};
+
+  &:hover {
+  }
 `;
 
 const Email = styled.span`

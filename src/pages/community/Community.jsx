@@ -49,29 +49,11 @@ const Community = () => {
   });
 
   const myCommunities = MyCommunities.map((community, index) => {
-    return (
-      <CommunityPreview
-        title={community['title']}
-        countMember={community['countMember']}
-        description={community['description']}
-        date={community['date']}
-        key={index}
-        hashTag={community['hashTag']}
-      />
-    );
+    return <CommunityPreview {...community} key={index} />;
   });
 
   const AllCommunities = MyCommunities.map((community, index) => {
-    return (
-      <CommunityPreview
-        title={community['title']}
-        countMember={community['countMember']}
-        description={community['description']}
-        date={community['date']}
-        key={index}
-        hashTag={community['hashTag']}
-      />
-    );
+    return <CommunityPreview {...community} key={index} />;
   });
 
   return (

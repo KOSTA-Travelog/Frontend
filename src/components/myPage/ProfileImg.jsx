@@ -17,7 +17,7 @@ const ProfileImg = (props) => {
 
 const ProfileImageWrapper = styled.div`
   width: 6.5rem;
-  height: 1rem;
+  height: 6.5rem;
 `;
 
 const Img = styled.img`
