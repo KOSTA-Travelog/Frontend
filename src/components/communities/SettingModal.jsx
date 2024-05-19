@@ -38,11 +38,6 @@ const SettingModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-
-  position: fixed;
-  top: 6%;
-  left: 55%;
-  /* transform: translate(-1%, -50%); */
 `;
 
 const BtnWrapper = styled.div`

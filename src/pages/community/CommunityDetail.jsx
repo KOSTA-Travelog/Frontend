@@ -82,17 +82,33 @@ const CommunityDetails = () => {
           />
         }
       />
+      <SettingWrapper>
+        {managerSetting}
+        {memberSetting}
+      </SettingWrapper>
       <Main>
         <Introduction {...community} countMember={countMember} />
         <Divider number={2222} />
         <PostImages />
       </Main>
       <Footer />
-      {managerSetting}
-      {memberSetting}
     </CommunityDetailsWrapper>
   );
 };
+
+const SettingWrapper = styled.div`
+  position: absolute;
+  z-index: 200;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-top: 27px;
+
+  @media (min-width: 900px) {
+    width: 95%;
+  }
+`;
 
 const CommunityDetailsWrapper = styled.div`
   width: 100%;
