@@ -25,7 +25,6 @@ const RoundPrimaryBtn = styled.button`
   width: 100%;
   height: 3rem;
   border-radius: 50px;
-  font-size: 16px;
 
   &.primary {
     background-color: ${Palette.Primary};
