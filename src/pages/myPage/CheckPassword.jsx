@@ -32,7 +32,7 @@ const CheckPassword = () => {
       />
       <Main>
         <InputBasic text={'Password'} />
-        <RoundButton text={'확인'} type={'Primary'} />
+        <RoundButton text={'확인'} type={'primary'} />
       </Main>
     </PageWrapper>
   );

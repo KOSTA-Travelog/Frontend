@@ -13,7 +13,7 @@ const RoundButton = (props) => {
 
 RoundButton.propTypes = {
   text: PropTypes.string,
-  type: PropTypes.oneOf(['Primary', 'transparent']),
+  type: PropTypes.oneOf(['primary', 'transparent', 'underline']),
   action: PropTypes.func,
 };
 
@@ -22,7 +22,7 @@ const RoundPrimaryBtn = styled.button`
   height: 3rem;
   border-radius: 50px;
 
-  &.Primary {
+  &.primary {
     background-color: ${Palette.Primary};
     color: ${Palette.BodyPrimary};
   }
@@ -30,6 +30,9 @@ const RoundPrimaryBtn = styled.button`
   &.transparent {
     color: ${Palette.Primary};
     border: 1.5px solid ${Palette.Primary};
+  }
+
+  &.underline {
   }
 `;
 

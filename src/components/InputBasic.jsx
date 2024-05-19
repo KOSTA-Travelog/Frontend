@@ -10,7 +10,10 @@ const InputBasic = (props) => {
       <InputStyle
         placeholder={props.text}
         style={{ height: `${props.height}rem` }}
-        className={props.searchIcon && 'search'}
+        className={
+          (props.searchIcon ? 'search ' : '') +
+          (props.editInput ? 'editInput' : '')
+        }
       />
     </InputWrapper>
   );
@@ -20,6 +23,7 @@ InputBasic.propTypes = {
   text: PropTypes.string,
   height: PropTypes.number,
   searchIcon: PropTypes.bool,
+  editInput: PropTypes.bool,
 };
 
 const InputWrapper = styled.div`
@@ -47,13 +51,20 @@ const InputStyle = styled.input`
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-
-  color: ${Palette.InputBorder};
   padding-left: 1rem;
+
+  &::placeholder {
+    color: ${Palette.InputBorder};
+  }
 
   &.search {
     &::placeholder {
       padding-left: 1.2rem;
+    }
+  }
+  &.editInput {
+    &::placeholder {
+      color: ${Palette.TextPrimary};
     }
   }
 `;

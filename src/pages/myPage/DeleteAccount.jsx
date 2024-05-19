@@ -24,7 +24,7 @@ const DeleteAccount = () => {
         <CheckMessage>정말로 탈퇴하시겠습니까?</CheckMessage>
         <InputWrapper>
           <InputBasic text={'Password'} />
-          <RoundButton text={'확인'} type={'Primary'} action={() => {}} />
+          <RoundButton text={'확인'} type={'primary'} action={() => {}} />
         </InputWrapper>
       </Main>
     </PageWrapper>
