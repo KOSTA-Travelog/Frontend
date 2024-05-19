@@ -107,11 +107,10 @@ const ProfileWrapper = styled.div`
   align-items: center;
 `;
 
-const ImgWRapper = styled.div`
+const ImgWRapper = styled.button`
   width: 6.5rem;
   height: 6.5rem;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.45);
   border-radius: 100px;
 
   display: flex;
@@ -119,9 +118,11 @@ const ImgWRapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
-  color: ${Palette.TextSecondary};
+  color: rgba(0, 0, 0, 0);
 
   &:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+    color: ${Palette.BodyPrimary};
   }
 `;
 
