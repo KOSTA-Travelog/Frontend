@@ -40,7 +40,7 @@ const MyProfile = () => {
         right={
           <HeaderButton
             color={Palette.TextPrimary}
-            icon={<i className="bi bi-pencil-square"></i>}
+            icon={<i className="bi bi-gear"></i>}
             action={() => {}}
           />
         }

@@ -65,9 +65,7 @@ const EditUserData = () => {
           <ImgWRapper>
             <i className="bi bi-pencil-fill"></i>
           </ImgWRapper>
-
           <ProfileImg />
-
           <Email>ssssssssss@gmail.com</Email>
         </ProfileWrapper>
         <InputItemWrapper>{inputItemList}</InputItemWrapper>
