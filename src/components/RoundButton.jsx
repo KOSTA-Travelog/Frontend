@@ -13,7 +13,7 @@ const RoundButton = (props) => {
 
 RoundButton.propTypes = {
   text: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['Primary', 'transparent']),
   action: PropTypes.func,
 };
 
