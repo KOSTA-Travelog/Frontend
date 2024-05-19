@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Footer from '../../components/Footer';
 import { useState } from 'react';
-import SettingModal from '../../components/communities/Modals/SettingModal';
+import SettingModal from '../../components/communities/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import Divider from '../../components/communities/communityDetails/Divider';

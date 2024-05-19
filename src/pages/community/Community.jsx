@@ -9,7 +9,6 @@ import InputBasic from '../../components/InputBasic';
 import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
 import CommunityTab from '../../components/communities/CommunityTab';
 import { useState } from 'react';
-import HashTag from '../../components/HashTag';
 
 const Community = () => {
   const navigate = useNavigate();
