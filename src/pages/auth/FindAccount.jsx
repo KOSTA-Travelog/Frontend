@@ -39,7 +39,7 @@ const FindAccount = () => {
           <InputBasic text={'Name'} />
           <InputBasic text={'Phone number'} />
         </FindAccountInputWrapper>
-        <RoundButton text={'Find account'} type={'Primary'} />
+        <RoundButton text={'Find account'} type={'primary'} />
         {!isModal ? (
           ''
         ) : (

@@ -53,5 +53,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     white-space: pre-wrap;
   }
+
+  textarea {
+    border: none;
+    outline: none;
+    resize: none;
+  }
 `;
 export default GlobalStyle;

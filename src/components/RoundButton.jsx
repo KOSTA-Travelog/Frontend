@@ -18,9 +18,14 @@ RoundButton.propTypes = {
 };
 
 const RoundPrimaryBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 3rem;
   border-radius: 50px;
+  font-size: 16px;
 
   &.primary {
     background-color: ${Palette.Primary};
@@ -33,6 +38,9 @@ const RoundPrimaryBtn = styled.button`
   }
 
   &.underline {
+    color: ${Palette.TextSecondary};
+    text-decoration: underline;
+    height: 1.4rem;
   }
 `;
 

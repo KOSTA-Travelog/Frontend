@@ -49,8 +49,8 @@ const MyProfile = () => {
         <Profile {...myInfo} />
         <ProfileStatus />
         <PostImages />
-        <Footer />
       </Main>
+      <Footer />
     </PageWrapper>
   );
 };
