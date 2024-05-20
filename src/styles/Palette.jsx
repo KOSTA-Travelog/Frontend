@@ -15,5 +15,6 @@ const Palette = {
   HashTagYellowGreen: '#e6f9ea',
   HashTagGreen: '#1fb881',
   TabBorderBottom: '#e7e7e7',
+  Divider: '#bbbbbb',
 };
 export default Palette;

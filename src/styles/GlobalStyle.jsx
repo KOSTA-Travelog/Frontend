@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 
   h1, h2, h3{
@@ -46,6 +47,17 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: ${Palette.TextPrimary};
     text-decoration: none;
+  }
+  pre{
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+  }
+
+  textarea {
+    border: none;
+    outline: none;
+    resize: none;
   }
 `;
 export default GlobalStyle;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Palette from '../../styles/Palette';
-import React from 'react';
 import RoundButton from '../../components/RoundButton';
 import InputBasic from '../../components/InputBasic';
 
@@ -16,8 +15,8 @@ const Login = () => {
         <InputBasic text="Email" />
         <InputBasic text="Password" />
         <LoginBtnWrapper>
-          <RoundButton text={'Log in'} type={'PrimaryRound'} />
-          <RoundButton text={'Create new accout'} type={'transparentRound'} />
+          <RoundButton text={'Log in'} type={'primary'} />
+          <RoundButton text={'Create new account'} type={'transparent'} />
         </LoginBtnWrapper>
       </LoginForm>
       <FindInfoWrapper>

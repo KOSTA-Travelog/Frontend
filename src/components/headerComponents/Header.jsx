@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import PropTypes from "prop-types";
+import styled from 'styled-components';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import PropTypes from 'prop-types';
 
 const FixedHeader = styled.header`
   background: #fff;
@@ -25,7 +25,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   min-width: 2rem;
   align-items: center;
-`
+`;
 
 const Title = styled.div`
   display: flex;
@@ -34,40 +34,43 @@ const Title = styled.div`
   width: 100%;
   overflow: hidden;
   text-overflow: clip;
-`
+`;
 
-const Header = ({title, left, right}) => (
-    <FixedHeader>
-      <HeaderWrapperDiv>
-        <ButtonWrapper>
-          {left}
-        </ButtonWrapper>
-        {title}
-        <ButtonWrapper>
-          {right}
-        </ButtonWrapper>
-      </HeaderWrapperDiv>
-    </FixedHeader>
+const Header = (props) => (
+  <FixedHeader
+    style={{ padding: `${props.vertical}rem ${props.horizontal}rem` }}
+  >
+    <HeaderWrapperDiv>
+      <ButtonWrapper>{props.left}</ButtonWrapper>
+      {props.title}
+      <ButtonWrapper>{props.right}</ButtonWrapper>
+    </HeaderWrapperDiv>
+  </FixedHeader>
 );
 
 Header.propTypes = {
   left: PropTypes.node,
   right: PropTypes.node,
   title: PropTypes.node,
-}
+  vertical: PropTypes.number,
+  horizontal: PropTypes.number,
+};
 
-export const HeaderTitle = ({align, title, action}) => (
-    <Title onClick={action} style={{
+export const HeaderTitle = ({ align, title, action }) => (
+  <Title
+    onClick={action}
+    style={{
       alignItems: align,
-    }}>
-      {title}
-    </Title>
-)
+    }}
+  >
+    {title}
+  </Title>
+);
 
 HeaderTitle.propTypes = {
-  align: PropTypes.oneOf(["flex-start", "center", "flex-end"]),
+  align: PropTypes.oneOf(['flex-start', 'center', 'flex-end']),
   title: PropTypes.node,
   action: PropTypes.func,
-}
+};
 
 export default Header;
