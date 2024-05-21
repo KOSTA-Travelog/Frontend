@@ -4,21 +4,21 @@ import { PropTypes } from 'prop-types';
 
 const Modal = (props) => {
   return (
-    <ModalBackground>
-      <ModalWrapper>
+    <Background>
+      <Wrapper>
         <CloseIconWrapper>
           <CloseIcon className="bi bi-x-lg" />
         </CloseIconWrapper>
-        <ModalContentWrapper>
-          <ModalTitleWrapper>
-            <ModalTitle>{props.title}</ModalTitle>
-          </ModalTitleWrapper>
-          <ModalDescriptionWrapper>
-            <ModalDescription>{props.description}</ModalDescription>
-          </ModalDescriptionWrapper>
-        </ModalContentWrapper>
-      </ModalWrapper>
-    </ModalBackground>
+        <ContentWrapper>
+          <TitleWrapper>
+            <Title>{props.title}</Title>
+          </TitleWrapper>
+          <DescriptionWrapper>
+            <Description>{props.description}</Description>
+          </DescriptionWrapper>
+        </ContentWrapper>
+      </Wrapper>
+    </Background>
   );
 };
 
@@ -27,7 +27,7 @@ Modal.propTypes = {
   description: PropTypes.string,
 };
 
-const ModalBackground = styled.div`
+const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -36,10 +36,10 @@ const ModalBackground = styled.div`
   background: rgba(0, 0, 0, 0.8);
 `;
 
-const ModalWrapper = styled.div`
+const Wrapper = styled.div`
   width: 90%;
   min-height: 2vh;
-  border: 1px solid ${Palette.ModalBorder};
+  border: 1px solid ${Palette.Border};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -67,17 +67,17 @@ const CloseIcon = styled.i`
   height: 100%;
 `;
 
-const ModalContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const ModalTitleWrapper = styled.div`
+const TitleWrapper = styled.div`
   width: 100%;
   height: 2rem;
 `;
 
-const ModalTitle = styled.h2`
+const Title = styled.h2`
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -86,14 +86,14 @@ const ModalTitle = styled.h2`
   text-align: center;
 `;
 
-const ModalDescriptionWrapper = styled.div`
+const DescriptionWrapper = styled.div`
   width: 100%;
   min-height: 2rem;
   padding-left: 3rem;
   padding-right: 4rem;
 `;
 
-const ModalDescription = styled.p`
+const Description = styled.p`
   text-align: center;
 
   font-style: normal;
