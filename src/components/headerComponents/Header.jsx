@@ -9,6 +9,7 @@ const FixedHeader = styled.header`
   left: 0;
   width: 100%;
   height: 4rem;
+  z-index: 150;
 `;
 
 const HeaderWrapperDiv = styled.div`
