@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import { PropTypes } from 'prop-types';
 import Palette from '../styles/Palette';
+import PropTypes from "prop-types";
 
 const InputBasic = (props) => {
   return (
@@ -14,6 +13,9 @@ const InputBasic = (props) => {
           (props.searchIcon ? 'search ' : '') +
           (props.editInput ? 'editInput' : '')
         }
+        type={props.type}
+        onChange={props.onChange}
+        value={props.value}
       />
     </InputWrapper>
   );
@@ -24,6 +26,10 @@ InputBasic.propTypes = {
   height: PropTypes.number,
   searchIcon: PropTypes.bool,
   editInput: PropTypes.bool,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
 };
 
 const InputWrapper = styled.div`
