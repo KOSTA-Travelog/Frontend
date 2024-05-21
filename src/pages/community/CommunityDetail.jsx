@@ -26,29 +26,13 @@ const CommunityDetails = () => {
   const countMember = 4;
 
   const [settingModal, setSettingModal] = useState({
-    manager: false,
-    member: false,
+    type: 'manager',
+    status: false,
   });
 
-  const managerSetting =
-    settingModal['manager'] === true ? (
-      <SettingModal
-        icon={<i className="bi bi-people"></i>}
-        text={'커뮤니티 관리'}
-      />
-    ) : (
-      ''
-    );
-
-  const memberSetting =
-    settingModal['member'] === true ? (
-      <SettingModal
-        icon={<i className="bi bi-arrow-bar-right"></i>}
-        text={'커뮤니티 탈퇴'}
-      />
-    ) : (
-      ''
-    );
+  const settingStatus = settingModal['status'] === true && (
+    <SettingModal type={settingModal} />
+  );
 
   return (
     <CommunityDetailsWrapper>
@@ -64,10 +48,10 @@ const CommunityDetails = () => {
           <HeaderButton
             icon={<i className="bi bi-gear"></i>}
             action={() => {
-              setSettingModal({
-                manager: !settingModal['manager'],
-                member: false,
-              });
+              setSettingModal((prevState) => ({
+                ...prevState,
+                status: !prevState.status,
+              }));
             }}
           />
         }
@@ -82,10 +66,7 @@ const CommunityDetails = () => {
           />
         }
       />
-      <SettingWrapper>
-        {managerSetting}
-        {memberSetting}
-      </SettingWrapper>
+      <SettingWrapper>{settingStatus}</SettingWrapper>
       <Main>
         <Introduction {...community} countMember={countMember} />
         <Divider number={2222} />
