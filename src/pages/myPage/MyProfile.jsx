@@ -7,9 +7,12 @@ import Profile from '../../components/myPage/Profile';
 import { ProfileStatus } from '../../components/myPage/ProfileStatusItem';
 import Footer from '../../components/Footer';
 import PostImages from '../../components/communities/communityDetails/PostImages';
+import MyPageSetting from '../../components/myPage/MyPageSetting';
+import { useState } from 'react';
 
 const MyProfile = () => {
   const navigate = useNavigate();
+  const [setting, setSetting] = useState(false);
 
   const myInfo = {
     nickname: 'nickname',
@@ -41,10 +44,13 @@ const MyProfile = () => {
           <HeaderButton
             color={Palette.TextPrimary}
             icon={<i className="bi bi-gear"></i>}
-            action={() => {}}
+            action={() => {
+              setSetting(!setting);
+            }}
           />
         }
       />
+      <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
       <Main>
         <Profile {...myInfo} />
         <ProfileStatus />
@@ -54,6 +60,20 @@ const MyProfile = () => {
     </PageWrapper>
   );
 };
+
+const SettingWrapper = styled.div`
+  position: absolute;
+  z-index: 200;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-top: -15px;
+
+  @media (min-width: 900px) {
+    width: 95%;
+  }
+`;
 
 const PageWrapper = styled.div`
   margin: 4rem 0;

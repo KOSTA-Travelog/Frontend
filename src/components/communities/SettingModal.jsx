@@ -1,27 +1,54 @@
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 import Palette from '../../styles/Palette';
+import ModalCustomMenu from '../ModalCustomMenu';
 
 const SettingModal = (props) => {
+  const ManagerSettingItems = [
+    {
+      icon: <i className="bi bi-person-plus"></i>,
+      text: '멤버 초대',
+      action: () => {},
+    },
+    {
+      icon: <i className="bi bi-people"></i>,
+      text: '커뮤니티 관리',
+      action: () => {},
+    },
+  ];
+
+  const MemberSettingItems = [
+    {
+      icon: <i className="bi bi-person-plus"></i>,
+      text: '멤버 초대',
+      action: () => {},
+    },
+    {
+      icon: <i className="bi bi-arrow-bar-right"></i>,
+      text: '커뮤니티 탈퇴',
+      action: () => {},
+    },
+  ];
+
+  const ManagerModal = ManagerSettingItems.map((item, index) => {
+    return <ModalCustomMenu {...item} key={index} />;
+  });
+
+  const MemberModal = MemberSettingItems.map((item, index) => {
+    return <ModalCustomMenu {...item} key={index} />;
+  });
+
   return (
     <SettingModalWrapper>
-      <BtnWrapper>
-        <IconWrapper>
-          <i className="bi bi-person-plus"></i>
-        </IconWrapper>
-        <Btn>멤버 초대</Btn>
-      </BtnWrapper>
-      <BtnWrapper>
-        <IconWrapper>{props.icon}</IconWrapper>
-        <Btn>{props.text}</Btn>
-      </BtnWrapper>
+      {props.type['type'] === 'manager' ? ManagerModal : MemberModal}
     </SettingModalWrapper>
   );
 };
 
 SettingModal.prototype = {
-  icon: PropTypes.node,
-  text: PropTypes.string,
+  // icon: PropTypes.node,
+  // text: PropTypes.string,
+  type: PropTypes.object,
 };
 
 const IconWrapper = styled.div`
