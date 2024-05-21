@@ -1,10 +1,11 @@
-import styled from "styled-components";
-import Palette from "../styles/Palette.jsx";
-import Header, {HeaderTitle} from "../components/headerComponents/Header.jsx";
-import HeaderButton from "../components/headerComponents/HeaderButton.jsx";
-import Footer from "../components/Footer.jsx";
-import {useNavigate} from "react-router-dom";
-import Feed from "../components/feedComponents/Feed.jsx";
+import styled from 'styled-components';
+import Palette from '../styles/Palette.jsx';
+import Header, {HeaderTitle} from '../components/headerComponents/Header.jsx';
+import HeaderButton from '../components/headerComponents/HeaderButton.jsx';
+import Footer from '../components/Footer.jsx';
+import {useNavigate} from 'react-router-dom';
+import Feed from '../components/feedComponents/Feed.jsx';
+import ReplyComponent from './ReplyComponent.jsx';
 
 const AppStyle = styled.div`
   padding: 4rem 0;
@@ -29,28 +30,10 @@ const Section = styled.section`
 
 const FeedPage = () => {
   const navigate = useNavigate();
-  return (<>
-    <AppStyle>
-      <Header
-          left={<HeaderButton
-              icon={<i className="bi bi-chevron-left"></i>}
-              action={() => navigate(-1)}
-          />}
-          title={<HeaderTitle
-              align={"center"}
-              title={
-                <h2><b>가평 아침고요수목원aaaaaaaaaaaaaaaaaaaa</b></h2>
-              }
-              action={() => {
-              }}
-          />}
-      />
-      <Content>
-        <Section>
-          <Feed props={{
-            title: "가평 아침고요수목원",
-            date: "2024. 05. 02.",
-            content: `
+  const data = {
+    title: '가평 아침고요수목원',
+    date: '2024. 05. 02.',
+    content: `
 [수목원 힐링 여행]
 🌱가평 아침고요수목원🌱
 
@@ -68,13 +51,32 @@ const FeedPage = () => {
 
 1/3지점쯤에 카페도 있고 식당도 있어서 산책하는 도중에도 편하게 이용할 수 있습니다🪴
 `,
-            openStatus: "public",
-          }}/>
+    openStatus: 'public',
+  };
+  return (<>
+    <AppStyle>
+      <Header
+          left={<HeaderButton
+              icon={<i className="bi bi-chevron-left"></i>}
+              action={() => navigate(-1)}
+          />}
+          title={<HeaderTitle
+              align={'center'}
+              title={
+                <h2><b>가평 아침고요수목원aaaaaaaaaaaaaaaaaaaa</b></h2>
+              }
+              action={() => {
+              }}
+          />}
+      />
+      <Content>
+        <Section>
+          <Feed {...data}/>
         </Section>
       </Content>
       <Footer/>
     </AppStyle>
-  </>)
+  </>);
 };
 
 export default FeedPage;
