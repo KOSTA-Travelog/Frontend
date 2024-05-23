@@ -5,13 +5,13 @@ import CommunityPreview from '../../components/communities/CommunityPreview';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
-import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
 import { useState } from 'react';
 import Footer from '../../components/Footer';
 import CommunityTab from '../../components/communities/CommunityTab';
 
 import InputBasic from '../../components/InputBasic';
 import TapMenuSection from '../../components/communities/TapMenuSection';
+import PageSubTitle from '../../components/PageSubTitle';
 
 const Community = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Community = () => {
     return <CommunityPreview {...community} key={index} />;
   });
 
-  const AllCommunities = MyCommunities.map((community, index) => {
+  const allCommunities = MyCommunities.map((community, index) => {
     return <CommunityPreview {...community} key={index} />;
   });
 
@@ -88,12 +88,12 @@ const Community = () => {
         <TapMenuSection tab={tab} />
         <Hr />
         <CommunityComponentsSection>
-          <CommunitySubTitle title={'My Communities'} />
+          <PageSubTitle title={'My Communities'} />
           <PreviewWrapper>{myCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
         <CommunityComponentsSection>
-          <CommunitySubTitle title={'All Communities'} />
-          <PreviewWrapper>{AllCommunities}</PreviewWrapper>
+          <PageSubTitle title={'All Communities'} />
+          <PreviewWrapper>{allCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
       </Main>
       <Footer></Footer>

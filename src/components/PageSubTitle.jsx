@@ -1,20 +1,19 @@
-import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 
-const CommunitySubTitle = (props) => {
+const PageSubTitle = (props) => {
   return (
-    <CommunityMenuArticle>
-      <CommunityTabTitle>{props.title}</CommunityTabTitle>
-    </CommunityMenuArticle>
+    <PageMenuArticle>
+      <PageTabTitle>{props.title}</PageTabTitle>
+    </PageMenuArticle>
   );
 };
 
-CommunitySubTitle.prototype = {
+PageSubTitle.prototype = {
   title: PropTypes.string,
 };
 
-const CommunityTabTitle = styled.h2`
+const PageTabTitle = styled.h2`
   height: 1.1rem;
 
   font-style: normal;
@@ -23,7 +22,7 @@ const CommunityTabTitle = styled.h2`
   line-height: 100%;
 `;
 
-const CommunityMenuArticle = styled.article`
+const PageMenuArticle = styled.article`
   width: 100%;
   height: 3rem;
   display: flex;
@@ -31,4 +30,4 @@ const CommunityMenuArticle = styled.article`
   justify-content: center;
 `;
 
-export default CommunitySubTitle;
+export default PageSubTitle;
