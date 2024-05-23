@@ -9,96 +9,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { postImageList } from '../../apis/Feed.jsx';
 
-const Article = styled.article`
-  padding: 1rem;
-  background-color: ${Palette.BodyPrimary};
-`;
-
-const FeedInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const FeedDate = styled.p`
-  color: ${Palette.TextSecondary};
-`;
-
-const FeedIconGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  height: 1rem;
-  font-size: 1rem;
-`;
-
-const Divider = styled.hr`
-  width: 100%;
-  margin: auto;
-`;
-
-const FeedContent = styled.pre`
-  width: 100%;
-  white-space: break-spaces;
-`;
-
-const FeedOpenStatus = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 0.25rem;
-`;
-
-const FeedComment = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  gap: 1rem;
-`;
-
-const CommentExpander = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const ExpanderText = styled.p`
-  height: 1rem;
-  white-space: nowrap;
-  padding-left: 1rem;
-`;
-
-const Carousel = styled.div``;
-
-const ImageWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
-`;
-
-const CarouselDotWrapper = styled.div`
-  position: relative;
-  height: 1rem;
-  display: flex;
-`;
-
-const CarouselDots = styled.ul`
-  margin: 0;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  gap: 1rem;
-`;
-
 const GenerateOpenStatus = ({ openStatus }) => {
   if (openStatus === 'public') {
     return (
@@ -167,7 +77,7 @@ export function EmblaCarousel() {
 
 function Feed(props) {
   return (
-    <>
+    <FeedWrapper>
       <Carousel>
         <EmblaCarousel />
       </Carousel>
@@ -180,7 +90,9 @@ function Feed(props) {
             <i className="bi bi-heart"></i>
           </FeedIconGroup>
         </FeedInfo>
-        <FeedContent>{props.content}</FeedContent>
+        <FeedContentWrapper>
+          <FeedContent>{props.content}</FeedContent>
+        </FeedContentWrapper>
         <FeedOpenStatus>
           <GenerateOpenStatus openStatus={props.openStatus} />
         </FeedOpenStatus>
@@ -200,7 +112,7 @@ function Feed(props) {
           />
         </FeedComment>
       </Article>
-    </>
+    </FeedWrapper>
   );
 }
 
@@ -210,5 +122,112 @@ Feed.propTypes = {
   image: PropTypes.string,
   openStatus: PropTypes.string,
 };
+
+const FeedWrapper = styled.div`
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Article = styled.article`
+  padding: 0.5rem 1rem;
+  background-color: ${Palette.BodyPrimary};
+`;
+
+const FeedInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+`;
+
+const FeedDate = styled.p`
+  color: ${Palette.TextSecondary};
+`;
+
+const FeedIconGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  height: 1rem;
+  font-size: 1rem;
+`;
+
+const Divider = styled.hr`
+  width: 100%;
+  margin: auto;
+`;
+
+const FeedContentWrapper = styled.div`
+  width: 100%;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.7rem;
+`;
+
+const FeedContent = styled.pre`
+  width: 100%;
+  white-space: break-spaces;
+`;
+
+const FeedOpenStatus = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 0.25rem;
+`;
+
+const FeedComment = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* padding: 0.5rem; */
+  /* margin: 1rem 0; */
+  gap: 1rem;
+`;
+
+const CommentExpander = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ExpanderText = styled.p`
+  height: 1rem;
+  white-space: nowrap;
+  padding-left: 1rem;
+`;
+
+const Carousel = styled.div``;
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+`;
+
+const CarouselDotWrapper = styled.div`
+  position: relative;
+  height: 1rem;
+  display: flex;
+`;
+
+const CarouselDots = styled.ul`
+  margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+`;
 
 export default Feed;
