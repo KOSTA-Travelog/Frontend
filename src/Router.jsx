@@ -15,6 +15,7 @@ import DeleteAccount from './pages/myPage/DeleteAccount.jsx';
 import MyProfile from './pages/myPage/MyProfile.jsx';
 import EditUserData from './pages/myPage/EditUserData.jsx';
 import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
+import CommunityEdit from './pages/community/CommunityEdit.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const Router = createBrowserRouter([
   {
     path: '/community/guest',
     element: <CommunityForGuest />,
+  },
+  {
+    path: '/community/edit',
+    element: <CommunityEdit />,
   },
 ]);
 

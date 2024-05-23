@@ -24,7 +24,7 @@ const CommunityWrite = () => {
 
       <Main>
         <CommunityForm />
-        {<Button text={'등록'} color={Palette.Primary} />}
+        <Button text={'등록'} color={Palette.Primary} />
       </Main>
       <Footer />
     </EnrollWrapper>

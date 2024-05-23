@@ -19,6 +19,13 @@ const CommunityForm = (props) => {
     height: 12,
   };
 
+  const hashtagInput = {
+    item: '해시태그',
+    text: '#해시태그',
+    editInput: false,
+    type: 'input',
+  };
+
   const hashTag = [
     {
       text: '#해시태그',
@@ -34,16 +41,17 @@ const CommunityForm = (props) => {
 
   return (
     <FormWrapper>
-      <ImageTitleWrapper>
-        <ImageWrapper>
-          <Img />
-        </ImageWrapper>
-        <LabeledInput {...titleInput} />
-      </ImageTitleWrapper>
+      <ImageWrapper>
+        <Img></Img>
+      </ImageWrapper>
+      <LabeledInput {...titleInput} />
       <DescriptionWrapper>
         <LabeledInput {...descriptionInput} />
-        <HashTagWrapper>{hashtagList}</HashTagWrapper>
       </DescriptionWrapper>
+      <HashtagWrapper>
+        <LabeledInput {...hashtagInput} />
+        <HashTagWrapper>{hashtagList}</HashTagWrapper>
+      </HashtagWrapper>
       <OpenStatusWrapper>
         <OpenStatusLabel>공개 여부*</OpenStatusLabel>
         <OpenStatusButtonWrapper>
@@ -65,31 +73,60 @@ const CommunityForm = (props) => {
   );
 };
 
-const FormWrapper = styled.div``;
+const FormWrapper = styled.div`
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+`;
 
 const DescriptionWrapper = styled.div``;
 
-const ImageTitleWrapper = styled.div``;
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
-const ImageWrapper = styled.div``;
+const Img = styled.div`
+  height: 8rem;
+  width: 100%;
+  border: 1px solid ${Palette.InputBorder};
+  border-radius: 10px;
+`;
 
-const Img = styled.img``;
+const HashtagWrapper = styled.div`
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const HashTagWrapper = styled.div`
   display: flex;
+
   flex-direction: row;
   gap: 0.3rem;
 `;
 
-const OpenStatusWrapper = styled.div``;
-
-const OpenStatusLabel = styled.span``;
-
-const OpenStatusButtonWrapper = styled.div`
-  height: 1.5rem;
+const OpenStatusWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  height: 6vh;
+`;
+
+const OpenStatusLabel = styled.span`
+  font-size: 16px;
+`;
+
+const OpenStatusButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 4.8rem;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const OpenStatus = styled.span``;
@@ -141,9 +178,18 @@ const Label = styled.label`
   }
 `;
 
-const AddMemberWrapper = styled.div``;
+const AddMemberWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  height: 6vh;
+  align-items: center;
+`;
 
-const AddMemberLabel = styled.span``;
+const AddMemberLabel = styled.span`
+  font-size: 16px;
+`;
 
 const InfoWrapper = styled.div`
   display: flex;

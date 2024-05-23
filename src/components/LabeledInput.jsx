@@ -45,6 +45,7 @@ const Wrapper = styled.div`
 
 const Item = styled.span`
   height: 1rem;
+  font-size: 16px;
 `;
 
 export default LabeledInput;
