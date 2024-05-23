@@ -1,11 +1,12 @@
-import Header, {HeaderTitle} from '../components/headerComponents/Header.jsx';
+import Header, { HeaderTitle } from '../components/headerComponents/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import styled from 'styled-components';
 import Palette from '../styles/Palette.jsx';
 import HeaderButton from '../components/headerComponents/HeaderButton.jsx';
 import HomeFeedPreview from '../components/feedComponents/HomeFeedPreview.jsx';
 import axios from 'axios';
-import {useState} from 'react';
+import { useEffect, useState } from 'react';
+import { json } from 'react-router-dom';
 
 const AppStyle = styled.div`
   //margin: 4rem 0;
@@ -39,90 +40,95 @@ const Article = styled.article`
 `;
 
 const axiosHomeFeed = async () => {
-  const conf = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'http://localhost:8080/api/homeFeed',
-    headers: {},
-    data: {}
-  };
-  return await axios.request(conf);
+  return await axios.get('http://127.0.0.1:8080/api/posts');
 };
 
 const HomePage = () => {
   const [feedList, setFeedList] = useState([]);
 
-  const renderHomeFeed = () => {
+  useEffect(() => {
     axiosHomeFeed().then((response) => {
-      console.log(JSON.parse(response.data.data.data));
-      // Looping Fetch
-      // setFeedList(
-      //     [...feedList,
-      //       JSON.parse(response.data.data.data).map((element, key) => {
-      //         return (
-      //             <Article key={key}>
-      //               <HomeFeedPreview
-      //                   image={element.images}
-      //                   userImg={element.userImg}
-      //                   userName={element.userName}
-      //                   title={element.postTitle}
-      //               />
-      //             </Article>
-      //         );
-      //       })]
-      // );
-    })
-    .catch((error) => {
-      console.log(error);
+      const postList = JSON.parse(response.data.data.data);
+      setFeedList(postList);
+      console.log(postList);
     });
-    return feedList;
-  };
+  }, []);
 
-  return (<>
-    <AppStyle>
-      <Header
-          left={<HeaderButton
+  const list = feedList.map((data, i) => {
+    return (
+      <Article key={i}>
+        <HomeFeedPreview
+          image={feedList[i]['images']}
+          userImg={
+            'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'
+          }
+          userName={'Thierry K'}
+          title={feedList[i]['postTitle']}
+          likeCount={64}
+          replyCount={72}
+          feedId={1}
+        />
+      </Article>
+    );
+  });
+  return (
+    <>
+      <AppStyle>
+        <Header
+          left={
+            <HeaderButton
               color={Palette.Primary}
               icon={<i className="bi bi-airplane-fill"></i>}
               action={() => {
                 location.href = '/';
               }}
-          />}
-          right={<HeaderButton
+            />
+          }
+          right={
+            <HeaderButton
               icon={<i className="bi bi-bell"></i>}
-              action={() => {
-              }}
-          />}
-          title={<HeaderTitle
+              action={() => {}}
+            />
+          }
+          title={
+            <HeaderTitle
               align={'flex-start'}
               title={
-                <h2 style={{color: Palette.Primary}}><b>TraveLog</b></h2>
+                <h2 style={{ color: Palette.Primary }}>
+                  <b>TraveLog</b>
+                </h2>
               }
               action={() => {
                 location.href = '/';
               }}
-          />}
-      />
-      <ContentDiv>
-        <Section>
-          {renderHomeFeed()}
-          {/*예제*/}
-          <Article>
-            <HomeFeedPreview
-                image={'https://images.unsplash.com/photo-1578023110180-ee277d6d95c2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
-                userImg={'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'}
+            />
+          }
+        />
+        <ContentDiv>
+          <Section>
+            {/*예제*/}
+            {/* <Article>
+              <HomeFeedPreview
+                image={
+                  'https://images.unsplash.com/photo-1578023110180-ee277d6d95c2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                }
+                userImg={
+                  'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'
+                }
                 userName={'Thierry K'}
                 title={'스페이스 니들 시애틀, 워싱턴 밤'}
                 likeCount={64}
                 replyCount={72}
                 feedId={1}
-            />
-          </Article>
-        </Section>
-      </ContentDiv>
-      <Footer/>
-    </AppStyle>
-  </>);
+              />
+            </Article> */}
+            {list}
+          </Section>
+        </ContentDiv>
+        <Footer />
+      </AppStyle>
+    </>
+  );
 };
 
 export default HomePage;
