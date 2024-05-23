@@ -9,6 +9,7 @@ import InputBasic from '../../components/InputBasic';
 import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
 import CommunityTab from '../../components/communities/CommunityTab';
 import { useState } from 'react';
+import Footer from '../../components/Footer';
 
 const Community = () => {
   const navigate = useNavigate();
@@ -82,22 +83,41 @@ const Community = () => {
       />
       <Main>
         <CommunityTabSection>
-          <InputBasic text={'Search here'} height={3} searchIcon={true} />
+          <SearchInputWrapper>
+            <InputBasic text={'Search here'} height={3} searchIcon={true} />
+          </SearchInputWrapper>
           <TabWrapper>{tab}</TabWrapper>
         </CommunityTabSection>
         <Hr />
         <CommunityComponentsSection>
           <CommunitySubTitle title={'My Communities'} />
-          {myCommunities}
+          <PreviewWrapper>{myCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
         <CommunityComponentsSection>
           <CommunitySubTitle title={'All Communities'} />
-          {AllCommunities}
+          <PreviewWrapper>{AllCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
       </Main>
+      <Footer></Footer>
     </CommunityWrapper>
   );
 };
+
+const SearchInputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: -0.5rem;
+`;
+
+const PreviewWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 26vh;
+`;
 
 const Hr = styled.hr`
   margin: 0 -1rem;

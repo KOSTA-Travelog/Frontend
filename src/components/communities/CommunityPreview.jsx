@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
 import HashTag from '../HashTag';
+import Community from '../../pages/community/Community';
 
 const CommunityPreview = (props) => {
   const hashtagList = props.hashTag.map((tag, index) => {
@@ -10,8 +11,8 @@ const CommunityPreview = (props) => {
   });
 
   return (
-    <CommunityComponentsArticle>
-      <CommunityImg
+    <ComponentsArticle>
+      <Img
         style={{
           backgroundImage:
             'url(' +
@@ -19,29 +20,29 @@ const CommunityPreview = (props) => {
             ')',
         }}
       />
-      <CommunityContent>
-        <CommunityTitleAreaWrapper>
-          <CommunityTitleWrapper>
-            <CommunityTitle>{props.title}</CommunityTitle>
-          </CommunityTitleWrapper>
-          <CommunityInfoWrapper>
+      <Content>
+        <TitleAreaWrapper>
+          <TitleWrapper>
+            <Title>{props.title}</Title>
+          </TitleWrapper>
+          <InfoWrapper>
             <PersonIconWrapper>
               <PersonIcon className="bi bi-person-fill" />
             </PersonIconWrapper>
             <CountPerson>{props.countMember}</CountPerson>
-          </CommunityInfoWrapper>
-        </CommunityTitleAreaWrapper>
-        <CommunityDescriptionWrapper>
-          <CommunityDescription>{props.description}</CommunityDescription>
-        </CommunityDescriptionWrapper>
-        <CommunityHashTagDateWrapper>
+          </InfoWrapper>
+        </TitleAreaWrapper>
+        <DescriptionWrapper>
+          <Description>{props.description}</Description>
+        </DescriptionWrapper>
+        <HashTagDateWrapper>
           <HashTagWrapper>{hashtagList}</HashTagWrapper>
-          <CommunityDateWrapper>
-            <CommunityEnrollDate>{props.date}</CommunityEnrollDate>
-          </CommunityDateWrapper>
-        </CommunityHashTagDateWrapper>
-      </CommunityContent>
-    </CommunityComponentsArticle>
+          <DateWrapper>
+            <EnrollDate>{props.date}</EnrollDate>
+          </DateWrapper>
+        </HashTagDateWrapper>
+      </Content>
+    </ComponentsArticle>
   );
 };
 
@@ -54,7 +55,7 @@ CommunityPreview.propTypes = {
   image: PropTypes.image,
 };
 
-const CommunityComponentsArticle = styled.article`
+const ComponentsArticle = styled.article`
   /* width: 22rem; */
   width: 100%;
   height: 6.7rem;
@@ -69,14 +70,14 @@ const CommunityComponentsArticle = styled.article`
   padding: 0.55rem 0.7rem 0.5rem 0.5rem;
 `;
 
-const CommunityImg = styled.img`
+const Img = styled.img`
   /* width: 5.5rem; */
   width: 30%;
   height: 5.5rem;
   background-size: cover;
 `;
 
-const CommunityContent = styled.article`
+const Content = styled.article`
   /* min-width: 15rem; */
   width: 70%;
   display: flex;
@@ -85,7 +86,7 @@ const CommunityContent = styled.article`
   justify-content: space-between;
 `;
 
-const CommunityHashTagDateWrapper = styled.div`
+const HashTagDateWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 0.2rem;
@@ -93,7 +94,7 @@ const CommunityHashTagDateWrapper = styled.div`
   align-items: center;
 `;
 
-const CommunityTitleAreaWrapper = styled.div`
+const TitleAreaWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -101,11 +102,11 @@ const CommunityTitleAreaWrapper = styled.div`
   align-items: center;
 `;
 
-const CommunityTitleWrapper = styled.div`
+const TitleWrapper = styled.div`
   width: 10rem;
 `;
 
-const CommunityTitle = styled.h3`
+const Title = styled.h3`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -113,7 +114,7 @@ const CommunityTitle = styled.h3`
   width: auto;
 `;
 
-const CommunityInfoWrapper = styled.div`
+const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 2rem;
@@ -130,11 +131,11 @@ const PersonIcon = styled.i`
 
 const CountPerson = styled.p``;
 
-const CommunityDescriptionWrapper = styled.div`
+const DescriptionWrapper = styled.div`
   padding-top: 0.3rem;
 `;
 
-const CommunityDescription = styled.p``;
+const Description = styled.p``;
 
 const HashTagWrapper = styled.div`
   display: flex;
@@ -142,9 +143,9 @@ const HashTagWrapper = styled.div`
   gap: 0.3rem;
 `;
 
-const CommunityDateWrapper = styled.div``;
+const DateWrapper = styled.div``;
 
-const CommunityEnrollDate = styled.p`
+const EnrollDate = styled.p`
   font-style: normal;
   font-weight: 300;
   font-size: 12px;

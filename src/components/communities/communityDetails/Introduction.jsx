@@ -78,7 +78,7 @@ const Description = styled.div`
 const DescriptionHashTagWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.4rem;
 `;
 
 const HashTagWrapper = styled.div`
