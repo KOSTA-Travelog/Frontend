@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
 import HashTag from '../HashTag';
-import Community from '../../pages/community/Community';
 
 const CommunityPreview = (props) => {
   const hashtagList = props.hashTag.map((tag, index) => {
@@ -54,6 +52,21 @@ CommunityPreview.propTypes = {
   hashTag: PropTypes.array,
   image: PropTypes.image,
 };
+
+const HashTagWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+`;
+
+const DateWrapper = styled.div``;
+
+const EnrollDate = styled.p`
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 100%;
+`;
 
 const ComponentsArticle = styled.article`
   /* width: 22rem; */
@@ -136,20 +149,5 @@ const DescriptionWrapper = styled.div`
 `;
 
 const Description = styled.p``;
-
-const HashTagWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-`;
-
-const DateWrapper = styled.div``;
-
-const EnrollDate = styled.p`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 100%;
-`;
 
 export default CommunityPreview;

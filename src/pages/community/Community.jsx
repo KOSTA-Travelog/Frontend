@@ -5,7 +5,6 @@ import CommunityPreview from '../../components/communities/CommunityPreview';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
-import { useState } from 'react';
 import Footer from '../../components/Footer';
 import CommunityTab from '../../components/communities/CommunityTab';
 
@@ -15,7 +14,6 @@ import PageSubTitle from '../../components/PageSubTitle';
 
 const Community = () => {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState(['', '']);
 
   const MyCommunities = [
     {

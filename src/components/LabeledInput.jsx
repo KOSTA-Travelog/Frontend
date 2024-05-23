@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import InputBasic from '../InputBasic';
+import InputBasic from './InputBasic';
 import { PropTypes } from 'prop-types';
-import TextArea from '../TextArea';
+import TextArea from './TextArea';
 
-const EditInput = (props) => {
+const LabeledInput = (props) => {
   return (
     <Wrapper>
       <Item>{props.item}</Item>
@@ -25,7 +25,7 @@ const EditInput = (props) => {
   );
 };
 
-EditInput.prototype = {
+LabeledInput.prototype = {
   item: PropTypes.string,
   text: PropTypes.string,
   height: PropTypes.number,
@@ -47,4 +47,4 @@ const Item = styled.span`
   height: 1rem;
 `;
 
-export default EditInput;
+export default LabeledInput;
