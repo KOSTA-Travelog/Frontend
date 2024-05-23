@@ -5,11 +5,13 @@ import CommunityPreview from '../../components/communities/CommunityPreview';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
-import InputBasic from '../../components/InputBasic';
 import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
-import CommunityTab from '../../components/communities/CommunityTab';
 import { useState } from 'react';
 import Footer from '../../components/Footer';
+import CommunityTab from '../../components/communities/CommunityTab';
+
+import InputBasic from '../../components/InputBasic';
+import TapMenuSection from '../../components/communities/TapMenuSection';
 
 const Community = () => {
   const navigate = useNavigate();
@@ -31,6 +33,7 @@ const Community = () => {
       hashTag: ['#여수', '#바다'],
     },
   ];
+
   const tabMenu = ['My Communities', 'All Communities'];
 
   const tab = tabMenu.map((menu, index) => {
@@ -39,11 +42,8 @@ const Community = () => {
         text={menu}
         key={index}
         selected={menu}
-        onClick={() => {
+        action={() => {
           console.log('click', index);
-          // let arr = [...menu];
-          // arr[index] = 'selected';
-          // setMenu([...arr]);
         }}
       />
     );
@@ -82,12 +82,10 @@ const Community = () => {
         }
       />
       <Main>
-        <CommunityTabSection>
-          <SearchInputWrapper>
-            <InputBasic text={'Search here'} height={3} searchIcon={true} />
-          </SearchInputWrapper>
-          <TabWrapper>{tab}</TabWrapper>
-        </CommunityTabSection>
+        <SearchInputWrapper>
+          <InputBasic text={'Search here'} height={3} searchIcon={true} />
+        </SearchInputWrapper>
+        <TapMenuSection tab={tab} />
         <Hr />
         <CommunityComponentsSection>
           <CommunitySubTitle title={'My Communities'} />
@@ -135,11 +133,6 @@ const Main = styled.div`
   margin: 4rem 0;
 `;
 
-const CommunityTabSection = styled.section`
-  width: 100%;
-  background-color: ${Palette.BodyPrimary};
-`;
-
 const CommunityComponentsSection = styled.section`
   width: 100%;
   min-height: 1.5vh;
@@ -148,16 +141,6 @@ const CommunityComponentsSection = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-top: 1.2rem;
-`;
-
-const TabWrapper = styled.article`
-  width: 100%;
-  height: 4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 0 2rem;
-  align-items: center;
 `;
 
 export default Community;
