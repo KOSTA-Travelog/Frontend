@@ -2,30 +2,22 @@ import styled from 'styled-components';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
 import Footer from '../../components/Footer';
-import CommunityPreview from '../../components/communities/CommunityPreview';
 import InputBasic from '../../components/InputBasic';
 import PageSubTitle from '../../components/PageSubTitle';
+import { axiosAllCommunityList } from '../../apis/Feed';
+import { useEffect, useState } from 'react';
+import CommunityPreview from '../../components/communities/CommunityPreview';
 
 const CommunityForGuest = () => {
-  const MyCommunities = [
-    {
-      title: '가족 여행',
-      countMember: 4,
-      description: '5월의 여수 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-    {
-      title: '가족 여행2',
-      countMember: 4,
-      description: '5월의 부산 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-  ];
+  const [communityList, setCommunityList] = useState([]);
+  useEffect(() => {
+    axiosAllCommunityList().then((res) => {
+      setCommunityList(JSON.parse(res.data.data.data));
+    });
+  }, []);
 
-  const allCommunities = MyCommunities.map((community, index) => {
-    return <CommunityPreview {...community} key={index} />;
+  const alCommunities = communityList.map((data) => {
+    return <CommunityPreview {...data} key={data['communityId']} />;
   });
 
   return (
@@ -51,7 +43,7 @@ const CommunityForGuest = () => {
         <Hr />
         <Section>
           <PageSubTitle title={'All Communities'} />
-          <PreviewWrapper>{allCommunities}</PreviewWrapper>
+          <PreviewWrapper>{alCommunities}</PreviewWrapper>
         </Section>
       </Main>
       <Footer></Footer>

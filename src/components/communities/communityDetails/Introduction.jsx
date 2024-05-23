@@ -4,8 +4,10 @@ import Palette from '../../../styles/Palette';
 import { PropTypes } from 'prop-types';
 
 const Introduction = (props) => {
-  const hashTag = props.communityHashTag.map((tag, index) => {
-    return <HashTag text={tag} key={index} />;
+  const hashTagList = (props.communityHashtag || '').split('#').slice(1);
+
+  const hashTag = hashTagList.map((tag, index) => {
+    return <HashTag text={'#' + tag.trim()} key={index} />;
   });
 
   return (
@@ -40,10 +42,11 @@ const Introduction = (props) => {
 
 Introduction.propTypes = {
   communityDescription: PropTypes.string,
-  communityHashTag: PropTypes.array,
+  communityHashtag: PropTypes.string,
   communityDate: PropTypes.string,
   countMember: PropTypes.number,
   communityImage: PropTypes.string,
+  communityId: PropTypes.number,
 };
 
 const IntroductionWrapper = styled.div`

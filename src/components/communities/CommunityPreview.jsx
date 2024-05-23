@@ -4,8 +4,9 @@ import { PropTypes } from 'prop-types';
 import HashTag from '../HashTag';
 
 const CommunityPreview = (props) => {
-  const hashtagList = props.hashTag.map((tag, index) => {
-    return <HashTag text={tag} key={index} />;
+  const hashTagList = (props.communityHashtag || '').split('#').slice(1);
+  const hashtagList = hashTagList.map((tag, index) => {
+    return <HashTag text={'#' + tag.trim()} key={index} />;
   });
 
   return (
@@ -21,7 +22,7 @@ const CommunityPreview = (props) => {
       <Content>
         <TitleAreaWrapper>
           <TitleWrapper>
-            <Title>{props.title}</Title>
+            <Title>{props.communityTitle}</Title>
           </TitleWrapper>
           <InfoWrapper>
             <PersonIconWrapper>
@@ -31,12 +32,12 @@ const CommunityPreview = (props) => {
           </InfoWrapper>
         </TitleAreaWrapper>
         <DescriptionWrapper>
-          <Description>{props.description}</Description>
+          <Description>{props.communityDescription}</Description>
         </DescriptionWrapper>
         <HashTagDateWrapper>
           <HashTagWrapper>{hashtagList}</HashTagWrapper>
           <DateWrapper>
-            <EnrollDate>{props.date}</EnrollDate>
+            <EnrollDate>{props.communityDate}</EnrollDate>
           </DateWrapper>
         </HashTagDateWrapper>
       </Content>
@@ -45,12 +46,13 @@ const CommunityPreview = (props) => {
 };
 
 CommunityPreview.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
+  communityId: PropTypes.number,
+  communityTitle: PropTypes.string,
+  communityDescription: PropTypes.string,
   countMember: PropTypes.number,
-  date: PropTypes.string,
-  hashTag: PropTypes.array,
-  image: PropTypes.image,
+  communityDate: PropTypes.string,
+  communityHashtag: PropTypes.string,
+  communityImage: PropTypes.image,
 };
 
 const HashTagWrapper = styled.div`

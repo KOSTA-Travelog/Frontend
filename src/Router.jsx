@@ -58,11 +58,11 @@ const Router = createBrowserRouter([
     element: <FindPassword />,
   },
   {
-    path: '/community',
+    path: '/community/:userId',
     element: <Community />,
   },
   {
-    path: '/community/detail',
+    path: '/community/detail/:id',
     element: <CommunityDetail />,
   },
   {

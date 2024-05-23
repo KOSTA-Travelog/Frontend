@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommunityPreview from '../../components/communities/CommunityPreview';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
@@ -11,26 +11,25 @@ import CommunityTab from '../../components/communities/CommunityTab';
 import InputBasic from '../../components/InputBasic';
 import TapMenuSection from '../../components/communities/TapMenuSection';
 import PageSubTitle from '../../components/PageSubTitle';
+import { useEffect, useState } from 'react';
+import { axiosAllCommunityList, axiosMyCommunityList } from '../../apis/Feed';
 
 const Community = () => {
-  const navigate = useNavigate();
+  const params = useParams();
+  const [myCommunityList, setMyCommunityList] = useState([]);
+  const [allCommunityList, setAllCommunityList] = useState([]);
 
-  const MyCommunities = [
-    {
-      title: '가족 여행',
-      countMember: 4,
-      description: '5월의 여수 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-    {
-      title: '가족 여행2',
-      countMember: 4,
-      description: '5월의 부산 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-  ];
+  useEffect(() => {
+    axiosMyCommunityList(params).then((res) => {
+      setMyCommunityList(JSON.parse(res.data.data.data));
+    });
+
+    axiosAllCommunityList().then((res) => {
+      setAllCommunityList(JSON.parse(res.data.data.data));
+    });
+  }, [params]);
+
+  const navigate = useNavigate();
 
   const tabMenu = ['My Communities', 'All Communities'];
 
@@ -47,11 +46,11 @@ const Community = () => {
     );
   });
 
-  const myCommunities = MyCommunities.map((community, index) => {
+  const myCommunities = myCommunityList.map((community, index) => {
     return <CommunityPreview {...community} key={index} />;
   });
 
-  const allCommunities = MyCommunities.map((community, index) => {
+  const allCommunities = allCommunityList.map((community, index) => {
     return <CommunityPreview {...community} key={index} />;
   });
 

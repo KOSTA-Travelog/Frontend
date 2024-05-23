@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import Palette from '../styles/Palette.jsx';
 import HeaderButton from '../components/headerComponents/HeaderButton.jsx';
 import HomeFeedPreview from '../components/feedComponents/HomeFeedPreview.jsx';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { json } from 'react-router-dom';
+import { axiosHomeFeed } from '../apis/Feed.jsx';
 
 const AppStyle = styled.div`
-  //margin: 4rem 0;
+  // margin: 4rem 0;
   padding: 4rem 0;
   display: flex;
   flex-direction: column;
@@ -39,10 +38,6 @@ const Article = styled.article`
   background-color: ${Palette.BodyPrimary};
 `;
 
-const axiosHomeFeed = async () => {
-  return await axios.get('http://127.0.0.1:8080/api/posts');
-};
-
 const HomePage = () => {
   const [feedList, setFeedList] = useState([]);
 
@@ -50,23 +45,22 @@ const HomePage = () => {
     axiosHomeFeed().then((response) => {
       const postList = JSON.parse(response.data.data.data);
       setFeedList(postList);
-      console.log(postList);
     });
   }, []);
 
-  const list = feedList.map((data, i) => {
+  const list = feedList.map((data) => {
     return (
-      <Article key={i}>
+      <Article key={data['postId']}>
         <HomeFeedPreview
-          image={feedList[i]['images']}
+          image={data['images']}
           userImg={
             'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'
           }
           userName={'Thierry K'}
-          title={feedList[i]['postTitle']}
+          title={data['postTitle']}
           likeCount={64}
           replyCount={72}
-          feedId={1}
+          feedId={data['postId']}
         />
       </Article>
     );
@@ -105,25 +99,7 @@ const HomePage = () => {
           }
         />
         <ContentDiv>
-          <Section>
-            {/*예제*/}
-            {/* <Article>
-              <HomeFeedPreview
-                image={
-                  'https://images.unsplash.com/photo-1578023110180-ee277d6d95c2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                }
-                userImg={
-                  'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'
-                }
-                userName={'Thierry K'}
-                title={'스페이스 니들 시애틀, 워싱턴 밤'}
-                likeCount={64}
-                replyCount={72}
-                feedId={1}
-              />
-            </Article> */}
-            {list}
-          </Section>
+          <Section>{list}</Section>
         </ContentDiv>
         <Footer />
       </AppStyle>
