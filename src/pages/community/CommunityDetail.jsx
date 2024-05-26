@@ -9,12 +9,17 @@ import SettingModal from '../../components/communities/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import Divider from '../../components/communities/communityDetails/Divider';
-import { axiosCommunity } from '../../apis/Community';
+import {
+  axiosCommunity,
+  axiosGuestCommunityPostList,
+  axiosMemberCommunityPostList,
+} from '../../apis/Community';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [communityInfo, setCommunityInfo] = useState();
+  const [postList, setPostList] = useState([]);
 
   const countMember = 4;
 
@@ -33,7 +38,11 @@ const CommunityDetails = () => {
         setCommunityInfo(JSON.parse(res.data.data.data));
       }
     });
-  }, [params, communityInfo]);
+
+    axiosGuestCommunityPostList(params).then((res) => {
+      setPostList(JSON.parse(res.data.data.data));
+    });
+  }, [params]);
   return (
     <CommunityDetailsWrapper>
       <Header
@@ -70,7 +79,7 @@ const CommunityDetails = () => {
       <Main>
         <Introduction {...communityInfo} countMember={countMember} />
         <Divider number={2222} />
-        <PostImages />
+        <PostImages postList={postList} />
       </Main>
       <Footer />
     </CommunityDetailsWrapper>

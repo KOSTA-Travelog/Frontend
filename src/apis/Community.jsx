@@ -31,3 +31,20 @@ export const axiosMyCommunityList = async (params) => {
 export const axiosAllCommunityList = async () => {
   return await axios.get('http://localhost:8080/api/communities/allCommunity');
 };
+
+export const axiosMemberCommunityPostList = async (params) => {
+  return await axios.get(
+    'http://localhost:8080/api/communityPosts/memberPage',
+    { params }
+  );
+};
+
+// axiosMemberCommunityPostList(params).then((res) => {
+//   console.log(JSON.parse(res.data.data.data));
+// });
+
+export const axiosGuestCommunityPostList = async (params) => {
+  return await axios.get('http://localhost:8080/api/communityPosts/guest', {
+    params,
+  });
+};
