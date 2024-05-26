@@ -16,7 +16,7 @@ const CommunityForGuest = () => {
     });
   }, []);
 
-  const alCommunities = communityList.map((data) => {
+  const allCommunities = communityList.map((data) => {
     return <CommunityPreview {...data} key={data['communityId']} />;
   });
 
@@ -43,7 +43,7 @@ const CommunityForGuest = () => {
         <Hr />
         <Section>
           <PageSubTitle title={'All Communities'} />
-          <PreviewWrapper>{alCommunities}</PreviewWrapper>
+          <PreviewWrapper>{allCommunities}</PreviewWrapper>
         </Section>
       </Main>
       <Footer></Footer>

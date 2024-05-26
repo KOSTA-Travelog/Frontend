@@ -2,21 +2,34 @@ import styled from 'styled-components';
 import LabeledInput from '../LabeledInput';
 import HashTag from '../HashTag';
 import Palette from '../../styles/Palette';
+import { useState } from 'react';
+import Introduction from './communityDetails/Introduction';
 
 const CommunityForm = (props) => {
+  const [openStatus, setOpenStatus] = useState(true);
+  const [title, setTitle] = useState('');
+  const [Introduction, setIntroduction] = useState('');
+  const [hashtag, setHashtag] = useState('');
+
   const titleInput = {
     item: '제목*',
     text: '제목을 입력하세요',
     editInput: false,
     type: 'input',
+    onChange: (e) => {
+      setTitle(e.target.value);
+    },
   };
 
-  const descriptionInput = {
+  const IntroductionInput = {
     item: '소개글',
     text: '내용을 입력하세요',
     editInput: false,
     type: 'textArea',
     height: 12,
+    onChange: (e) => {
+      setIntroduction(e.target.value);
+    },
   };
 
   const hashtagInput = {
@@ -24,19 +37,25 @@ const CommunityForm = (props) => {
     text: '#해시태그',
     editInput: false,
     type: 'input',
+    onChange: (e) => {
+      setHashtag(e.target.value);
+    },
+  };
+  console.log(sessionStorage.getItem('userId'));
+
+  const params = {
+    communityTitle: title,
+    communityDescription: Introduction,
+    communityHashtag: hashtag,
+    // communityImage:,
+    communityStatus: openStatus ? 1 : 0,
+    // userId:
   };
 
-  const hashTag = [
-    {
-      text: '#해시태그',
-    },
-    {
-      text: '#해시태그',
-    },
-  ];
+  const hashTagList = (hashtag || '').split('#').slice(1);
 
-  const hashtagList = hashTag.map((tag, index) => {
-    return <HashTag {...tag} key={index} />;
+  const hashTagData = hashTagList.map((tag, index) => {
+    return <HashTag text={'#' + tag.trim()} key={index} />;
   });
 
   return (
@@ -46,17 +65,23 @@ const CommunityForm = (props) => {
       </ImageWrapper>
       <LabeledInput {...titleInput} />
       <DescriptionWrapper>
-        <LabeledInput {...descriptionInput} />
+        <LabeledInput {...IntroductionInput} />
       </DescriptionWrapper>
-      <HashtagWrapper>
+      <HashtagInputWrapper>
         <LabeledInput {...hashtagInput} />
-        <HashTagWrapper>{hashtagList}</HashTagWrapper>
-      </HashtagWrapper>
+        <HashTagWrapper>{hashTagData}</HashTagWrapper>
+      </HashtagInputWrapper>
       <OpenStatusWrapper>
         <OpenStatusLabel>공개 여부*</OpenStatusLabel>
         <OpenStatusButtonWrapper>
           <OpenStatus>공개</OpenStatus>
-          <OpenStatusInputButton type="checkbox" id="switch" />
+          <OpenStatusInputButton
+            type="checkbox"
+            id="switch"
+            onChange={() => {
+              setOpenStatus(!openStatus);
+            }}
+          />
           <Label htmlFor="switch"></Label>
         </OpenStatusButtonWrapper>
       </OpenStatusWrapper>
@@ -73,10 +98,11 @@ const CommunityForm = (props) => {
   );
 };
 
-const FormWrapper = styled.div`
-  height: 85vh;
+const FormWrapper = styled.form`
+  height: 86vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const DescriptionWrapper = styled.div``;
@@ -87,14 +113,14 @@ const ImageWrapper = styled.div`
   justify-content: center;
 `;
 
-const Img = styled.div`
+const Img = styled.img`
   height: 8rem;
   width: 100%;
   border: 1px solid ${Palette.InputBorder};
   border-radius: 10px;
 `;
 
-const HashtagWrapper = styled.div`
+const HashtagInputWrapper = styled.div`
   height: 8rem;
   display: flex;
   flex-direction: column;
@@ -175,6 +201,12 @@ const Label = styled.label`
     top: 50%;
     transform: translateY(-50%);
     transition: all 0.4s;
+  }
+
+  #switch:checked + label::before {
+    content: 'ON';
+    color: #fff;
+    left: 15px;
   }
 `;
 
