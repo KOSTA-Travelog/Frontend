@@ -7,8 +7,11 @@ import PageSubTitle from '../../components/PageSubTitle';
 import { axiosAllCommunityList } from '../../apis/Community';
 import { useEffect, useState } from 'react';
 import CommunityPreview from '../../components/communities/CommunityPreview';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityForGuest = () => {
+  const navigate = useNavigate();
+
   const [communityList, setCommunityList] = useState([]);
   useEffect(() => {
     axiosAllCommunityList().then((res) => {
@@ -17,7 +20,15 @@ const CommunityForGuest = () => {
   }, []);
 
   const allCommunities = communityList.map((data) => {
-    return <CommunityPreview {...data} key={data['communityId']} />;
+    return (
+      <CommunityPreview
+        {...data}
+        key={data['communityId']}
+        onClick={() => {
+          navigate(`/community/detail/${data['communityId']}`);
+        }}
+      />
+    );
   });
 
   return (

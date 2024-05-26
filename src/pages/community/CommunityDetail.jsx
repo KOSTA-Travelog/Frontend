@@ -12,7 +12,6 @@ import Divider from '../../components/communities/communityDetails/Divider';
 import {
   axiosCommunity,
   axiosGuestCommunityPostList,
-  axiosMemberCommunityPostList,
 } from '../../apis/Community';
 
 const CommunityDetails = () => {

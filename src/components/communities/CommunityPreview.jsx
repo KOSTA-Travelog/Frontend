@@ -10,7 +10,7 @@ const CommunityPreview = (props) => {
   });
 
   return (
-    <ComponentsArticle>
+    <ComponentsArticle onClick={props.onClick}>
       <Img
         style={{
           backgroundImage:
@@ -53,6 +53,7 @@ CommunityPreview.propTypes = {
   communityDate: PropTypes.string,
   communityHashtag: PropTypes.string,
   communityImage: PropTypes.image,
+  onClick: PropTypes.func,
 };
 
 const HashTagWrapper = styled.div`

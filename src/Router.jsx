@@ -64,11 +64,11 @@ const Router = createBrowserRouter([
     element: <Community />,
   },
   {
-    path: '/community/guest',
+    path: '/community/detail',
     element: <CommunityForGuest />,
   },
   {
-    path: '/community/guest/:id',
+    path: '/community/detail/:id',
     element: <CommunityDetail />,
   },
   {
