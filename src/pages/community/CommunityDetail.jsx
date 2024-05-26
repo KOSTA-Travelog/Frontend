@@ -9,7 +9,7 @@ import SettingModal from '../../components/communities/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import Divider from '../../components/communities/communityDetails/Divider';
-import { axiosCommunity } from '../../apis/Feed';
+import { axiosCommunity } from '../../apis/Community';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();

@@ -53,10 +53,8 @@ const HomePage = () => {
       <Article key={data['postId']}>
         <HomeFeedPreview
           image={data['images']}
-          userImg={
-            'https://images.unsplash.com/profile-1578024616928-2e448ac30b4dimage?bg=fff&crop=faces&dpr=2&h=32&w=32&auto=format&fit=crop&q=60&ixlib=rb-4.0.3'
-          }
-          userName={'Thierry K'}
+          userImg={data['profileImage']}
+          userName={data['nickname']}
           title={data['postTitle']}
           likeCount={64}
           replyCount={72}

@@ -64,7 +64,11 @@ const Router = createBrowserRouter([
     element: <Community />,
   },
   {
-    path: '/community/detail/:id',
+    path: '/community/guest',
+    element: <CommunityForGuest />,
+  },
+  {
+    path: '/community/guest/:id',
     element: <CommunityDetail />,
   },
   {
@@ -86,10 +90,6 @@ const Router = createBrowserRouter([
   {
     path: '/myPage/edit',
     element: <EditUserData />,
-  },
-  {
-    path: '/community/guest',
-    element: <CommunityForGuest />,
   },
   {
     path: '/community/edit',

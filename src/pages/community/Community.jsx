@@ -12,7 +12,10 @@ import InputBasic from '../../components/InputBasic';
 import TapMenuSection from '../../components/communities/TapMenuSection';
 import PageSubTitle from '../../components/PageSubTitle';
 import { useEffect, useState } from 'react';
-import { axiosAllCommunityList, axiosMyCommunityList } from '../../apis/Feed';
+import {
+  axiosAllCommunityList,
+  axiosMyCommunityList,
+} from '../../apis/Community';
 
 const Community = () => {
   const params = useParams();

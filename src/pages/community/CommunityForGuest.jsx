@@ -4,7 +4,7 @@ import Palette from '../../styles/Palette';
 import Footer from '../../components/Footer';
 import InputBasic from '../../components/InputBasic';
 import PageSubTitle from '../../components/PageSubTitle';
-import { axiosAllCommunityList } from '../../apis/Feed';
+import { axiosAllCommunityList } from '../../apis/Community';
 import { useEffect, useState } from 'react';
 import CommunityPreview from '../../components/communities/CommunityPreview';
 
