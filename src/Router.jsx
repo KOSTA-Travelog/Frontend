@@ -17,6 +17,7 @@ import EditUserData from './pages/myPage/EditUserData.jsx';
 import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
 import CommunityEdit from './pages/community/CommunityEdit.jsx';
 import FeedPageWrite from './pages/FeedPageWrite.jsx';
+import AddMember from './pages/community/AddMember.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ const Router = createBrowserRouter([
   {
     path: '/feed/write',
     element: <FeedPageWrite />,
+  },
+  {
+    path: '/community/addMember',
+    element: <AddMember />,
   },
 ]);
 
