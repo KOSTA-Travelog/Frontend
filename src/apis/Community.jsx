@@ -1,9 +1,10 @@
 import axios from 'axios';
-
-const url = process.env.VITE_API_URL;
+import.meta.env.VITE_API_BASE_URL;
 
 export const axiosCommunityDetail = async (params) => {
-  return await axios.get(url + `/posts/imageList?postId=${params['id']}`);
+  return await axios.get(
+    VITE_API_BASE_URL + `/posts/imageList?postId=${params['id']}`
+  );
 };
 
 // export const axiosAddCommunity = async (params) => {
@@ -18,24 +19,28 @@ export const axiosCommunityDetail = async (params) => {
 
 export const axiosCommunity = async (params) => {
   return await axios.get(
-    url + `/communities/detail?communityId=${params['id']}`
+    VITE_API_BASE_URL + `/communities/detail?communityId=${params['id']}`
   );
 };
 
 export const axiosMyCommunityList = async (params) => {
-  return await axios.get(url + `/myCommunity?userId=${params['userId']}`);
+  return await axios.get(
+    VITE_API_BASE_URL + `/myCommunity?userId=${params['userId']}`
+  );
 };
 
 export const axiosAllCommunityList = async () => {
-  return await axios.get(url + '/communities/allCommunity');
+  return await axios.get(VITE_API_BASE_URL + '/communities/allCommunity');
 };
 
 export const axiosMemberCommunityPostList = async (params) => {
-  return await axios.get(url + '/communityPosts/memberPage', { params });
+  return await axios.get(VITE_API_BASE_URL + '/communityPosts/memberPage', {
+    params,
+  });
 };
 
 export const axiosGuestCommunityPostList = async (params) => {
-  return await axios.get(url + `/communityPosts/guest`, {
+  return await axios.get(VITE_API_BASE_URL + `/communityPosts/guest`, {
     params,
   });
 };
@@ -46,14 +51,19 @@ export const axiosCurrentMemberList = async (params) => {
   );
 };
 
+export const axiosCommunityPostList = async (params) => {
+  return await axios.get(VITE_API_BASE_URL + '/communityPosts', { params });
+};
+
 export const axiosSearchNickname = async (params) => {
   return await axios.get(
-    url + `/searchNickname?nickname=${params['nickname']}`
+    VITE_API_BASE_URL + `/searchNickname?nickname=${params['nickname']}`
   );
 };
 
 export const axiosAddMember = async (communityId, userId) => {
   return await axios.post(
-    url + `/communities/member/add?communityId=${communityId}&userId=${userId}`
+    VITE_API_BASE_URL +
+      `/communities/member/add?communityId=${communityId}&userId=${userId}`
   );
 };
