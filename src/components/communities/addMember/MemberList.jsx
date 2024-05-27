@@ -1,66 +1,45 @@
 import styled from 'styled-components';
 import PageSubTitle from '../../PageSubTitle';
-import Button from '../../Button';
 import { PropTypes } from 'prop-types';
+import MemberProfile from './MemberProfile';
 
 const MemberList = (props) => {
+  const list = [...props.currentMember];
+  const CommunityMember = list.map((data) => {
+    const profileDate = {
+      profileImage: data['profileImage'],
+      nickname: data['nickname'],
+      bio: data['bio'],
+      buttonColor: props.buttonColor,
+      buttonText: props.buttonText,
+      buttonHeight: props.buttonHeight,
+    };
+    return <MemberProfile key={data['nickname']} {...profileDate} />;
+  });
+
   return (
     <Wrapper>
       <PageSubTitle title={props.title} />
-      <MemberListWrapper>
-        <ProfileWrapper>
-          <Img />
-          <UserInfo>
-            <Nickname>user name</Nickname>
-            <Bio>user bio</Bio>
-          </UserInfo>
-          <BtnWrapper>
-            <Button
-              color={props.buttonColor}
-              text={props.buttonText}
-              height={props.buttonHeight}
-            />
-          </BtnWrapper>
-        </ProfileWrapper>
-      </MemberListWrapper>
+      <MemberListWrapper>{CommunityMember}</MemberListWrapper>
     </Wrapper>
   );
 };
 
 MemberList.prototype = {
-  title: PropTypes.String,
-  buttonColor: PropTypes.String,
-  buttonText: PropTypes.String,
-  buttonHeight: PropTypes.Number,
+  title: PropTypes.string,
+  buttonColor: PropTypes.string,
+  buttonText: PropTypes.string,
+  buttonHeight: PropTypes.number,
+  currentMember: PropTypes.object,
 };
 
 const Wrapper = styled.div``;
 
-const MemberListWrapper = styled.div``;
-
-const ProfileWrapper = styled.div`
+const MemberListWrapper = styled.div`
+  min-height: 30vh;
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.2rem;
 `;
-
-const Img = styled.img`
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 100px;
-`;
-
-const UserInfo = styled.div`
-  width: 8rem;
-`;
-
-const BtnWrapper = styled.div`
-  width: 7.8rem;
-`;
-const Nickname = styled.p``;
-
-const Bio = styled.p``;
 
 export default MemberList;

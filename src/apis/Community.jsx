@@ -39,12 +39,26 @@ export const axiosMemberCommunityPostList = async (params) => {
   );
 };
 
-// axiosMemberCommunityPostList(params).then((res) => {
-//   console.log(JSON.parse(res.data.data.data));
-// });
-
 export const axiosGuestCommunityPostList = async (params) => {
   return await axios.get('http://localhost:8080/api/communityPosts/guest', {
     params,
   });
+};
+
+export const axiosCurrentMemberList = async (params) => {
+  return await axios.get(
+    `http://localhost:8080/api/communities/currentMember?communityId=${params['id']}`
+  );
+};
+
+export const axiosSearchNickname = async (params) => {
+  return await axios.get(
+    `http://localhost:8080/api/searchNickname?nickname=${params['nickname']}`
+  );
+};
+
+export const axiosAddMember = async (communityId, userId) => {
+  return await axios.post(
+    `http://localhost:8080/api/communities/member/add?communityId=${communityId}&userId=${userId}`
+  );
 };

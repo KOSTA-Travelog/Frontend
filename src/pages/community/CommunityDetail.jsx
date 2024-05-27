@@ -42,6 +42,7 @@ const CommunityDetails = () => {
       setPostList(JSON.parse(res.data.data.data));
     });
   }, [params]);
+
   return (
     <CommunityDetailsWrapper>
       <Header

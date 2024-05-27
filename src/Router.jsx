@@ -101,7 +101,11 @@ const Router = createBrowserRouter([
     element: <FeedPageWrite />,
   },
   {
-    path: '/community/addMember',
+    path: '/community/addMember/:id',
+    element: <AddMember />,
+  },
+  {
+    path: '/community/addMember/:id/:nickname',
     element: <AddMember />,
   },
 ]);
