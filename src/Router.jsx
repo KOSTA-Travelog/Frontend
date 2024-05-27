@@ -14,6 +14,10 @@ import CheckPassword from './pages/myPage/CheckPassword.jsx';
 import DeleteAccount from './pages/myPage/DeleteAccount.jsx';
 import MyProfile from './pages/myPage/MyProfile.jsx';
 import EditUserData from './pages/myPage/EditUserData.jsx';
+import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
+import CommunityEdit from './pages/community/CommunityEdit.jsx';
+import FeedPageWrite from './pages/FeedPageWrite.jsx';
+import AddMember from './pages/community/AddMember.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -57,11 +61,15 @@ const Router = createBrowserRouter([
     element: <FindPassword />,
   },
   {
-    path: '/community',
+    path: '/community/:userId',
     element: <Community />,
   },
   {
     path: '/community/detail',
+    element: <CommunityForGuest />,
+  },
+  {
+    path: '/community/detail/:id',
     element: <CommunityDetail />,
   },
   {
@@ -83,6 +91,22 @@ const Router = createBrowserRouter([
   {
     path: '/myPage/edit',
     element: <EditUserData />,
+  },
+  {
+    path: '/community/edit',
+    element: <CommunityEdit />,
+  },
+  {
+    path: '/feed/write',
+    element: <FeedPageWrite />,
+  },
+  {
+    path: '/community/addMember/:id',
+    element: <AddMember />,
+  },
+  {
+    path: '/community/addMember/:id/:nickname',
+    element: <AddMember />,
   },
 ]);
 

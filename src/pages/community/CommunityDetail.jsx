@@ -1,27 +1,24 @@
 import styled from 'styled-components';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Footer from '../../components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SettingModal from '../../components/communities/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import Divider from '../../components/communities/communityDetails/Divider';
+import {
+  axiosCommunity,
+  axiosGuestCommunityPostList,
+} from '../../apis/Community';
 
 const CommunityDetails = () => {
   const navigate = useNavigate();
-
-  const community = {
-    communityTitle: '가족 여행',
-    communityDescription:
-      '가족들과 국내 여행을 다녀왔다. 가을 여행이라 날씨가 너무 좋았다.',
-    communityHashTag: ['여수', '바다'],
-    communityDate: '2024.05.10',
-    communityImage:
-      'https://images.unsplash.com/photo-1578023110180-ee277d6d95c2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  };
+  const params = useParams();
+  const [communityInfo, setCommunityInfo] = useState();
+  const [postList, setPostList] = useState([]);
 
   const countMember = 4;
 
@@ -33,6 +30,18 @@ const CommunityDetails = () => {
   const settingStatus = settingModal['status'] === true && (
     <SettingModal type={settingModal} />
   );
+
+  useEffect(() => {
+    axiosCommunity(params).then((res) => {
+      if (JSON.parse(res.data.data.data)['communityStatus'] != 0) {
+        setCommunityInfo(JSON.parse(res.data.data.data));
+      }
+    });
+
+    axiosGuestCommunityPostList(params).then((res) => {
+      setPostList(JSON.parse(res.data.data.data));
+    });
+  }, [params]);
 
   return (
     <CommunityDetailsWrapper>
@@ -60,7 +69,7 @@ const CommunityDetails = () => {
             align={'center'}
             title={
               <h2 style={{ color: Palette.TextPrimary }}>
-                <b>{community.communityTitle}</b>
+                {/* <b>{communityInfo.communityTitle}</b> */}
               </h2>
             }
           />
@@ -68,9 +77,9 @@ const CommunityDetails = () => {
       />
       <SettingWrapper>{settingStatus}</SettingWrapper>
       <Main>
-        <Introduction {...community} countMember={countMember} />
+        <Introduction {...communityInfo} countMember={countMember} />
         <Divider number={2222} />
-        <PostImages />
+        <PostImages postList={postList} />
       </Main>
       <Footer />
     </CommunityDetailsWrapper>

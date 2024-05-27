@@ -1,35 +1,39 @@
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommunityPreview from '../../components/communities/CommunityPreview';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import Palette from '../../styles/Palette';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
-import InputBasic from '../../components/InputBasic';
-import CommunitySubTitle from '../../components/communities/CommunitySubTitle';
+import Footer from '../../components/Footer';
 import CommunityTab from '../../components/communities/CommunityTab';
-import { useState } from 'react';
+
+import InputBasic from '../../components/InputBasic';
+import TapMenuSection from '../../components/communities/TapMenuSection';
+import PageSubTitle from '../../components/PageSubTitle';
+import { useEffect, useState } from 'react';
+import {
+  axiosAllCommunityList,
+  axiosMyCommunityList,
+} from '../../apis/Community';
 
 const Community = () => {
-  const navigate = useNavigate();
-  const [menu, setMenu] = useState(['', '']);
+  const params = useParams();
+  const [myCommunityList, setMyCommunityList] = useState([]);
+  const [allCommunityList, setAllCommunityList] = useState([]);
 
-  const MyCommunities = [
-    {
-      title: '가족 여행',
-      countMember: 4,
-      description: '5월의 여수 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-    {
-      title: '가족 여행2',
-      countMember: 4,
-      description: '5월의 부산 여행',
-      date: '2024.05.10',
-      hashTag: ['#여수', '#바다'],
-    },
-  ];
+  useEffect(() => {
+    axiosMyCommunityList(params).then((res) => {
+      setMyCommunityList(JSON.parse(res.data.data.data));
+    });
+
+    axiosAllCommunityList().then((res) => {
+      setAllCommunityList(JSON.parse(res.data.data.data));
+    });
+  }, [params]);
+
+  const navigate = useNavigate();
+
   const tabMenu = ['My Communities', 'All Communities'];
 
   const tab = tabMenu.map((menu, index) => {
@@ -38,21 +42,18 @@ const Community = () => {
         text={menu}
         key={index}
         selected={menu}
-        onClick={() => {
+        action={() => {
           console.log('click', index);
-          // let arr = [...menu];
-          // arr[index] = 'selected';
-          // setMenu([...arr]);
         }}
       />
     );
   });
 
-  const myCommunities = MyCommunities.map((community, index) => {
+  const myCommunities = myCommunityList.map((community, index) => {
     return <CommunityPreview {...community} key={index} />;
   });
 
-  const AllCommunities = MyCommunities.map((community, index) => {
+  const allCommunities = allCommunityList.map((community, index) => {
     return <CommunityPreview {...community} key={index} />;
   });
 
@@ -81,23 +82,40 @@ const Community = () => {
         }
       />
       <Main>
-        <CommunityTabSection>
+        <SearchInputWrapper>
           <InputBasic text={'Search here'} height={3} searchIcon={true} />
-          <TabWrapper>{tab}</TabWrapper>
-        </CommunityTabSection>
+        </SearchInputWrapper>
+        <TapMenuSection tab={tab} />
         <Hr />
         <CommunityComponentsSection>
-          <CommunitySubTitle title={'My Communities'} />
-          {myCommunities}
+          <PageSubTitle title={'My Communities'} />
+          <PreviewWrapper>{myCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
         <CommunityComponentsSection>
-          <CommunitySubTitle title={'All Communities'} />
-          {AllCommunities}
+          <PageSubTitle title={'All Communities'} />
+          <PreviewWrapper>{allCommunities}</PreviewWrapper>
         </CommunityComponentsSection>
       </Main>
+      <Footer></Footer>
     </CommunityWrapper>
   );
 };
+
+const SearchInputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: -0.5rem;
+`;
+
+const PreviewWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 26vh;
+`;
 
 const Hr = styled.hr`
   margin: 0 -1rem;
@@ -115,11 +133,6 @@ const Main = styled.div`
   margin: 4rem 0;
 `;
 
-const CommunityTabSection = styled.section`
-  width: 100%;
-  background-color: ${Palette.BodyPrimary};
-`;
-
 const CommunityComponentsSection = styled.section`
   width: 100%;
   min-height: 1.5vh;
@@ -128,16 +141,6 @@ const CommunityComponentsSection = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-top: 1.2rem;
-`;
-
-const TabWrapper = styled.article`
-  width: 100%;
-  height: 4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 0 2rem;
-  align-items: center;
 `;
 
 export default Community;

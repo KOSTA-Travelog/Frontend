@@ -4,9 +4,9 @@ import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Palette from '../../styles/Palette';
 import Footer from '../../components/Footer';
-import EditInput from '../../components/myPage/EditInput';
 import ProfileImg from '../../components/myPage/ProfileImg';
 import RoundButton from '../../components/RoundButton';
+import LabeledInput from '../../components/LabeledInput';
 
 const EditUserData = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const EditUserData = () => {
   ];
 
   const inputItemList = editItemList.map((data, index) => {
-    return <EditInput {...data} key={index} />;
+    return <LabeledInput {...data} key={index} />;
   });
 
   return (

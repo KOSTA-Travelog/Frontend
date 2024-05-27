@@ -12,8 +12,7 @@ const PostPreviewImage = (props) => {
 };
 
 const Post = styled.div`
-  /* width: 8rem; */
-  width: 33%;
+  width: 6.87rem;
   aspect-ratio: 1;
   background-size: cover;
 `;

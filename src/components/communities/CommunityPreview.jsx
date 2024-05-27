@@ -1,17 +1,17 @@
-import React from 'react';
 import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import { PropTypes } from 'prop-types';
 import HashTag from '../HashTag';
 
 const CommunityPreview = (props) => {
-  const hashtagList = props.hashTag.map((tag, index) => {
-    return <HashTag text={tag} key={index} />;
+  const hashTagList = (props.communityHashtag || '').split('#').slice(1);
+  const hashtagList = hashTagList.map((tag, index) => {
+    return <HashTag text={'#' + tag.trim()} key={index} />;
   });
 
   return (
-    <CommunityComponentsArticle>
-      <CommunityImg
+    <ComponentsArticle onClick={props.onClick}>
+      <Img
         style={{
           backgroundImage:
             'url(' +
@@ -19,42 +19,59 @@ const CommunityPreview = (props) => {
             ')',
         }}
       />
-      <CommunityContent>
-        <CommunityTitleAreaWrapper>
-          <CommunityTitleWrapper>
-            <CommunityTitle>{props.title}</CommunityTitle>
-          </CommunityTitleWrapper>
-          <CommunityInfoWrapper>
+      <Content>
+        <TitleAreaWrapper>
+          <TitleWrapper>
+            <Title>{props.communityTitle}</Title>
+          </TitleWrapper>
+          <InfoWrapper>
             <PersonIconWrapper>
               <PersonIcon className="bi bi-person-fill" />
             </PersonIconWrapper>
             <CountPerson>{props.countMember}</CountPerson>
-          </CommunityInfoWrapper>
-        </CommunityTitleAreaWrapper>
-        <CommunityDescriptionWrapper>
-          <CommunityDescription>{props.description}</CommunityDescription>
-        </CommunityDescriptionWrapper>
-        <CommunityHashTagDateWrapper>
+          </InfoWrapper>
+        </TitleAreaWrapper>
+        <DescriptionWrapper>
+          <Description>{props.communityDescription}</Description>
+        </DescriptionWrapper>
+        <HashTagDateWrapper>
           <HashTagWrapper>{hashtagList}</HashTagWrapper>
-          <CommunityDateWrapper>
-            <CommunityEnrollDate>{props.date}</CommunityEnrollDate>
-          </CommunityDateWrapper>
-        </CommunityHashTagDateWrapper>
-      </CommunityContent>
-    </CommunityComponentsArticle>
+          <DateWrapper>
+            <EnrollDate>{props.communityDate}</EnrollDate>
+          </DateWrapper>
+        </HashTagDateWrapper>
+      </Content>
+    </ComponentsArticle>
   );
 };
 
 CommunityPreview.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
+  communityId: PropTypes.number,
+  communityTitle: PropTypes.string,
+  communityDescription: PropTypes.string,
   countMember: PropTypes.number,
-  date: PropTypes.string,
-  hashTag: PropTypes.array,
-  image: PropTypes.image,
+  communityDate: PropTypes.string,
+  communityHashtag: PropTypes.string,
+  communityImage: PropTypes.image,
+  onClick: PropTypes.func,
 };
 
-const CommunityComponentsArticle = styled.article`
+const HashTagWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+`;
+
+const DateWrapper = styled.div``;
+
+const EnrollDate = styled.p`
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 100%;
+`;
+
+const ComponentsArticle = styled.article`
   /* width: 22rem; */
   width: 100%;
   height: 6.7rem;
@@ -69,14 +86,14 @@ const CommunityComponentsArticle = styled.article`
   padding: 0.55rem 0.7rem 0.5rem 0.5rem;
 `;
 
-const CommunityImg = styled.img`
+const Img = styled.img`
   /* width: 5.5rem; */
   width: 30%;
   height: 5.5rem;
   background-size: cover;
 `;
 
-const CommunityContent = styled.article`
+const Content = styled.article`
   /* min-width: 15rem; */
   width: 70%;
   display: flex;
@@ -85,7 +102,7 @@ const CommunityContent = styled.article`
   justify-content: space-between;
 `;
 
-const CommunityHashTagDateWrapper = styled.div`
+const HashTagDateWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 0.2rem;
@@ -93,7 +110,7 @@ const CommunityHashTagDateWrapper = styled.div`
   align-items: center;
 `;
 
-const CommunityTitleAreaWrapper = styled.div`
+const TitleAreaWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -101,11 +118,11 @@ const CommunityTitleAreaWrapper = styled.div`
   align-items: center;
 `;
 
-const CommunityTitleWrapper = styled.div`
+const TitleWrapper = styled.div`
   width: 10rem;
 `;
 
-const CommunityTitle = styled.h3`
+const Title = styled.h3`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -113,7 +130,7 @@ const CommunityTitle = styled.h3`
   width: auto;
 `;
 
-const CommunityInfoWrapper = styled.div`
+const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 2rem;
@@ -130,25 +147,10 @@ const PersonIcon = styled.i`
 
 const CountPerson = styled.p``;
 
-const CommunityDescriptionWrapper = styled.div`
+const DescriptionWrapper = styled.div`
   padding-top: 0.3rem;
 `;
 
-const CommunityDescription = styled.p``;
-
-const HashTagWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-`;
-
-const CommunityDateWrapper = styled.div``;
-
-const CommunityEnrollDate = styled.p`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 100%;
-`;
+const Description = styled.p``;
 
 export default CommunityPreview;

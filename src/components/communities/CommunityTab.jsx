@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 const CommunityTab = (props) => {
   return (
     <TabMenuWrapper>
-      <TabMenu className={props.selected} onClick={props.clickEvent}>
+      <TabMenu className={props.selected} onClick={props.action}>
         {props.text}
       </TabMenu>
       <Focus className={props.selected}></Focus>
@@ -16,7 +16,7 @@ const CommunityTab = (props) => {
 CommunityTab.prototype = {
   text: PropTypes.string,
   selected: PropTypes.string,
-  clickEvent: PropTypes.func,
+  action: PropTypes.func,
 };
 
 const Focus = styled.div`

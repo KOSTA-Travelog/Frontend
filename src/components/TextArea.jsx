@@ -11,6 +11,7 @@ const TextArea = (props) => {
         (props.searchIcon ? 'search ' : '') +
         (props.editInput ? 'editInput' : '')
       }
+      onChange={props.onChange}
     ></Text>
   );
 };
@@ -19,6 +20,7 @@ TextArea.prototype = {
   text: PropTypes.string,
   height: PropTypes.number,
   editInput: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 const Text = styled.textarea`

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import InputBasic from '../InputBasic';
+import InputBasic from './InputBasic';
 import { PropTypes } from 'prop-types';
-import TextArea from '../TextArea';
+import TextArea from './TextArea';
 
-const EditInput = (props) => {
+const LabeledInput = (props) => {
   return (
     <Wrapper>
       <Item>{props.item}</Item>
@@ -12,6 +12,7 @@ const EditInput = (props) => {
           text={props.text}
           height={props.height}
           editInput={props.editInput}
+          onChange={props.onChange}
         />
       )}
       {props.type === 'textArea' && (
@@ -19,18 +20,20 @@ const EditInput = (props) => {
           text={props.text}
           height={props.height}
           editInput={props.editInput}
+          onChange={props.onChange}
         />
       )}
     </Wrapper>
   );
 };
 
-EditInput.prototype = {
+LabeledInput.prototype = {
   item: PropTypes.string,
   text: PropTypes.string,
   height: PropTypes.number,
   editInput: PropTypes.bool,
   type: PropTypes.oneOf(['input', 'textArea']),
+  onChange: PropTypes.func,
 };
 
 const Wrapper = styled.div`
@@ -45,6 +48,7 @@ const Wrapper = styled.div`
 
 const Item = styled.span`
   height: 1rem;
+  font-size: 16px;
 `;
 
-export default EditInput;
+export default LabeledInput;
