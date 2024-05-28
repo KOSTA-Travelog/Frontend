@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import PostPreviewImage from './PostPreviewImage';
-import { PropTypes } from 'prop-types';
+import {PropTypes} from 'prop-types';
 
 const PostImages = (props) => {
-  const imageList = [...props.postList];
-
-  const list = imageList.map((data, i) => {
-    return <PostPreviewImage key={i} postImage={data['image']} />;
-  });
-
-  return <Contents>{list}</Contents>;
+  return <Contents>
+    {props.postList.map((data, i) =>
+        <PostPreviewImage key={i} postImage={data['image']}/>
+    )}
+  </Contents>;
 };
 
 PostImages.propTypes = {
