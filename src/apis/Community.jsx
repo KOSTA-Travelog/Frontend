@@ -48,10 +48,9 @@ export const axiosCommunityPostList = async (communityId, userId) => {
   );
 };
 
-export const axiosCurrentMemberList = async (params) => {
-  console.log(params);
+export const axiosCurrentMemberList = async (communityId) => {
   return await axios.get(
-    BASE_URL + `/communities/currentMember?communityId=${params['id']}`
+    BASE_URL + `/communities/currentMember?communityId=${communityId}`
   );
 };
 
@@ -63,5 +62,18 @@ export const axiosAddMember = async (communityId, userId) => {
   return await axios.post(
     BASE_URL +
       `/communities/member/add?communityId=${communityId}&userId=${userId}`
+  );
+};
+
+export const axiosCheckCreatorNickname = async (communityId) => {
+  return await axios.get(
+    BASE_URL + `/communities/creator?communityId=${communityId}`
+  );
+};
+
+export const axiosInsertCommunityMember = async (communityId, nickname) => {
+  return await axios.post(
+    BASE_URL +
+      `/communities/member/add?communityId=${communityId}&nickname=${nickname}`
   );
 };

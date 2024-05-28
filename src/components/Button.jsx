@@ -25,6 +25,7 @@ const Button = (props) => {
         backgroundColor: `${props.color}`,
         height: `${props.height}rem`,
       }}
+      onClick={props.action}
     >
       {props.text}
     </StyleButton>
@@ -35,6 +36,7 @@ Button.propTypes = {
   color: PropTypes.string,
   text: PropTypes.string,
   height: PropTypes.number,
+  action: PropTypes.func,
 };
 
 export default Button;

@@ -52,7 +52,7 @@ CommunityPreview.propTypes = {
   countMember: PropTypes.number,
   communityDate: PropTypes.string,
   communityHashtag: PropTypes.string,
-  communityImage: PropTypes.image,
+  communityImage: PropTypes.string,
   onClick: PropTypes.func,
 };
 

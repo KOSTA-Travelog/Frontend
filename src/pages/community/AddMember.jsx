@@ -2,41 +2,47 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Palette from '../../styles/Palette';
 import Footer from '../../components/Footer';
 import InputBasic from '../../components/InputBasic';
-import { axiosAddMember, axiosSearchNickname } from '../../apis/Community';
+import {
+  axiosInsertCommunityMember,
+  axiosSearchNickname,
+} from '../../apis/Community';
 import MemberProfile from '../../components/communities/addMember/MemberProfile';
+import useDebounce from '../../hooks/useDebounce';
 
 const AddMember = (props) => {
   const navigate = useNavigate();
-  // const params = useParams();
 
   const queryString = new URLSearchParams(location.search);
 
   const [searchResult, setSearchResult] = useState([]);
+  const debouncedSearchText = useDebounce(queryString.get('nickname'), 500);
 
   useEffect(() => {
-    console.log(queryString.get('nickname'));
-    axiosSearchNickname(queryString.get('nickname')).then((res) => {
-      console.log(JSON.parse(res.data.data.data));
+    axiosSearchNickname(debouncedSearchText).then((res) => {
       setSearchResult(JSON.parse(res.data.data.data));
     });
-  }, [queryString]);
+  }, [debouncedSearchText]);
 
   const searchResultList = searchResult.map((data) => {
     return (
       <MemberProfile
-        key={data['userId']}
+        key={data['nickname']}
         profileImage={data['profileImage']}
         nickname={data['nickname']}
         bio={data['bio']}
         buttonColor={Palette.Primary}
         buttonText={'추가'}
         buttonHeight={2}
+        isButton={true}
         action={() => {
-          // axiosAddMember(params['id'], data['userId']);
+          axiosInsertCommunityMember(
+            sessionStorage.getItem('communityId'),
+            data['nickname']
+          );
         }}
       />
     );
