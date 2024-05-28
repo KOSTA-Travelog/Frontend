@@ -12,12 +12,14 @@ const MemberProfile = (props) => {
         <Bio>{props.bio}</Bio>
       </UserInfo>
       <BtnWrapper>
-        <Button
-          color={props.buttonColor}
-          text={props.buttonText}
-          height={props.buttonHeight}
-          onClick={props.action}
-        />
+        {props.isButton && (
+          <Button
+            color={props.buttonColor}
+            text={props.buttonText}
+            height={props.buttonHeight}
+            action={props.action}
+          />
+        )}
       </BtnWrapper>
     </ProfileWrapper>
   );
@@ -32,6 +34,7 @@ MemberProfile.propTypes = {
   buttonHeight: PropTypes.number,
   action: PropTypes.func,
   communityId: PropTypes.number,
+  isButton: PropTypes.bool,
 };
 
 const ProfileWrapper = styled.div`

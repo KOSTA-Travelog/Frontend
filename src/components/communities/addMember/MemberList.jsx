@@ -14,9 +14,15 @@ const MemberList = (props) => {
       buttonColor: props.buttonColor,
       buttonText: props.buttonText,
       buttonHeight: props.buttonHeight,
-      action: props.action,
+      isButton: !(props.creator == data['nickname']),
     };
-    return <MemberProfile key={data['communityMemberId']} {...profileData} />;
+    return (
+      <MemberProfile
+        key={data['communityMemberId']}
+        {...profileData}
+        action={props.action}
+      />
+    );
   });
 
   return (
@@ -34,6 +40,7 @@ MemberList.prototype = {
   buttonHeight: PropTypes.number,
   currentMember: PropTypes.object,
   action: PropTypes.func,
+  creator: PropTypes.string,
 };
 
 const Wrapper = styled.div``;

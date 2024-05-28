@@ -19,8 +19,6 @@ const CommunityDetails = () => {
   const [title, setTitle] = useState('');
   const queryString = new URLSearchParams(location.search);
 
-  const countMember = 4;
-
   const [settingModal, setSettingModal] = useState({
     type: 'manager',
     status: false,
@@ -62,7 +60,13 @@ const CommunityDetails = () => {
               //   ...prevState,
               //   status: !prevState.status,
               // }));
-              navigate(`/community/addMember?nickname=${params['nickname']}`);
+              sessionStorage.setItem(
+                'communityId',
+                `${communityInfo['communityId']}`
+              );
+              navigate(
+                `/community/addMember?id=${communityInfo['communityId']}`
+              );
             }}
           />
         }
@@ -82,9 +86,8 @@ const CommunityDetails = () => {
       <Main>
         <Introduction
           {...communityInfo}
-          countMember={countMember}
           action={() => {
-            navigate(`/community/currentMember/${params['id']}`);
+            navigate(`/community/currentMember?id=${queryString.get('id')}`);
           }}
         />
         <Divider number={2222} />

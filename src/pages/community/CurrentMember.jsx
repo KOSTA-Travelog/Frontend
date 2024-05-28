@@ -6,20 +6,27 @@ import styled from 'styled-components';
 import InputBasic from '../../components/InputBasic';
 import MemberProfile from '../../components/communities/addMember/MemberProfile';
 import { useEffect, useState } from 'react';
-import { axiosCurrentMemberList } from '../../apis/Community';
+import {
+  axiosCheckCreatorNickname,
+  axiosCurrentMemberList,
+} from '../../apis/Community';
 import MemberList from '../../components/communities/addMember/MemberList';
 
 const CurrentMember = (props) => {
   const [currentMember, setCurrentMember] = useState([]);
+  const [creator, setCreator] = useState('');
   const navigate = useNavigate();
-  const params = useParams();
+  const queryString = new URLSearchParams(location.search);
 
   useEffect(() => {
-    axiosCurrentMemberList(params).then((res) => {
-      console.log(JSON.parse(res.data.data.data));
+    axiosCurrentMemberList(queryString.get('id')).then((res) => {
       setCurrentMember(JSON.parse(res.data.data.data));
     });
-  }, [params]);
+
+    axiosCheckCreatorNickname(queryString.get('id')).then((res) => {
+      setCreator(res.data.data.data);
+    });
+  }, []);
 
   return (
     <CurrentMemberWrapper>
@@ -36,7 +43,7 @@ const CurrentMember = (props) => {
             align={'center'}
             title={
               <h2 style={{ color: Palette.TextPrimary }}>
-                {/* <b>현재 멤버</b> */}
+                <b>현재 멤버</b>
               </h2>
             }
           />
@@ -47,13 +54,13 @@ const CurrentMember = (props) => {
           <CurrentMemberWrapper>
             <MemberList
               currentMember={currentMember}
-              title={'현재 멤버'}
-              buttonColor={Palette.TextSecondary}
+              buttonColor={Palette.Primary}
               buttonText={'삭제'}
               buttonHeight={2}
               action={() => {
                 console.log('이거');
               }}
+              creator={creator}
             />
           </CurrentMemberWrapper>
         </MemberInfoWrapper>
@@ -62,14 +69,15 @@ const CurrentMember = (props) => {
   );
 };
 
-const CurrentMemberWrapper = styled.div``;
+const CurrentMemberWrapper = styled.div`
+  padding: 2rem 1rem;
+`;
 
 const MemberInfoWrapper = styled.div`
   min-height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 0;
 `;
 
 const Main = styled.div``;

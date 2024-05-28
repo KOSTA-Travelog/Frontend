@@ -4,7 +4,7 @@ import Palette from '../../../styles/Palette';
 import { PropTypes } from 'prop-types';
 
 const Introduction = (props) => {
-  const hashTagList = (props.communityHashtag || '').split('#').slice(1);
+  const hashTagList = (props.communityHashtag || '').split(',').slice(1);
 
   const hashTag = hashTagList.map((tag, index) => {
     return <HashTag text={'#' + tag.trim()} key={index} />;
