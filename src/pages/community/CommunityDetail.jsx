@@ -9,16 +9,15 @@ import SettingModal from '../../components/communities/SettingModal';
 import Introduction from '../../components/communities/communityDetails/Introduction';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import Divider from '../../components/communities/communityDetails/Divider';
-import {
-  axiosCommunity,
-  axiosGuestCommunityPostList,
-} from '../../apis/Community';
-
+import { axiosCommunity, axiosCommunityPostList } from '../../apis/Community';
+// /:id/:userId
 const CommunityDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [communityInfo, setCommunityInfo] = useState();
   const [postList, setPostList] = useState([]);
+  const [title, setTitle] = useState('');
+  const queryString = new URLSearchParams(location.search);
 
   const countMember = 4;
 
@@ -28,20 +27,22 @@ const CommunityDetails = () => {
   });
 
   const settingStatus = settingModal['status'] === true && (
-    <SettingModal type={settingModal} />
+    <SettingModal type={settingModal} params={params} />
   );
 
   useEffect(() => {
-    axiosCommunity(params).then((res) => {
-      if (JSON.parse(res.data.data.data)['communityStatus'] != 0) {
-        setCommunityInfo(JSON.parse(res.data.data.data));
-      }
+    axiosCommunity(queryString.get('id')).then((res) => {
+      setCommunityInfo(JSON.parse(res.data.data.data));
+      setTitle(JSON.parse(res.data.data.data)['communityTitle']);
     });
 
-    axiosGuestCommunityPostList(params).then((res) => {
+    axiosCommunityPostList(
+      queryString.get('id'),
+      queryString.get('userId')
+    ).then((res) => {
       setPostList(JSON.parse(res.data.data.data));
     });
-  }, [params]);
+  }, []);
 
   return (
     <CommunityDetailsWrapper>
@@ -57,10 +58,11 @@ const CommunityDetails = () => {
           <HeaderButton
             icon={<i className="bi bi-gear"></i>}
             action={() => {
-              setSettingModal((prevState) => ({
-                ...prevState,
-                status: !prevState.status,
-              }));
+              // setSettingModal((prevState) => ({
+              //   ...prevState,
+              //   status: !prevState.status,
+              // }));
+              navigate(`/community/addMember?nickname=${params['nickname']}`);
             }}
           />
         }
@@ -69,15 +71,22 @@ const CommunityDetails = () => {
             align={'center'}
             title={
               <h2 style={{ color: Palette.TextPrimary }}>
-                {/* <b>{communityInfo.communityTitle}</b> */}
+                <b>{title}</b>
               </h2>
             }
           />
         }
       />
-      <SettingWrapper>{settingStatus}</SettingWrapper>
+      {/* <SettingWrapper>{settingStatus}</SettingWrapper> */}
+
       <Main>
-        <Introduction {...communityInfo} countMember={countMember} />
+        <Introduction
+          {...communityInfo}
+          countMember={countMember}
+          action={() => {
+            navigate(`/community/currentMember/${params['id']}`);
+          }}
+        />
         <Divider number={2222} />
         <PostImages postList={postList} />
       </Main>

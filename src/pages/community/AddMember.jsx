@@ -5,31 +5,25 @@ import HeaderButton from '../../components/headerComponents/HeaderButton';
 import { useNavigate, useParams } from 'react-router-dom';
 import Palette from '../../styles/Palette';
 import Footer from '../../components/Footer';
-import MemberList from '../../components/communities/addMember/MemberList';
 import InputBasic from '../../components/InputBasic';
-import {
-  axiosAddMember,
-  axiosCurrentMemberList,
-  axiosSearchNickname,
-} from '../../apis/Community';
+import { axiosAddMember, axiosSearchNickname } from '../../apis/Community';
 import MemberProfile from '../../components/communities/addMember/MemberProfile';
 
 const AddMember = (props) => {
   const navigate = useNavigate();
-  const params = useParams();
+  // const params = useParams();
 
-  const [currentMember, setCurrentMember] = useState([]);
+  const queryString = new URLSearchParams(location.search);
+
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
-    axiosCurrentMemberList(params).then((res) => {
-      setCurrentMember(JSON.parse(res.data.data.data));
-    });
-
-    axiosSearchNickname(params).then((res) => {
+    console.log(queryString.get('nickname'));
+    axiosSearchNickname(queryString.get('nickname')).then((res) => {
+      console.log(JSON.parse(res.data.data.data));
       setSearchResult(JSON.parse(res.data.data.data));
     });
-  }, [params]);
+  }, [queryString]);
 
   const searchResultList = searchResult.map((data) => {
     return (
@@ -42,7 +36,7 @@ const AddMember = (props) => {
         buttonText={'추가'}
         buttonHeight={2}
         action={() => {
-          axiosAddMember(params['id'], data['userId']);
+          // axiosAddMember(params['id'], data['userId']);
         }}
       />
     );
@@ -55,6 +49,7 @@ const AddMember = (props) => {
           <HeaderButton
             color={Palette.TextPrimary}
             icon={<i className="bi bi-chevron-left"></i>}
+            // /community/detail
             action={() => navigate(-1)}
           />
         }
@@ -82,21 +77,12 @@ const AddMember = (props) => {
             height={3}
             // searchIcon={true}
             onChange={(e) => {
-              navigate(`/community/addMember/21/${e.target.value}`);
+              navigate(`/community/addMember?nickname=${e.target.value}`);
             }}
           />
         </SearchInputWrapper>
         <MemberInfoWrapper>
           <SearchResultWrapper>{searchResultList}</SearchResultWrapper>
-          <CurrentMemberWrapper>
-            <MemberList
-              currentMember={currentMember}
-              title={'현재 멤버'}
-              buttonColor={Palette.TextSecondary}
-              buttonText={'삭제'}
-              buttonHeight={2}
-            />
-          </CurrentMemberWrapper>
         </MemberInfoWrapper>
       </Main>
       <Footer></Footer>

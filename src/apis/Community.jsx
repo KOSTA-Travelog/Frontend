@@ -16,9 +16,9 @@ export const axiosCommunityDetail = async (params) => {
 //   );
 // };
 
-export const axiosCommunity = async (params) => {
+export const axiosCommunity = async (queryString) => {
   return await axios.get(
-    BASE_URL + `/communities/detail?communityId=${params['id']}`
+    BASE_URL + `/communities/detail?communityId=${queryString}`
   );
 };
 
@@ -30,32 +30,33 @@ export const axiosAllCommunityList = async () => {
   return await axios.get(BASE_URL + '/communities/allCommunity');
 };
 
-export const axiosMemberCommunityPostList = async (params) => {
-  return await axios.get(BASE_URL + '/communityPosts/memberPage', {
-    params,
-  });
-};
+// export const axiosMemberCommunityPostList = async (params) => {
+//   return await axios.get(BASE_URL + '/communityPosts/memberPage', {
+//     params,
+//   });
+// };
 
-export const axiosGuestCommunityPostList = async (params) => {
-  return await axios.get(BASE_URL + `/communityPosts/guest`, {
-    params,
-  });
+// export const axiosGuestCommunityPostList = async (params) => {
+//   return await axios.get(BASE_URL + `/communityPosts/guest`, {
+//     params,
+//   });
+// };
+
+export const axiosCommunityPostList = async (communityId, userId) => {
+  return await axios.get(
+    BASE_URL + `/communityPosts?id=${communityId}&userId=${userId}`
+  );
 };
 
 export const axiosCurrentMemberList = async (params) => {
+  console.log(params);
   return await axios.get(
     BASE_URL + `/communities/currentMember?communityId=${params['id']}`
   );
 };
 
-export const axiosCommunityPostList = async (params) => {
-  return await axios.get(BASE_URL + '/communityPosts', { params });
-};
-
-export const axiosSearchNickname = async (params) => {
-  return await axios.get(
-    BASE_URL + `/searchNickname?nickname=${params['nickname']}`
-  );
+export const axiosSearchNickname = async (queryString) => {
+  return await axios.get(BASE_URL + `/searchNickname?nickname=${queryString}`);
 };
 
 export const axiosAddMember = async (communityId, userId) => {
