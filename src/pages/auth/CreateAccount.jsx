@@ -5,18 +5,98 @@ import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import { useNavigate } from 'react-router-dom';
 import Palette from '../../styles/Palette';
+import { useEffect, useState } from 'react';
+import { axiosRegistration } from '../../apis/Auth';
+import { hashingPassword } from './Login';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
+  const [inputList, setInputList] = useState([
+    { key: 'name', text: 'name', isWritten: true, input: '' },
+    { key: 'nickname', text: 'nickname', isWritten: true, input: '' },
+    {
+      key: 'email',
+      text: 'email',
+      isWritten: true,
+      input: '',
+    },
+    { key: 'password', text: 'password', isWritten: true, input: '' },
+    {
+      key: 'passwordCheck',
+      text: 'confirm password',
+      isWritten: true,
+      input: '',
+    },
+    {
+      key: 'phoneNumber',
+      text: 'phone number',
+      isWritten: true,
+      input: '',
+    },
+  ]);
 
-  const inputList = [
-    { text: 'Name', isWritten: 0 },
-    { text: 'Nickname', isWritten: 1 },
-    { text: 'Email', isWritten: 1 },
-    { text: 'Password', isWritten: 1 },
-    { text: 'Confirm Password', isWritten: 1 },
-    { text: 'Phone number', isWritten: 1 },
-  ];
+  const handleInputChange = (index, value) => {
+    const newList = [...inputList];
+    newList[index].input = value;
+    if (newList[index].input === '') {
+      newList[index].isWritten = false;
+    } else {
+      newList[index].isWritten = true;
+    }
+    setInputList(newList);
+  };
+
+  const handleSignUp = async () => {
+    const params = {};
+    const promises = inputList.map(async (data) => {
+      switch (data.key) {
+        case 'password':
+        case 'passwordCheck':
+          params[data.key] = await hashingPassword(data.input);
+          break;
+        case 'email':
+          console.log(emailCheck(data.input));
+          if (!emailCheck(data.input)) {
+            alert('올바른 이메일 주소를 입력하세요. (예: example@domain.com)');
+          } else {
+            params[data.key] = data.input;
+          }
+          break;
+        case 'phoneNumber':
+          if (!phoneNumberCheck(data.input)) {
+            alert('올바른 형식의 번호를 입력하세요. (예: 010-1234-1234)');
+          } else {
+            params[data.key] = data.input;
+          }
+          break;
+        default:
+          params[data.key] = data.input;
+      }
+    });
+    await Promise.all(promises);
+    return params;
+  };
+
+  const onSignUpClick = async () => {
+    const params = await handleSignUp();
+    await axiosRegistration(params);
+    alert('가입이 완료되었습니다!');
+    navigate('/auth/login');
+  };
+
+  const emailCheck = (email) => {
+    const result = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    if (!result.test(email)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const phoneNumberCheck = (number) => {
+    let result = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+    return result.test(number);
+  };
 
   return (
     <RegistrationWrapper>
@@ -41,15 +121,20 @@ const CreateAccount = () => {
       />
       <Main>
         <RegistrationFormWrapper>
-          {inputList.map((type, index) => (
+          {inputList.map((data, index) => (
             <RegistrationInput
-              key={index}
-              text={type['text']}
-              isWritten={type['isWritten']}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              key={data['key']}
+              text={data['text']}
+              isWritten={data['isWritten']}
             />
           ))}
           <SignUpBtnWrapper>
-            <RoundButton text={'Sign up'} type={'primary'} />
+            <RoundButton
+              text={'Sign up'}
+              type={'primary'}
+              action={onSignUpClick}
+            />
           </SignUpBtnWrapper>
         </RegistrationFormWrapper>
       </Main>
