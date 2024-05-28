@@ -15,7 +15,7 @@ import {
 import {BootstrapIcon} from '../components/BootstrapIcon.jsx';
 import axios from 'axios';
 
-const FeedPageWrite = (props) => {
+const FeedWritePage = (props) => {
   const navigate = useNavigate();
 
   const hashtagInput = {
@@ -211,4 +211,4 @@ const CreatePostForm = styled.form`
   gap: 1rem;
 `;
 
-export default FeedPageWrite;
+export default FeedWritePage;

@@ -16,7 +16,7 @@ import MyProfile from './pages/myPage/MyProfile.jsx';
 import EditUserData from './pages/myPage/EditUserData.jsx';
 import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
 import CommunityEdit from './pages/community/CommunityEdit.jsx';
-import FeedPageWrite from './pages/FeedPageWrite.jsx';
+import FeedWritePage from './pages/FeedWritePage.jsx';
 import AddMember from './pages/community/AddMember.jsx';
 import Error from './pages/Error';
 import NotFoundPage from './pages/NotFoundPage';
@@ -102,7 +102,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/feed/write',
-    element: <FeedPageWrite />,
+    element: <FeedWritePage />,
   },
   {
     path: '/community/addMember',
