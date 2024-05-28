@@ -13,14 +13,8 @@ const PostImages = (props) => {
 };
 
 PostImages.propTypes = {
-  postList: PropTypes.object,
+  postList: PropTypes.array,
 };
-// const Contents = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0.8rem;
-// `;
 
 const Contents = styled.div`
   width: 102%;

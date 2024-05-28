@@ -6,15 +6,17 @@ import MemberProfile from './MemberProfile';
 const MemberList = (props) => {
   const list = [...props.currentMember];
   const CommunityMember = list.map((data) => {
-    const profileDate = {
+    const profileData = {
+      communityId: data['communityId'],
       profileImage: data['profileImage'],
       nickname: data['nickname'],
       bio: data['bio'],
       buttonColor: props.buttonColor,
       buttonText: props.buttonText,
       buttonHeight: props.buttonHeight,
+      action: props.action,
     };
-    return <MemberProfile key={data['nickname']} {...profileDate} />;
+    return <MemberProfile key={data['communityMemberId']} {...profileData} />;
   });
 
   return (
@@ -31,6 +33,7 @@ MemberList.prototype = {
   buttonText: PropTypes.string,
   buttonHeight: PropTypes.number,
   currentMember: PropTypes.object,
+  action: PropTypes.func,
 };
 
 const Wrapper = styled.div``;

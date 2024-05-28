@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 import Palette from '../../styles/Palette';
 import ModalCustomMenu from '../ModalCustomMenu';
+import { useNavigate } from 'react-router-dom';
 
 const SettingModal = (props) => {
+  const navigate = useNavigate();
+
   const ManagerSettingItems = [
     {
       icon: <i className="bi bi-person-plus"></i>,
       text: '멤버 초대',
-      action: () => {},
+      action: () => {
+        navigate(`/community/addMember/${props.params['id']}`);
+      },
     },
     {
       icon: <i className="bi bi-people"></i>,
@@ -49,6 +54,7 @@ SettingModal.prototype = {
   // icon: PropTypes.node,
   // text: PropTypes.string,
   type: PropTypes.object,
+  params: PropTypes.object,
 };
 
 const IconWrapper = styled.div`

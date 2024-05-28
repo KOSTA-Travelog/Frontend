@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import Palette from "../styles/Palette.jsx";
+import styled from 'styled-components';
+import Palette from '../styles/Palette.jsx';
+import { Link } from 'react-router-dom';
 
 const FixedFooter = styled.footer`
   border-top: 1px solid ${Palette.TextTertiary};
@@ -20,7 +21,7 @@ const FooterWrapperUl = styled.ul`
   font-size: 20px;
 `;
 
-const NavLink = styled.button`
+const IconWrapper = styled.div`
   color: ${Palette.TextPrimary};
   background-color: ${Palette.BodyPrimary};
   border: 0;
@@ -34,34 +35,44 @@ const NavLink = styled.button`
 
 export default function Footer() {
   return (
-      <FixedFooter>
-        <FooterWrapperUl>
-          <li>
-            <NavLink href="#">
+    <FixedFooter>
+      <FooterWrapperUl>
+        <li>
+          <Link to="/">
+            <IconWrapper href="/">
               <i className="bi bi-house-door"></i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink href="#">
+            </IconWrapper>
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <IconWrapper>
               <i className="bi bi-search"></i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink href="#" className="primary-icon">
+            </IconWrapper>
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <IconWrapper className="primary-icon">
               <i className="bi bi-plus-circle-fill"></i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink href="#">
+            </IconWrapper>
+          </Link>
+        </li>
+        <li>
+          <Link to="/community">
+            <IconWrapper href="#">
               <i className="bi bi-people"></i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink href="#">
+            </IconWrapper>
+          </Link>
+        </li>
+        <li>
+          <Link to="/myPage/profile">
+            <IconWrapper>
               <i className="bi bi-person-circle"></i>
-            </NavLink>
-          </li>
-        </FooterWrapperUl>
-      </FixedFooter>
+            </IconWrapper>
+          </Link>
+        </li>
+      </FooterWrapperUl>
+    </FixedFooter>
   );
 }

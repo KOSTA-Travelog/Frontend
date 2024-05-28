@@ -13,6 +13,7 @@ const CommunityForGuest = () => {
   const navigate = useNavigate();
 
   const [communityList, setCommunityList] = useState([]);
+
   useEffect(() => {
     axiosAllCommunityList().then((res) => {
       setCommunityList(JSON.parse(res.data.data.data));
@@ -25,7 +26,13 @@ const CommunityForGuest = () => {
         {...data}
         key={data['communityId']}
         onClick={() => {
-          navigate(`/community/detail/${data['communityId']}`);
+          if (data['userId'] == null) {
+            navigate(`/community/detail?id=${data['communityId']}`);
+          } else {
+            navigate(
+              `/community/detail?id=${data['communityId']}&userId=${data['userId']}`
+            );
+          }
         }}
       />
     );

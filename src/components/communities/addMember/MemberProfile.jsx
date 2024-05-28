@@ -31,6 +31,7 @@ MemberProfile.propTypes = {
   buttonText: PropTypes.string,
   buttonHeight: PropTypes.number,
   action: PropTypes.func,
+  communityId: PropTypes.number,
 };
 
 const ProfileWrapper = styled.div`

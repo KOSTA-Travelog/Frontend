@@ -18,6 +18,9 @@ import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
 import CommunityEdit from './pages/community/CommunityEdit.jsx';
 import FeedPageWrite from './pages/FeedPageWrite.jsx';
 import AddMember from './pages/community/AddMember.jsx';
+import Error from './pages/Error';
+import NotFoundPage from './pages/NotFoundPage';
+import CurrentMember from './pages/community/CurrentMember.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -65,12 +68,13 @@ const Router = createBrowserRouter([
     element: <Community />,
   },
   {
-    path: '/community/detail',
+    path: '/community',
     element: <CommunityForGuest />,
   },
   {
-    path: '/community/detail/:id',
+    path: '/community/detail',
     element: <CommunityDetail />,
+    errorElement: <Error />,
   },
   {
     path: '/community/write',
@@ -101,12 +105,23 @@ const Router = createBrowserRouter([
     element: <FeedPageWrite />,
   },
   {
-    path: '/community/addMember/:id',
+    path: '/community/addMember',
     element: <AddMember />,
   },
+  // {
+  //   path: '/community/addMember/:nickname',
+  //   element: <AddMember />,
+  //   errorElement: <Error />,
+  // },
   {
-    path: '/community/addMember/:id/:nickname',
-    element: <AddMember />,
+    path: '/community/currentMember',
+    element: <CurrentMember />,
+    errorElement: <Error />,
+  },
+
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 

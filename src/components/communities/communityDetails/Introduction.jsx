@@ -27,7 +27,7 @@ const Introduction = (props) => {
             <Date>{props.communityDate}</Date>
           </DateWrapper>
           <MemberInfoWrapper>
-            <PersonIconWrapper>
+            <PersonIconWrapper onClick={props.action}>
               <PersonIcon className="bi bi-person-fill" />
             </PersonIconWrapper>
             <CountMemberWrapper>
@@ -47,6 +47,7 @@ Introduction.propTypes = {
   countMember: PropTypes.number,
   communityImage: PropTypes.string,
   communityId: PropTypes.number,
+  action: PropTypes.func,
 };
 
 const IntroductionWrapper = styled.div`
@@ -100,7 +101,7 @@ const DateCountMemberWrapper = styled.div`
 `;
 
 const DateWrapper = styled.div`
-  min-width: 1rem;
+  min-width: 10rem;
 `;
 
 const Date = styled.p`
@@ -130,6 +131,7 @@ const CountMember = styled.p`
 
 const PersonIconWrapper = styled.div`
   font-size: 1.3rem;
+  cursor: pointer;
 `;
 
 const PersonIcon = styled.i`
