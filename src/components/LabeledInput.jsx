@@ -27,7 +27,7 @@ const LabeledInput = (props) => {
   );
 };
 
-LabeledInput.prototype = {
+LabeledInput.propTypes= {
   item: PropTypes.string,
   text: PropTypes.string,
   height: PropTypes.number,

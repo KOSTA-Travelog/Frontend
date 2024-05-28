@@ -54,7 +54,7 @@ const MyProfile = () => {
       <Main>
         <Profile {...myInfo} />
         <ProfileStatus />
-        <PostImages />
+        <PostImages postList={[]}/>
       </Main>
       <Footer />
     </PageWrapper>
