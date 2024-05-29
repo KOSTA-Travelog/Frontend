@@ -8,6 +8,7 @@ import Feed from '../components/feedComponents/Feed.jsx';
 import { useEffect, useState } from 'react';
 import { axiosFeed } from '../apis/Feed.jsx';
 import MyPageSetting from '../components/myPage/MyPageSetting.jsx';
+import FeedSettingMenu from '../components/feedComponents/FeedSettingMenu.jsx';
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
@@ -49,8 +50,9 @@ const FeedPage = () => {
     width: 90%;
     display: flex;
     flex-direction: row;
-    justify-content: end;
-    margin-top: -15px;
+    justify-content: right;
+    margin-top: -0.8rem;
+    margin-left: 2.5rem;
 
     @media (min-width: 900px) {
       width: 95%;
@@ -77,8 +79,17 @@ const FeedPage = () => {
               action={() => {}}
             />
           }
+          right={
+            <HeaderButton
+              color={Palette.TextPrimary}
+              icon={<i className="bi bi-three-dots-vertical"></i>}
+              action={() => {
+                setSetting(!setting);
+              }}
+            />
+          }
         />
-        <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
+        <SettingWrapper>{setting && <FeedSettingMenu />}</SettingWrapper>
         <Content>
           <Section>
             <Feed {...data} nickname={nickname} profileImage={profileImage} />

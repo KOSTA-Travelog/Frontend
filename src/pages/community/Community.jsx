@@ -43,7 +43,7 @@ const Community = () => {
         key={index}
         selected={menu}
         action={() => {
-          console.log('click', index);
+          // console.log('click', index);
         }}
       />
     );
