@@ -14,6 +14,7 @@ import {
 } from '../components/PostStatusRadio.jsx';
 import {BootstrapIcon} from '../components/BootstrapIcon.jsx';
 import axios from 'axios';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const FeedWritePage = (props) => {
   const navigate = useNavigate();
@@ -33,8 +34,9 @@ const FeedWritePage = (props) => {
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
   const [openStatus, setOpenStatus] = useState('1');
-  const [statusText, setStatusText] = useState();
+  const [statusText, setStatusText] = useState('');
   const [rawHashTag, setRawHashTag] = useState('');
+  const [file, setFile] = useState([]);
 
   useEffect(() => {
     setStatusText(statusValue(openStatus));
@@ -70,7 +72,7 @@ const FeedWritePage = (props) => {
     return <HashTag text={text} key={index}/>;
   });
 
-  const config = {
+  const feedConfig = {
     method: 'post',
     maxBodyLength: Infinity,
     url: 'http://localhost:8080/api/posts/create',
@@ -84,6 +86,54 @@ const FeedWritePage = (props) => {
       'postStatus': openStatus,
     }
   };
+
+  const imageConfig = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  const postingImage = async (postId) => {
+    const formData = new FormData();
+    file.forEach((f) => {
+      formData.append('' + f.name, f);
+    });
+    formData.append('postId', postId);
+    await axios.post('http://localhost:8080/api/posts/image', formData,
+        imageConfig)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  };
+
+  const postingFeed = () => {
+    axios.request(feedConfig)
+    .then(async (resp) => {
+      console.log(resp);
+      // const json = JSON.parse(resp.data);
+      // console.log(json);
+      const postId = await resp.data.data.data;
+      console.log(postId);
+      await postingImage(await postId);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  };
+
+  const handleChange = async (e) => {
+    console.log(e.target.files);
+
+    setFile([...file, ...Array.from(e.target.files)]);
+  };
+  const removeFile = (key) => {
+    const filteredFile = file.filter(item => item !== key);
+    setFile(filteredFile);
+  };
+
   return (
       <FeedWriteWrapper>
         <Header
@@ -104,14 +154,8 @@ const FeedWritePage = (props) => {
                 console.log(openStatus);
                 console.log(selectedCommunity);
                 console.log(hashTag);
-                if (postTitle.length > 0 && postContent > 0) {
-                  axios.request(config)
-                  .then((response) => {
-                    console.log(JSON.stringify(response.data));
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
+                if (postTitle.length > 0 && postContent.length > 0) {
+                  postingFeed();
                 }
               }}
           >
@@ -157,11 +201,29 @@ const FeedWritePage = (props) => {
               <option value="1">comm test1</option>
             </SelectWrapper>
             <hr/>
-            <textarea name="content" id="userContent" cols="30" rows="10"
-                      placeholder={'내용을 입력하세요'}
-                      value={postContent}
-                      onChange={(e) => setPostContent(e.target.value)}
+            <TextareaAutosize name="content" id="userContent" minRows="15"
+                              style={{overflow: 'hidden'}}
+                              placeholder={'내용을 입력하세요'}
+                              value={postContent}
+                              onChange={(e) => {
+                                setPostContent(e.target.value);
+                              }}
             />
+
+            <ImageInput type="file" onChange={handleChange} id="file" multiple/>
+            <ImageWrapper>
+              <div>
+                <UploadLabel htmlFor="file">+</UploadLabel>
+              </div>
+              {/*<img src={file}/>*/}
+              {file.map((item, key) => (
+                  <div key={key} onClick={() => {
+                    removeFile(item);
+                  }}>
+                    <ImagePreview src={URL.createObjectURL(item)} alt=""/>
+                  </div>
+              ))}
+            </ImageWrapper>
 
             <HashtagInputWrapper>
               <LabeledInput {...hashtagInput} />
@@ -170,7 +232,7 @@ const FeedWritePage = (props) => {
             <Button text={'게시글 등록'} color={Palette.Primary}/>
           </CreatePostForm>
         </Main>
-        <Footer/>
+        <Footer/>;
       </FeedWriteWrapper>
   );
 };
@@ -202,13 +264,65 @@ const HashTagWrapper = styled.div`
 const SelectWrapper = styled.select`
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border-color: ${Palette.TextTertiary};
+  border-color: ${
+      Palette.TextTertiary
+  };
 `;
 
 const CreatePostForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+const PostContent = styled.textarea`
+  width: 100%;
+  height: auto;
+  min-height: 15em;
+
+  padding: 1rem;
+  box-shadow: ${Palette.ShadowBody};
+`;
+
+const ImageInput = styled.input`
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+`;
+
+const UploadLabel = styled.label`
+  width: 100px;
+  aspect-ratio: 1;
+  display: flex;
+  text-align: center;
+  font-size: 2rem;
+  color: ${Palette.Primary};
+  cursor: pointer;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  border: 0.25rem solid ${
+      Palette.Primary
+  };
+`;
+
+const ImagePreview = styled.img`
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+`;
+
+const ImageWrapper = styled.div`
+  padding: 1rem 0;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
 `;
 
 export default FeedWritePage;
