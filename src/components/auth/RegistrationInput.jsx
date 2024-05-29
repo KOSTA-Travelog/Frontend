@@ -6,6 +6,7 @@ const RegistrationInput = (props) => {
   return (
     <InputWrapper>
       <Input
+        onChange={props.onChange}
         placeholder={props.text}
         className={props.isWritten || 'placeholderEffect'}
       />
@@ -22,7 +23,8 @@ RegistrationInput.propTypes = {
   text: PropTypes.string,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
-  isWritten: PropTypes.number,
+  isWritten: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default RegistrationInput;
@@ -50,8 +52,6 @@ const Input = styled.input`
   line-height: 100%;
   padding-bottom: 0.5rem;
 
-  color: ${Palette.InputBorder};
-
   padding-left: 1rem;
   padding-top: 0.5rem;
 
@@ -63,6 +63,8 @@ const Input = styled.input`
 
   &.placeholderEffect {
     border: 1px solid ${Palette.Error};
+    color: ${Palette.InputBorder};
+
     &::placeholder {
       color: ${Palette.Error};
     }
@@ -71,9 +73,20 @@ const Input = styled.input`
 
 const RegistrationInputMessage = styled.p`
   padding-left: 0.3rem;
-  color: transparent;
-
+  /* color: transparent; */
+  display: none;
   &.unWrittenEffect {
+    display: block;
+    color: ${Palette.Error};
+  }
+`;
+
+const ValidateMessage = styled.div`
+  padding-left: 0.3rem;
+  /* color: transparent; */
+  display: none;
+  &.validationEffect {
+    display: block;
     color: ${Palette.Error};
   }
 `;

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
@@ -7,37 +7,66 @@ import Footer from '../../components/Footer';
 import ProfileImg from '../../components/myPage/ProfileImg';
 import RoundButton from '../../components/RoundButton';
 import LabeledInput from '../../components/LabeledInput';
+import { useEffect, useState } from 'react';
+import { axiosEditUserInfo, axiosUserInfo } from '../../apis/User';
+import { hashingPassword } from '../auth/Login';
 
 const EditUserData = () => {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [profileImage, setProfileImage] = useState('');
+  const [bio, setBio] = useState('');
+  const [password, setPassword] = useState('password');
+  const [checkPassword, setCheckPassword] = useState('check password');
 
-  const editItemList = [
-    {
-      item: '소개',
-      text: '저의 소개글 입니다. 여기서 수정해요',
-      editInput: true,
-      type: 'textArea',
-    },
-    { item: '이름*', text: '김선희', editInput: true, type: 'input' },
-    {
-      item: '닉네임*',
-      text: '하이하이',
-      editInput: true,
-      type: 'input',
-    },
-    { item: '비밀번호*', text: 'Password', type: 'input' },
-    { item: '비밀번호*', text: 'Confirm Password', type: 'input' },
-    {
-      item: '전화번호*',
-      text: '010-1111-1111',
-      editInput: true,
-      type: 'input',
-    },
-  ];
+  const bioItem = {
+    id: 'bio',
+    item: '소개',
+    editInput: true,
+    type: 'textArea',
+  };
+  const nameItem = {
+    id: 'name',
+    item: '이름*',
+    editInput: true,
+    type: 'input',
+  };
 
-  const inputItemList = editItemList.map((data, index) => {
-    return <LabeledInput {...data} key={index} />;
-  });
+  const nicknameItem = {
+    id: 'nickname',
+    item: '닉네임*',
+    editInput: true,
+    type: 'input',
+  };
+
+  const passwordItem = { item: '비밀번호*', text: 'password', type: 'input' };
+
+  const CheckPasswordItem = {
+    item: '비밀번호 확인*',
+    type: 'input',
+  };
+
+  const phoneNumberItem = {
+    item: '전화번호*',
+    editInput: true,
+    type: 'input',
+  };
+
+  useEffect(() => {
+    axiosUserInfo().then((res) => {
+      const data = JSON.parse(res.data.data.data);
+      setBio(data.bio);
+      setName(data.name);
+      setEmail(data.email);
+      setNickname(data.nickname);
+      setPhoneNumber(data.phoneNumber);
+      setProfileImage(data.profileImage);
+    });
+  }, []);
 
   return (
     <PageWrapper>
@@ -66,12 +95,75 @@ const EditUserData = () => {
             <i className="bi bi-pencil-fill"></i>
           </ImgWRapper>
           <ProfileImg />
-          <Email>ssssssssss@gmail.com</Email>
+          <Email>{email}</Email>
         </ProfileWrapper>
-        <InputItemWrapper>{inputItemList}</InputItemWrapper>
+        <InputItemWrapper>
+          <LabeledInput
+            {...bioItem}
+            value={bio}
+            onChange={(e) => {
+              setBio(e.target.value);
+            }}
+          />
+          <LabeledInput
+            {...nameItem}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <LabeledInput
+            {...nicknameItem}
+            value={nickname}
+            onChange={(e) => {
+              setNickname(e.target.value);
+            }}
+          />
+          <LabeledInput
+            {...passwordItem}
+            text={password}
+            onChange={async (e) => {
+              setPassword(await hashingPassword(e.target.value));
+            }}
+          />
+          <LabeledInput
+            {...CheckPasswordItem}
+            text={checkPassword}
+            onChange={async (e) => {
+              setCheckPassword(await hashingPassword(e.target.value));
+            }}
+          />
+          <LabeledInput
+            {...phoneNumberItem}
+            value={phoneNumber}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
+          />
+        </InputItemWrapper>
         <ButtonWrapper>
-          <RoundButton text={'수정 완료'} type={'primary'} action={() => {}} />
-          <RoundButton text={'회원 탈퇴'} type={'underline'} />
+          <RoundButton
+            text={'수정 완료'}
+            type={'primary'}
+            action={async () => {
+              await axiosEditUserInfo({
+                name: name,
+                nickname: nickname,
+                profileImage: profileImage,
+                password: password,
+                phoneNumber: phoneNumber,
+                bio: bio,
+                passwordCheck: checkPassword,
+                userId: JSON.parse(sessionStorage.getItem('userId')),
+              });
+              navigate('/myPage/profile');
+            }}
+          />
+          <RoundButton
+            text={'회원 탈퇴'}
+            type={'underline'}
+            action={() => {}}
+          />
         </ButtonWrapper>
       </Main>
       <Footer />

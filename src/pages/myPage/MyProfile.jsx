@@ -8,17 +8,28 @@ import { ProfileStatus } from '../../components/myPage/ProfileStatusItem';
 import Footer from '../../components/Footer';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import MyPageSetting from '../../components/myPage/MyPageSetting';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Divider from '../../components/communities/communityDetails/Divider';
+import { axiosUserInfo } from '../../apis/User';
+import { axiosCountUserFeed } from '../../apis/Feed';
 
 const MyProfile = () => {
   const navigate = useNavigate();
   const [setting, setSetting] = useState(false);
 
-  const myInfo = {
-    nickname: 'nickname',
-    email: 'ssssssssss@gmail.com',
-    bio: '안녕하세요. 소개페이지입니다. 여기에서 나의 소개를 확인할 수 있어요',
-  };
+  const [myInfo, setMyInfo] = useState({});
+  const [countPost, setCountPost] = useState(0);
+
+  useEffect(() => {
+    axiosUserInfo().then((res) => {
+      setMyInfo(JSON.parse(res.data.data.data));
+    });
+
+    axiosCountUserFeed().then((res) => {
+      setCountPost(JSON.parse(res.data.data.data));
+      console.log(JSON.parse(res.data.data.data));
+    });
+  }, []);
 
   return (
     <PageWrapper>
@@ -53,8 +64,9 @@ const MyProfile = () => {
       <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
       <Main>
         <Profile {...myInfo} />
-        <ProfileStatus />
-        <PostImages postList={[]}/>
+        {/* <ProfileStatus /> */}
+        <Divider number={countPost} />
+        <PostImages postList={[]} />
       </Main>
       <Footer />
     </PageWrapper>
@@ -86,6 +98,8 @@ const Main = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  padding-left: 1.2rem;
+  padding: 1rem 0;
 `;
 
 export default MyProfile;

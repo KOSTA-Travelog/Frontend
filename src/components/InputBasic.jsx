@@ -8,6 +8,7 @@ const InputBasic = (props) => {
     <InputWrapper>
       {props.searchIcon && <SearchIcon className="bi bi-search"></SearchIcon>}
       <InputStyle
+        text={props.text}
         placeholder={props.text}
         style={{ height: `${props.height}rem` }}
         className={
