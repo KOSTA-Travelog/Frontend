@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 import PostPreviewImage from './PostPreviewImage';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const PostImages = (props) => {
-  return <Contents>
-    {props.postList.map((data, i) =>
-        <PostPreviewImage key={i} postImage={data['image']}/>
-    )}
-  </Contents>;
+  return (
+    <Contents>
+      {props.postList.map((data, i) => (
+        <PostPreviewImage
+          key={i}
+          postImage={data['image']}
+          postId={data['postId']}
+        />
+      ))}
+    </Contents>
+  );
 };
 
 PostImages.propTypes = {
