@@ -7,3 +7,10 @@
 body {
   background-color: white;
 }
+
+.post_title_font {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+}

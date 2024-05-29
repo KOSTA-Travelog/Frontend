@@ -9,30 +9,11 @@ import { useEffect, useState } from 'react';
 import { axiosFeed } from '../apis/Feed.jsx';
 import MyPageSetting from '../components/myPage/MyPageSetting.jsx';
 
-const AppStyle = styled.div`
-  padding: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  background-color: ${Palette.BodySecondary};
-`;
-
-const Content = styled.div`
-  display: flex;
-  width: 100%;
-  max-height: 100%;
-  min-height: 80vh;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-`;
-
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
   const [setting, setSetting] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [profileImage, setProfileImage] = useState('');
   const params = useParams();
 
   useEffect(() => {
@@ -41,6 +22,9 @@ const FeedPage = () => {
         alert('잘못된 접근입니다.');
       } else {
         setFeed(JSON.parse(res.data.data.data));
+        setNickname(JSON.parse(res.data.data.data)['nickname']);
+        setProfileImage(JSON.parse(res.data.data.data)['profileImage']);
+        console.log(JSON.parse(res.data.data.data)['profileImage']);
       }
     });
   }, [params]);
@@ -97,7 +81,7 @@ const FeedPage = () => {
         <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
         <Content>
           <Section>
-            <Feed {...data} />
+            <Feed {...data} nickname={nickname} profileImage={profileImage} />
           </Section>
         </Content>
         <Footer />
@@ -105,5 +89,26 @@ const FeedPage = () => {
     </>
   );
 };
+
+const AppStyle = styled.div`
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  background-color: ${Palette.BodySecondary};
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  max-height: 100%;
+  min-height: 80vh;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default FeedPage;

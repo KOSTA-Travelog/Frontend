@@ -113,6 +113,7 @@ const Title = styled.h3`
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
+
   width: 60%;
   white-space: nowrap;
   overflow: clip;
