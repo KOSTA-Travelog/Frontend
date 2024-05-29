@@ -11,7 +11,7 @@ import MyPageSetting from '../../components/myPage/MyPageSetting';
 import { useEffect, useState } from 'react';
 import Divider from '../../components/communities/communityDetails/Divider';
 import { axiosUserInfo } from '../../apis/User';
-import { axiosCountUserFeed } from '../../apis/Feed';
+import { axiosCountUserFeed, axiosGetUserPostImage } from '../../apis/Feed';
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const MyProfile = () => {
 
   const [myInfo, setMyInfo] = useState({});
   const [countPost, setCountPost] = useState(0);
+  const [postList, setPostList] = useState([]);
 
   useEffect(() => {
     axiosUserInfo().then((res) => {
@@ -27,7 +28,11 @@ const MyProfile = () => {
 
     axiosCountUserFeed().then((res) => {
       setCountPost(JSON.parse(res.data.data.data));
-      console.log(JSON.parse(res.data.data.data));
+      // console.log(JSON.parse(res.data.data.data));
+    });
+
+    axiosGetUserPostImage().then((res) => {
+      setPostList(JSON.parse(res.data.data.data));
     });
   }, []);
 
@@ -64,9 +69,14 @@ const MyProfile = () => {
       <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
       <Main>
         <Profile {...myInfo} />
-        {/* <ProfileStatus /> */}
+
+        {/* 
+        // 프로필 정보
+        <ProfileStatus /> 
+        */}
+
         <Divider number={countPost} />
-        <PostImages postList={[]} />
+        <PostImages postList={postList} />
       </Main>
       <Footer />
     </PageWrapper>
@@ -97,7 +107,6 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
   padding-left: 1.2rem;
   padding: 1rem 0;
 `;

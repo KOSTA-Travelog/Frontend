@@ -39,3 +39,10 @@ export const axiosCountUserFeed = async () => {
       `/posts/user/count?userId=${JSON.parse(sessionStorage.getItem('userId'))}`
   );
 };
+
+export const axiosGetUserPostImage = async () => {
+  return await axios.get(
+    BASE_URL +
+      `/myPage/postList?userId=${JSON.parse(sessionStorage.getItem('userId'))}`
+  );
+};
