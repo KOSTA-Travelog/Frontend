@@ -25,7 +25,7 @@ const Line = styled.div`
   margin: 1rem;
 `;
 const Hr = styled.hr`
-  margin: 0 -1rem;
+  /* margin: 0 -1rem; */
   background: ${Palette.Divider};
   height: 1px;
   border: 0;
@@ -34,7 +34,7 @@ const Hr = styled.hr`
 
 const CountPosts = styled.p`
   color: ${Palette.Divider};
-  width: 12%;
+  width: 11%;
   padding-right: 0.2rem;
   text-align: center;
 

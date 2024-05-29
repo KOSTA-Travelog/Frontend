@@ -2,14 +2,17 @@ import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import RoundButton from '../../components/RoundButton';
 import InputBasic from '../../components/InputBasic';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { axiosCheckEmail, axiosGetUserId } from '../../apis/User';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   // useEffect(() => {}, [email, password]);
   return (
     <LoginPageWrapper>
@@ -43,7 +46,13 @@ const Login = () => {
               postLogin(email, password);
             }}
           />
-          <RoundButton text={'Create new account'} type={'transparent'} />
+          <RoundButton
+            text={'Create new account'}
+            type={'transparent'}
+            action={() => {
+              navigate('/auth/createAccount');
+            }}
+          />
         </LoginBtnWrapper>
       </LoginForm>
       <FindInfoWrapper>
@@ -147,10 +156,15 @@ const axiosPostLogin = async (id, password) => {
   return axios.request(conf);
 };
 
-const postLogin = (id, pw) => {
-  axiosPostLogin(id, pw)
-    .then((response) => {
+const postLogin = async (id, pw) => {
+  const password = await hashingPassword(pw);
+  await axiosCheckEmail(id, password).then(async (res) => {
+    await sessionStorage.setItem('userId', JSON.stringify(res.data.data.data));
+  });
+  await axiosPostLogin(id, pw)
+    .then(async (response) => {
       console.log(JSON.stringify(response.data));
+
       location.href = '/';
     })
     .catch((error) => {

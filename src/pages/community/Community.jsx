@@ -19,6 +19,8 @@ import {
 
 const Community = () => {
   const params = useParams();
+  const navigate = useNavigate();
+
   const [myCommunityList, setMyCommunityList] = useState([]);
   const [allCommunityList, setAllCommunityList] = useState([]);
 
@@ -31,8 +33,6 @@ const Community = () => {
       setAllCommunityList(JSON.parse(res.data.data.data));
     });
   }, [params]);
-
-  const navigate = useNavigate();
 
   const tabMenu = ['My Communities', 'All Communities'];
 

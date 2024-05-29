@@ -13,6 +13,8 @@ const LabeledInput = (props) => {
           height={props.height}
           editInput={props.editInput}
           onChange={props.onChange}
+          value={props.value}
+          type={props.type}
         />
       )}
       {props.type === 'textArea' && (
@@ -21,19 +23,21 @@ const LabeledInput = (props) => {
           height={props.height}
           editInput={props.editInput}
           onChange={props.onChange}
+          value={props.value}
         />
       )}
     </Wrapper>
   );
 };
 
-LabeledInput.propTypes= {
+LabeledInput.propTypes = {
   item: PropTypes.string,
   text: PropTypes.string,
   height: PropTypes.number,
   editInput: PropTypes.bool,
   type: PropTypes.oneOf(['input', 'textArea']),
   onChange: PropTypes.func,
+  value: PropTypes.any,
 };
 
 const Wrapper = styled.div`

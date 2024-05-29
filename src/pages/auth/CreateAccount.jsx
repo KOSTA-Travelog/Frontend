@@ -6,7 +6,7 @@ import HeaderButton from '../../components/headerComponents/HeaderButton';
 import { useNavigate } from 'react-router-dom';
 import Palette from '../../styles/Palette';
 import { useEffect, useState } from 'react';
-import { axiosRegistration } from '../../apis/Auth';
+import { axiosRegistration } from '../../apis/User';
 import { hashingPassword } from './Login';
 
 const CreateAccount = () => {

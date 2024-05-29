@@ -32,3 +32,10 @@ export const axiosAddFeed = async (params) => {
     }
   );
 };
+
+export const axiosCountUserFeed = async () => {
+  return await axios.post(
+    BASE_URL +
+      `/posts/user/count?userId=${JSON.parse(sessionStorage.getItem('userId'))}`
+  );
+};

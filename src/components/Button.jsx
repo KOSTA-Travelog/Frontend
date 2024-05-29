@@ -13,7 +13,7 @@ const StyleButton = styled.button`
   color: ${Palette.BodyPrimary};
 
   font-style: normal;
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 14px;
   line-height: 100%;
 `;
