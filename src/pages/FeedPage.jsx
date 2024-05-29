@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Feed from '../components/feedComponents/Feed.jsx';
 import { useEffect, useState } from 'react';
 import { axiosFeed } from '../apis/Feed.jsx';
+import MyPageSetting from '../components/myPage/MyPageSetting.jsx';
 
 const AppStyle = styled.div`
   padding: 4rem 0;
@@ -31,6 +32,7 @@ const Section = styled.section`
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
+  const [setting, setSetting] = useState(false);
   const params = useParams();
 
   useEffect(() => {
@@ -56,6 +58,20 @@ const FeedPage = () => {
         ? 'group'
         : 'private',
   };
+
+  const SettingWrapper = styled.div`
+    position: absolute;
+    z-index: 200;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: -15px;
+
+    @media (min-width: 900px) {
+      width: 95%;
+    }
+  `;
   return (
     <>
       <AppStyle>
@@ -78,6 +94,7 @@ const FeedPage = () => {
             />
           }
         />
+        <SettingWrapper>{setting && <MyPageSetting />}</SettingWrapper>
         <Content>
           <Section>
             <Feed {...data} />

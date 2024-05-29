@@ -19,6 +19,10 @@ const HeaderWrapperDiv = styled.div`
   align-items: center;
   padding: 1rem;
   height: 100%;
+  /* font-size: 18px; */
+
+  font-style: normal;
+  font-weight: 400;
 `;
 
 const ButtonWrapper = styled.div`
@@ -26,6 +30,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   min-width: 2rem;
   align-items: center;
+  font-size: 18px;
 `;
 
 const Title = styled.div`
