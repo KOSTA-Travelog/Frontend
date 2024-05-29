@@ -5,7 +5,8 @@ import Palette from '../styles/Palette';
 const ModalCustomMenu = (props) => {
   return (
     <BtnWrapper>
-      <IconWrapper>{props.icon}</IconWrapper>
+      {console.log(props.icon == null)}
+      {props.icon == null || <IconWrapper>{props.icon}</IconWrapper>}
       <Btn onClick={props.action}>{props.text}</Btn>
     </BtnWrapper>
   );
@@ -24,17 +25,18 @@ const IconWrapper = styled.div`
 
 const BtnWrapper = styled.div`
   width: 100%;
-  height: 2rem;
+  min-height: 2.2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+
+  /* justify-content: space-between; */
   align-items: center;
-  padding-top: 0.3rem;
+  /* padding: 0.3rem 0; */
 `;
 
 const Btn = styled.button`
   color: ${Palette.TextSecondary};
-  width: 5.7rem;
+  width: 6rem;
   text-align: left;
   padding-left: 0.8rem;
 `;

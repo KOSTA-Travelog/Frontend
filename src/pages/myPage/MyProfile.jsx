@@ -59,7 +59,7 @@ const MyProfile = () => {
         right={
           <HeaderButton
             color={Palette.TextPrimary}
-            icon={<i className="bi bi-gear"></i>}
+            icon={<i className="bi bi-three-dots-vertical"></i>}
             action={() => {
               setSetting(!setting);
             }}

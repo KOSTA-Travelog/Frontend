@@ -7,37 +7,6 @@ import HomeFeedPreview from '../components/feedComponents/HomeFeedPreview.jsx';
 import { useEffect, useState } from 'react';
 import { axiosHomeFeed } from '../apis/Feed.jsx';
 
-const AppStyle = styled.div`
-  // margin: 4rem 0;
-  padding: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  background-color: ${Palette.BodySecondary};
-`;
-
-const ContentDiv = styled.div`
-  display: flex;
-  width: 100%;
-  max-height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-`;
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Article = styled.article`
-  display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  background-color: ${Palette.BodyPrimary};
-`;
-
 const HomePage = () => {
   const [feedList, setFeedList] = useState([]);
 
@@ -59,6 +28,7 @@ const HomePage = () => {
           likeCount={64}
           replyCount={72}
           feedId={data['postId']}
+          profileImage={data['profileImage']}
         />
       </Article>
     );
@@ -104,5 +74,36 @@ const HomePage = () => {
     </>
   );
 };
+
+const AppStyle = styled.div`
+  // margin: 4rem 0;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  background-color: ${Palette.BodySecondary};
+`;
+
+const ContentDiv = styled.div`
+  display: flex;
+  width: 100%;
+  max-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Article = styled.article`
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: ${Palette.BodyPrimary};
+`;
 
 export default HomePage;

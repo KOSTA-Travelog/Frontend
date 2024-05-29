@@ -64,7 +64,7 @@ const IconWrapper = styled.div`
 
 const SettingModalWrapper = styled.div`
   width: 9.2rem;
-  height: 4.2rem;
+  min-height: 4.2rem;
   border-radius: 5px;
   border: 1px solid ${Palette.ModalBorder};
   background-color: ${Palette.BodyPrimary};

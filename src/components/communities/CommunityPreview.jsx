@@ -20,26 +20,23 @@ const CommunityPreview = (props) => {
         }}
       />
       <Content>
-        <TitleAreaWrapper>
+        <DataWrapper>
           <TitleWrapper>
             <Title>{props.communityTitle}</Title>
           </TitleWrapper>
-          <InfoWrapper>
-            <PersonIconWrapper>
-              <PersonIcon className="bi bi-person-fill" />
-            </PersonIconWrapper>
-            <CountPerson>{props.countMember}</CountPerson>
-          </InfoWrapper>
-        </TitleAreaWrapper>
-        <DescriptionWrapper>
-          <Description>{props.communityDescription}</Description>
-        </DescriptionWrapper>
-        <HashTagDateWrapper>
-          <HashTagWrapper>{hashtagList}</HashTagWrapper>
-          <DateWrapper>
-            <EnrollDate>{props.communityDate}</EnrollDate>
-          </DateWrapper>
-        </HashTagDateWrapper>
+          <DescriptionWrapper>
+            <Description>{props.communityDescription}</Description>
+          </DescriptionWrapper>
+          <HashTagDateWrapper>
+            <HashTagWrapper>{hashtagList}</HashTagWrapper>
+          </HashTagDateWrapper>
+        </DataWrapper>
+        <InfoWrapper>
+          <PersonIconWrapper>
+            <PersonIcon className="bi bi-person-fill" />
+          </PersonIconWrapper>
+          <CountPerson>{props.countMember}</CountPerson>
+        </InfoWrapper>
       </Content>
     </ComponentsArticle>
   );
@@ -56,25 +53,24 @@ CommunityPreview.propTypes = {
   onClick: PropTypes.func,
 };
 
+const DataWrapper = styled.div`
+  padding: 0.1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.3rem;
+`;
+
 const HashTagWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
 `;
 
-const DateWrapper = styled.div``;
-
-const EnrollDate = styled.p`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 100%;
-`;
-
 const ComponentsArticle = styled.article`
-  /* width: 22rem; */
+  padding: 0 1.4rem 0 1rem;
   width: 100%;
-  height: 6.7rem;
+  min-height: 7rem;
   background: ${Palette.BodyPrimary};
   box-shadow: 0px 2px 10px rgba(231, 233, 242, 0.7);
   border-radius: 10px;
@@ -82,40 +78,30 @@ const ComponentsArticle = styled.article`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 0.8rem;
-  padding: 0.55rem 0.7rem 0.5rem 0.5rem;
 `;
 
 const Img = styled.img`
-  /* width: 5.5rem; */
   width: 30%;
   height: 5.5rem;
   background-size: cover;
 `;
 
 const Content = styled.article`
-  /* min-width: 15rem; */
+  padding: 0.8rem 0;
   width: 70%;
   display: flex;
-  flex-direction: column;
-  padding: 0.2rem 0.5rem;
+  flex-direction: row;
   justify-content: space-between;
 `;
 
 const HashTagDateWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  padding-top: 0.2rem;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const TitleAreaWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  /* height: 3rem; */
+  justify-content: center;
+  gap: 0.4rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -124,31 +110,60 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h3`
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 16px;
   line-height: 100%;
-  width: auto;
+
+  width: 60%;
+  white-space: nowrap;
+  overflow: clip;
+  text-overflow: ellipsis;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 2rem;
   align-items: center;
+  justify-content: space-between;
+  width: 2.5rem;
+
+  height: 1rem;
 `;
 
 const PersonIconWrapper = styled.div`
-  font-size: 1.3rem;
+  display: flex;
+  flex-direction: row;
+  /* width: 100%; */
+
+  justify-content: end;
+  gap: 0.2rem;
+  font-size: 1.2rem;
 `;
 
 const PersonIcon = styled.i`
   color: ${Palette.TextSecondary};
 `;
 
-const CountPerson = styled.p``;
+const CountPerson = styled.p`
+  color: ${Palette.TextSecondary};
+  text-align: center;
+`;
 
 const DescriptionWrapper = styled.div`
+  font-size: 15px;
   padding-top: 0.3rem;
+  /* text-overflow: ellipsis; */
+  width: 10rem;
+  height: 2.5rem;
+  background: white;
+
+  overflow: hidden;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
+  text-overflow: ellipsis;
 `;
 
 const Description = styled.p``;

@@ -7,30 +7,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Feed from '../components/feedComponents/Feed.jsx';
 import { useEffect, useState } from 'react';
 import { axiosFeed } from '../apis/Feed.jsx';
-
-const AppStyle = styled.div`
-  padding: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  background-color: ${Palette.BodySecondary};
-`;
-
-const Content = styled.div`
-  display: flex;
-  width: 100%;
-  max-height: 100%;
-  min-height: 80vh;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-`;
+import MyPageSetting from '../components/myPage/MyPageSetting.jsx';
+import FeedSettingMenu from '../components/feedComponents/FeedSettingMenu.jsx';
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
+  const [setting, setSetting] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [profileImage, setProfileImage] = useState('');
   const params = useParams();
 
   useEffect(() => {
@@ -39,6 +23,9 @@ const FeedPage = () => {
         alert('잘못된 접근입니다.');
       } else {
         setFeed(JSON.parse(res.data.data.data));
+        setNickname(JSON.parse(res.data.data.data)['nickname']);
+        setProfileImage(JSON.parse(res.data.data.data)['profileImage']);
+        console.log(JSON.parse(res.data.data.data)['profileImage']);
       }
     });
   }, [params]);
@@ -56,6 +43,21 @@ const FeedPage = () => {
         ? 'group'
         : 'private',
   };
+
+  const SettingWrapper = styled.div`
+    position: absolute;
+    z-index: 200;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -0.8rem;
+    margin-left: 2.5rem;
+
+    @media (min-width: 900px) {
+      width: 95%;
+    }
+  `;
   return (
     <>
       <AppStyle>
@@ -77,10 +79,20 @@ const FeedPage = () => {
               action={() => {}}
             />
           }
+          right={
+            <HeaderButton
+              color={Palette.TextPrimary}
+              icon={<i className="bi bi-three-dots-vertical"></i>}
+              action={() => {
+                setSetting(!setting);
+              }}
+            />
+          }
         />
+        <SettingWrapper>{setting && <FeedSettingMenu />}</SettingWrapper>
         <Content>
           <Section>
-            <Feed {...data} />
+            <Feed {...data} nickname={nickname} profileImage={profileImage} />
           </Section>
         </Content>
         <Footer />
@@ -88,5 +100,26 @@ const FeedPage = () => {
     </>
   );
 };
+
+const AppStyle = styled.div`
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  background-color: ${Palette.BodySecondary};
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  max-height: 100%;
+  min-height: 80vh;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default FeedPage;

@@ -8,13 +8,18 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
 
   body {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 15px;
     color: ${Palette.TextPrimary};
     overflow-x: hidden;
     font-family: sans-serif;

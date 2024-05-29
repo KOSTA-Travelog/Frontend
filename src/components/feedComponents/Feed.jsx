@@ -6,8 +6,92 @@ import '../carousel.css';
 import ReplyComponent from '../../pages/ReplyComponent.jsx';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postImageList } from '../../apis/Feed.jsx';
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const params = useParams();
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    postImageList(params).then((res) => {
+      setImages(JSON.parse(res.data.data.data));
+    });
+  }, []);
+
+  const imageList = images.map((data) => {
+    return (
+      <div className={'embla__slide'} key={data['imageId']}>
+        <ImageWrapper>
+          <Image style={{ width: '100%' }} src={data['images']} alt="" />
+        </ImageWrapper>
+      </div>
+    );
+  });
+
+  return (
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container">{imageList}</div>
+    </div>
+  );
+}
+
+function Feed(props) {
+  const navigate = useNavigate();
+
+  return (
+    <FeedWrapper>
+      <Carousel>
+        <EmblaCarousel />
+      </Carousel>
+      <Article>
+        <FeedInfoWrapper>
+          <FeedInfo>
+            <Profile onClick={() => navigate(`/profile/${props.nickname}`)}>
+              {<ProfileImage src={props.profileImage} />}
+              <div>{props.nickname}</div>
+            </Profile>
+            <FeedIconGroup>
+              <i className="bi bi-share"></i>
+              <i className="bi bi-chat"></i>
+              <i className="bi bi-heart"></i>
+            </FeedIconGroup>
+          </FeedInfo>
+          <FeedDate>{props.date}</FeedDate>
+        </FeedInfoWrapper>
+        <FeedContentWrapper>
+          <FeedContent>{props.content}</FeedContent>
+        </FeedContentWrapper>
+        <FeedOpenStatus>
+          <GenerateOpenStatus openStatus={props.openStatus} />
+        </FeedOpenStatus>
+      </Article>
+      <Article>
+        <FeedComment>
+          <CommentExpander onClick={() => {}}>
+            <Divider></Divider>
+            <ExpanderText>댓글 8개 더보기</ExpanderText>
+          </CommentExpander>
+          <ReplyComponent
+            image={props.ProfileImage}
+            primary={'username'}
+            secondary={'2024.05.02'}
+          />
+        </FeedComment>
+      </Article>
+    </FeedWrapper>
+  );
+}
+
+Feed.propTypes = {
+  content: PropTypes.string,
+  date: PropTypes.string,
+  image: PropTypes.string,
+  openStatus: PropTypes.string,
+  nickname: PropTypes.string,
+  ProfileImage: PropTypes.string,
+};
 
 const GenerateOpenStatus = ({ openStatus }) => {
   if (openStatus === 'public') {
@@ -44,84 +128,21 @@ GenerateOpenStatus.propTypes = {
   openStatus: PropTypes.string,
 };
 
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
-  const params = useParams();
-  const [images, setImages] = useState([]);
+const FeedInfoWrapper = styled.div``;
 
-  useEffect(() => {
-    postImageList(params).then((res) => {
-      setImages(JSON.parse(res.data.data.data));
-    });
-    if (emblaApi) {
-      // console.log(emblaApi.slideNodes()); // Access API
-    }
-  }, [emblaApi]);
+const ProfileImage = styled.img`
+  border-radius: 1rem;
+  width: 2rem;
+  height: 2rem;
+`;
 
-  const imageList = images.map((data) => {
-    return (
-      <div className={'embla__slide'} key={data['imageId']}>
-        <ImageWrapper>
-          <Image style={{ width: '100%' }} src={data['images']} alt="" />
-        </ImageWrapper>
-      </div>
-    );
-  });
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">{imageList}</div>
-    </div>
-  );
-}
-
-function Feed(props) {
-  return (
-    <FeedWrapper>
-      <Carousel>
-        <EmblaCarousel />
-      </Carousel>
-      <Article>
-        <FeedInfo>
-          <FeedDate>{props.date}</FeedDate>
-          <FeedIconGroup>
-            <i className="bi bi-share"></i>
-            <i className="bi bi-chat"></i>
-            <i className="bi bi-heart"></i>
-          </FeedIconGroup>
-        </FeedInfo>
-        <FeedContentWrapper>
-          <FeedContent>{props.content}</FeedContent>
-        </FeedContentWrapper>
-        <FeedOpenStatus>
-          <GenerateOpenStatus openStatus={props.openStatus} />
-        </FeedOpenStatus>
-      </Article>
-      <Article>
-        <FeedComment>
-          <CommentExpander onClick={() => {}}>
-            <Divider></Divider>
-            <ExpanderText>댓글 8개 더보기</ExpanderText>
-          </CommentExpander>
-          <ReplyComponent
-            image={
-              'https://plus.unsplash.com/premium_photo-1706727288970-b3378fe22298?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }
-            primary={'username'}
-            secondary={'2024.05.02'}
-          />
-        </FeedComment>
-      </Article>
-    </FeedWrapper>
-  );
-}
-
-Feed.propTypes = {
-  content: PropTypes.string,
-  date: PropTypes.string,
-  image: PropTypes.string,
-  openStatus: PropTypes.string,
-};
+const Profile = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const FeedWrapper = styled.div`
   min-height: 20vh;
@@ -150,9 +171,10 @@ const FeedDate = styled.p`
 const FeedIconGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.8rem;
   height: 1rem;
-  font-size: 1rem;
+  font-size: 1.3rem;
 `;
 
 const Divider = styled.hr`
