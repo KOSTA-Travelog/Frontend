@@ -46,3 +46,12 @@ export const axiosGetUserPostImage = async () => {
       `/myPage/postList?userId=${JSON.parse(sessionStorage.getItem('userId'))}`
   );
 };
+
+export const axiosDeleteFeed = async (postId) => {
+  try {
+    const res = await axios.post(BASE_URL + `/posts/remove?postId=${postId}`);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
