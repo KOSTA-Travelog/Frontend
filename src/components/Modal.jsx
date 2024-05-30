@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import Palette from '../styles/Palette';
 import { PropTypes } from 'prop-types';
+import Button from './Button';
+import CancelDeleteButton from './common/modal/CancelDeleteButton';
 
 const Modal = (props) => {
   return (
     <Background>
       <Wrapper>
         <CloseIconWrapper>
-          <CloseIcon className="bi bi-x-lg" />
+          {props.isCloseBtnNeed && (
+            <CloseIcon className="bi bi-x-lg" onClick={props.closeAction} />
+          )}
         </CloseIconWrapper>
         <ContentWrapper>
           <TitleWrapper>
@@ -17,14 +21,30 @@ const Modal = (props) => {
             <Description>{props.description}</Description>
           </DescriptionWrapper>
         </ContentWrapper>
+        {props.isCheckDelete && (
+          <CancelDeleteButton
+            deleteAction={props.deleteAction}
+            cancelAction={props.cancelAction}
+          />
+        )}
+        {props.isConfirmButton && (
+          <Button text={'확인'} action={props.confirmAction} />
+        )}
       </Wrapper>
     </Background>
   );
 };
 
 Modal.propTypes = {
+  isCheckDelete: PropTypes.bool,
   title: PropTypes.string,
   description: PropTypes.string,
+  deleteAction: PropTypes.func,
+  cancelAction: PropTypes.func,
+  closeAction: PropTypes.func,
+  isCloseBtnNeed: PropTypes.bool,
+  isConfirmButton: PropTypes.bool,
+  confirmAction: PropTypes.func,
 };
 
 const Background = styled.div`
@@ -34,6 +54,7 @@ const Background = styled.div`
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
+  z-index: 200;
 `;
 
 const Wrapper = styled.div`
@@ -89,11 +110,12 @@ const Title = styled.h2`
 const DescriptionWrapper = styled.div`
   width: 100%;
   min-height: 2rem;
-  padding-left: 3rem;
-  padding-right: 4rem;
+  /* padding-left: 3rem;
+  padding-right: 4rem; */
 `;
 
 const Description = styled.p`
+  width: 100%;
   text-align: center;
 
   font-style: normal;

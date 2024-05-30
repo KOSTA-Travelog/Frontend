@@ -24,6 +24,7 @@ const Button = (props) => {
       style={{
         backgroundColor: `${props.color}`,
         height: `${props.height}rem`,
+        color: `${props.fontColor}`,
       }}
       onClick={props.action}
     >
@@ -37,6 +38,7 @@ Button.propTypes = {
   text: PropTypes.string,
   height: PropTypes.number,
   action: PropTypes.func,
+  fontColor: PropTypes.string,
 };
 
 export default Button;

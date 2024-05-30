@@ -6,15 +6,19 @@ import Footer from '../components/Footer.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import Feed from '../components/feedComponents/Feed.jsx';
 import { useEffect, useState } from 'react';
-import { axiosFeed } from '../apis/Feed.jsx';
-import MyPageSetting from '../components/myPage/MyPageSetting.jsx';
+import { axiosDeleteFeed, axiosFeed } from '../apis/Feed.jsx';
 import FeedSettingMenu from '../components/feedComponents/FeedSettingMenu.jsx';
+import Modal from '../components/Modal.jsx';
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
   const [setting, setSetting] = useState(false);
   const [nickname, setNickname] = useState('');
   const [profileImage, setProfileImage] = useState('');
+  const [postId, setPostId] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+
   const params = useParams();
 
   useEffect(() => {
@@ -25,7 +29,7 @@ const FeedPage = () => {
         setFeed(JSON.parse(res.data.data.data));
         setNickname(JSON.parse(res.data.data.data)['nickname']);
         setProfileImage(JSON.parse(res.data.data.data)['profileImage']);
-        console.log(JSON.parse(res.data.data.data)['profileImage']);
+        setPostId(JSON.parse(res.data.data.data)['postId']);
       }
     });
   }, [params]);
@@ -44,20 +48,6 @@ const FeedPage = () => {
         : 'private',
   };
 
-  const SettingWrapper = styled.div`
-    position: absolute;
-    z-index: 200;
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    margin-top: -0.8rem;
-    margin-left: 2.5rem;
-
-    @media (min-width: 900px) {
-      width: 95%;
-    }
-  `;
   return (
     <>
       <AppStyle>
@@ -89,17 +79,78 @@ const FeedPage = () => {
             />
           }
         />
-        <SettingWrapper>{setting && <FeedSettingMenu />}</SettingWrapper>
+        <SettingWrapper>
+          {setting && (
+            <FeedSettingMenu
+              postId={postId}
+              setModal={setModal}
+              setSetting={setSetting}
+            />
+          )}
+        </SettingWrapper>
         <Content>
           <Section>
             <Feed {...data} nickname={nickname} profileImage={profileImage} />
           </Section>
         </Content>
+
+        {/* Modal */}
+
+        <ModalWrapper>
+          {modal && (
+            <Modal
+              title={'삭제 확인'}
+              description={'해당 게시물을 삭제하시겠습니까?'}
+              isCheckDelete={true}
+              setSetting={setSetting}
+              deleteAction={() => {
+                axiosDeleteFeed(postId).then(() => {
+                  setConfirmModal(true);
+                });
+              }}
+              cancelAction={() => {
+                setModal(false);
+              }}
+              isCloseBtnNeed={false}
+            />
+          )}
+          {confirmModal && (
+            <Modal
+              title={'삭제되었습니다.'}
+              isConfirmButton={true}
+              confirmAction={() => {
+                setConfirmModal(false);
+                navigate('/');
+              }}
+            />
+          )}
+        </ModalWrapper>
         <Footer />
       </AppStyle>
     </>
   );
 };
+
+const ModalWrapper = styled.div`
+  /* width: 5rem; */
+`;
+
+const SettingWrapper = styled.div`
+  position: absolute;
+  z-index: 200;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-top: -0.8rem;
+  margin-left: 1rem;
+
+  @media (min-width: 900px) {
+    width: 95%;
+
+    margin-left: 2.5rem;
+  }
+`;
 
 const AppStyle = styled.div`
   padding: 4rem 0;

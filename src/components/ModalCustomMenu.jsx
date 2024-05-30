@@ -5,7 +5,6 @@ import Palette from '../styles/Palette';
 const ModalCustomMenu = (props) => {
   return (
     <BtnWrapper>
-      {console.log(props.icon == null)}
       {props.icon == null || <IconWrapper>{props.icon}</IconWrapper>}
       <Btn onClick={props.action}>{props.text}</Btn>
     </BtnWrapper>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Palette from '../../styles/Palette';
 import ModalCustomMenu from '../ModalCustomMenu';
 import { useNavigate } from 'react-router-dom';
+import { axiosDeleteFeed } from '../../apis/Feed';
+import { PropTypes } from 'prop-types';
 
 const FeedSettingMenu = (props) => {
   const navigate = useNavigate();
@@ -24,7 +26,10 @@ const FeedSettingMenu = (props) => {
     {
       icon: <i className="bi bi-trash"></i>,
       text: '삭제',
-      action: () => {},
+      action: () => {
+        props.setModal(true);
+        props.setSetting(false);
+      },
     },
   ];
 
@@ -33,6 +38,12 @@ const FeedSettingMenu = (props) => {
   });
 
   return <Wrapper>{btn}</Wrapper>;
+};
+
+FeedSettingMenu.propTypes = {
+  postId: PropTypes.number,
+  setModal: PropTypes.func.isRequired,
+  setSetting: PropTypes.func.isRequired,
 };
 
 const Wrapper = styled.div`
