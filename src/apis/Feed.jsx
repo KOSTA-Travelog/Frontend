@@ -7,7 +7,11 @@ export const postImageList = async (params) => {
 };
 
 export const axiosFeed = async (params) => {
-  return await axios.get(BASE_URL + `/posts/feed?postId=${params['id']}`);
+  try {
+    return await axios.get(BASE_URL + `/posts/feed?postId=${params['id']}`);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const axiosHomeFeed = async () => {

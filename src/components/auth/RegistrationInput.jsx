@@ -9,6 +9,7 @@ const RegistrationInput = (props) => {
         onChange={props.onChange}
         placeholder={props.text}
         className={props.isWritten || 'placeholderEffect'}
+        type={props.type}
       />
       <RegistrationInputMessage
         className={props.isWritten || 'unWrittenEffect'}
@@ -25,6 +26,7 @@ RegistrationInput.propTypes = {
   backgroundColor: PropTypes.string,
   isWritten: PropTypes.bool,
   onChange: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default RegistrationInput;

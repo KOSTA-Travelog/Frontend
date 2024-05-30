@@ -9,6 +9,7 @@ import Header, { HeaderTitle } from '../../components/headerComponents/Header';
 import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Footer from '../../components/Footer';
 import Feed from '../../components/feedComponents/HomeFeedPreview';
+import { axiosGetUserId } from '../../apis/User.jsx';
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
@@ -18,6 +19,7 @@ const FeedPage = () => {
   const [postId, setPostId] = useState(0);
   const [modal, setModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [userId, setUserId] = useState('');
 
   const params = useParams();
 
@@ -32,7 +34,10 @@ const FeedPage = () => {
         setPostId(JSON.parse(res.data.data.data)['postId']);
       }
     });
-  }, [params]);
+    axiosGetUserId(nickname).then((res) => {
+      setUserId(res.data.data.data);
+    });
+  }, [params, nickname]);
 
   const navigate = useNavigate();
 
@@ -72,7 +77,11 @@ const FeedPage = () => {
           right={
             <HeaderButton
               color={Palette.TextPrimary}
-              icon={<i className="bi bi-three-dots-vertical"></i>}
+              icon={
+                sessionStorage.getItem('userId') === userId && (
+                  <i className="bi bi-three-dots-vertical"></i>
+                )
+              }
               action={() => {
                 setSetting(!setting);
               }}
