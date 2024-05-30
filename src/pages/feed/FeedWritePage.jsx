@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import Palette from '../styles/Palette';
-import Footer from '../components/Footer';
-import Header from '../components/headerComponents/Header';
-import HeaderButton from '../components/headerComponents/HeaderButton';
-import LabeledInput from '../components/LabeledInput';
-import Button from '../components/Button';
+import Palette from '../../styles/Palette.jsx';
+import Footer from '../../components/Footer.jsx';
+import Header from '../../components/headerComponents/Header.jsx';
+import HeaderButton from '../../components/headerComponents/HeaderButton.jsx';
+import LabeledInput from '../../components/LabeledInput.jsx';
+import Button from '../../components/Button.jsx';
 import {useNavigate} from 'react-router-dom';
-import HashTag from '../components/HashTag';
+import HashTag from '../../components/HashTag.jsx';
 import {
   PostStatusRadio,
   PostStatusRadioGroup
-} from '../components/PostStatusRadio.jsx';
-import {BootstrapIcon} from '../components/BootstrapIcon.jsx';
+} from '../../components/PostStatusRadio.jsx';
+import {BootstrapIcon} from '../../components/BootstrapIcon.jsx';
 import axios from 'axios';
 import TextareaAutosize from 'react-textarea-autosize';
 
