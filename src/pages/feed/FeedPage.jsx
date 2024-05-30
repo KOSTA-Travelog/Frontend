@@ -90,7 +90,7 @@ const FeedPage = () => {
         </SettingWrapper>
         <Content>
           <Section>
-            <Feed {...data} nickname={nickname} profileImage={profileImage} />
+            <Feed {...data} />
           </Section>
         </Content>
 

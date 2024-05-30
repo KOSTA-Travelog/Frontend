@@ -52,7 +52,7 @@ export default function Footer() {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/feed/write">
             <IconWrapper className="primary-icon">
               <i className="bi bi-plus-circle-fill"></i>
             </IconWrapper>
