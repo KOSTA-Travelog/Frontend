@@ -1,8 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Footer from './components/Footer.jsx';
-import Header from './components/headerComponents/Header.jsx';
+import {createBrowserRouter} from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
-import FeedPage from './pages/FeedPage.jsx';
+import FeedPage from './pages/feed/FeedPage.jsx';
 import Login from './pages/auth/Login.jsx';
 import CreateAccount from './pages/auth/CreateAccount.jsx';
 import FindAccount from './pages/auth/FindAccount.jsx';
@@ -16,7 +14,7 @@ import MyProfile from './pages/myPage/MyProfile.jsx';
 import EditUserData from './pages/myPage/EditUserData.jsx';
 import CommunityForGuest from './pages/community/CommunityForGuest.jsx';
 import CommunityEdit from './pages/community/CommunityEdit.jsx';
-import FeedWritePage from './pages/FeedWritePage.jsx';
+import FeedWritePage from './pages/feed/FeedWritePage.jsx';
 import AddMember from './pages/community/AddMember.jsx';
 import Error from './pages/Error';
 import NotFoundPage from './pages/NotFoundPage';
@@ -25,88 +23,72 @@ import CurrentMember from './pages/community/CurrentMember.jsx';
 const Router = createBrowserRouter([
   {
     path: '/feed/:id',
-    element: <FeedPage />,
+    element: <FeedPage/>,
   },
   {
     path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/foo',
-    element: <Footer />,
-  },
-  {
-    path: '/head',
-    element: <Header />,
-  },
-  {
-    path: '/foo',
-    element: <Footer />,
-  },
-  {
-    path: '/head',
-    element: <Header />,
+    element: <HomePage/>,
   },
   {
     path: '/auth/login',
-    element: <Login />,
+    element: <Login/>,
   },
   {
     path: '/auth/createAccount',
-    element: <CreateAccount />,
+    element: <CreateAccount/>,
   },
   {
     path: '/auth/findAccount',
-    element: <FindAccount />,
+    element: <FindAccount/>,
   },
   {
     path: '/auth/findPassword',
-    element: <FindPassword />,
+    element: <FindPassword/>,
   },
   {
     path: '/community/:userId',
-    element: <Community />,
+    element: <Community/>,
   },
   {
     path: '/community',
-    element: <CommunityForGuest />,
+    element: <CommunityForGuest/>,
   },
   {
     path: '/community/detail',
-    element: <CommunityDetail />,
-    errorElement: <Error />,
+    element: <CommunityDetail/>,
+    errorElement: <Error/>,
   },
   {
     path: '/community/write',
-    element: <CommunityWrite />,
+    element: <CommunityWrite/>,
   },
   {
     path: '/myPage/checkPassword',
-    element: <CheckPassword />,
+    element: <CheckPassword/>,
   },
   {
     path: '/myPage/deleteAccount',
-    element: <DeleteAccount />,
+    element: <DeleteAccount/>,
   },
   {
     path: '/myPage/profile',
-    element: <MyProfile />,
+    element: <MyProfile/>,
   },
   {
     path: '/myPage/edit',
-    element: <EditUserData />,
+    element: <EditUserData/>,
   },
   {
     path: '/community/edit',
-    element: <CommunityEdit />,
+    element: <CommunityEdit/>,
   },
   {
     path: '/feed/write',
-    element: <FeedWritePage />,
+    element: <FeedWritePage/>,
   },
   {
     path: '/community/addMember',
-    element: <AddMember />,
+    element: <AddMember/>,
   },
   // {
   //   path: '/community/addMember/:nickname',
@@ -115,13 +97,13 @@ const Router = createBrowserRouter([
   // },
   {
     path: '/community/currentMember',
-    element: <CurrentMember />,
-    errorElement: <Error />,
+    element: <CurrentMember/>,
+    errorElement: <Error/>,
   },
 
   {
     path: '*',
-    element: <NotFoundPage />,
+    element: <NotFoundPage/>,
   },
 ]);
 
