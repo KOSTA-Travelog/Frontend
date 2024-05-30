@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import Palette from '../styles/Palette.jsx';
-import Header, { HeaderTitle } from '../components/headerComponents/Header.jsx';
-import HeaderButton from '../components/headerComponents/HeaderButton.jsx';
-import Footer from '../components/Footer.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
-import Feed from '../components/feedComponents/Feed.jsx';
 import { useEffect, useState } from 'react';
-import { axiosDeleteFeed, axiosFeed } from '../apis/Feed.jsx';
-import FeedSettingMenu from '../components/feedComponents/FeedSettingMenu.jsx';
-import Modal from '../components/Modal.jsx';
+import { axiosDeleteFeed, axiosFeed } from '../../apis/Feed.jsx';
+import FeedSettingMenu from '../../components/feedComponents/FeedSettingMenu.jsx';
+import Modal from '../../components/Modal.jsx';
+import Palette from '../../styles/Palette';
+import Header, { HeaderTitle } from '../../components/headerComponents/Header';
+import HeaderButton from '../../components/headerComponents/HeaderButton';
+import Footer from '../../components/Footer';
+import Feed from '../../components/feedComponents/HomeFeedPreview';
 
 const FeedPage = () => {
   const [feed, setFeed] = useState([]);
