@@ -25,8 +25,8 @@ const HomePage = () => {
           userImg={data['profileImage']}
           userName={data['nickname']}
           title={data['postTitle']}
-          likeCount={64}
-          replyCount={72}
+          likeCount={Math.floor(Math.random() * 100)}
+          replyCount={Math.floor(Math.random() * 100)}
           feedId={data['postId']}
           profileImage={data['profileImage']}
         />
