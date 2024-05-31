@@ -15,7 +15,6 @@ import {
 import { BootstrapIcon } from '../../components/BootstrapIcon.jsx';
 import axios from 'axios';
 import TextareaAutosize from 'react-textarea-autosize';
-import { axiosMyCommunityList } from '../../apis/Community.jsx';
 
 const FeedWritePage = (props) => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const FeedWritePage = (props) => {
     item: '해시태그',
     text: '#해시태그',
     editInput: false,
-    type: 'input',
+    inputStyle: 'input',
     onChange: (e) => {
       setRawHashTag(e.target.value);
     },
@@ -84,7 +83,7 @@ const FeedWritePage = (props) => {
   const feedConfig = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'http://localhost:8080/api/posts/create',
+    url: '/api/posts/create',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
@@ -109,13 +108,13 @@ const FeedWritePage = (props) => {
     });
     formData.append('postId', postId);
     await axios
-      .post('http://localhost:8080/api/posts/image', formData, imageConfig)
-      .then((res) => {
-        console.log(JSON.stringify(res.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .post('/api/posts/image', formData, imageConfig)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   const postingFeed = () => {
@@ -127,7 +126,9 @@ const FeedWritePage = (props) => {
         // console.log(json);
         const postId = await resp.data.data.data;
         console.log(postId);
-        await postingImage(await postId);
+        await postingImage(await postId).then(() => {
+          location.href = '/';
+        });
       })
       .catch((error) => {
         console.log(error);

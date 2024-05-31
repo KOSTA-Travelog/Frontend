@@ -42,7 +42,7 @@ const CommunityDetails = () => {
       setPostList(JSON.parse(res.data.data.data), queryString.get('id'));
     });
     sessionStorage.setItem('communityId', queryString.get('id'));
-  }, [queryString]);
+  }, []);
 
   useEffect(() => {
     setCountCommunity(postList.length);
