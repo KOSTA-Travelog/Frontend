@@ -22,8 +22,13 @@ export const axiosCommunity = async (queryString) => {
   );
 };
 
-export const axiosMyCommunityList = async (params) => {
-  return await axios.get(BASE_URL + `/myCommunity?userId=${params['userId']}`);
+export const axiosMyCommunityList = async () => {
+  return await axios.get(
+    BASE_URL +
+      `/communities/myCommunity?userId=${JSON.parse(
+        sessionStorage.getItem('userId')
+      )}`
+  );
 };
 
 export const axiosAllCommunityList = async () => {

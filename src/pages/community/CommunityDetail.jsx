@@ -17,6 +17,7 @@ const CommunityDetails = () => {
   const [communityInfo, setCommunityInfo] = useState();
   const [postList, setPostList] = useState([]);
   const [title, setTitle] = useState('');
+  const [countCommunity, setCountCommunity] = useState(0);
   const queryString = new URLSearchParams(location.search);
 
   const [settingModal, setSettingModal] = useState({
@@ -38,9 +39,14 @@ const CommunityDetails = () => {
       queryString.get('id'),
       queryString.get('userId')
     ).then((res) => {
-      setPostList(JSON.parse(res.data.data.data));
+      setPostList(JSON.parse(res.data.data.data), queryString.get('id'));
     });
-  }, []);
+    sessionStorage.setItem('communityId', queryString.get('id'));
+  }, [queryString]);
+
+  useEffect(() => {
+    setCountCommunity(postList.length);
+  }, [postList]);
 
   return (
     <CommunityDetailsWrapper>
@@ -49,7 +55,7 @@ const CommunityDetails = () => {
           <HeaderButton
             color={Palette.TextPrimary}
             icon={<i className="bi bi-chevron-left"></i>}
-            action={() => navigate(-1)}
+            action={() => navigate('/community')}
           />
         }
         right={
@@ -90,7 +96,7 @@ const CommunityDetails = () => {
             navigate(`/community/currentMember?id=${queryString.get('id')}`);
           }}
         />
-        <Divider number={2222} />
+        <Divider number={countCommunity} />
         <PostImages postList={postList} />
       </Main>
       <Footer />

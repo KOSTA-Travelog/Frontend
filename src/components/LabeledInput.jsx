@@ -7,17 +7,18 @@ const LabeledInput = (props) => {
   return (
     <Wrapper>
       <Item>{props.item}</Item>
-      {props.type === 'input' && (
+      {props.inputStyle === 'input' && (
         <InputBasic
           text={props.text}
           height={props.height}
           editInput={props.editInput}
           onChange={props.onChange}
           value={props.value}
+          inputStyle={props.inputStyle}
           type={props.type}
         />
       )}
-      {props.type === 'textArea' && (
+      {props.inputStyle === 'textArea' && (
         <TextArea
           text={props.text}
           height={props.height}
@@ -35,9 +36,10 @@ LabeledInput.propTypes = {
   text: PropTypes.string,
   height: PropTypes.number,
   editInput: PropTypes.bool,
-  type: PropTypes.oneOf(['input', 'textArea']),
+  inputStyle: PropTypes.oneOf(['input', 'textArea']),
   onChange: PropTypes.func,
   value: PropTypes.any,
+  type: PropTypes.string,
 };
 
 const Wrapper = styled.div`

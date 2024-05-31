@@ -25,7 +25,7 @@ const Community = () => {
   const [allCommunityList, setAllCommunityList] = useState([]);
 
   useEffect(() => {
-    axiosMyCommunityList(params).then((res) => {
+    axiosMyCommunityList().then((res) => {
       setMyCommunityList(JSON.parse(res.data.data.data));
     });
 

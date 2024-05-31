@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Palette from '../../styles/Palette.jsx';
 import Footer from '../../components/Footer.jsx';
@@ -6,15 +6,16 @@ import Header from '../../components/headerComponents/Header.jsx';
 import HeaderButton from '../../components/headerComponents/HeaderButton.jsx';
 import LabeledInput from '../../components/LabeledInput.jsx';
 import Button from '../../components/Button.jsx';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import HashTag from '../../components/HashTag.jsx';
 import {
   PostStatusRadio,
-  PostStatusRadioGroup
+  PostStatusRadioGroup,
 } from '../../components/PostStatusRadio.jsx';
-import {BootstrapIcon} from '../../components/BootstrapIcon.jsx';
+import { BootstrapIcon } from '../../components/BootstrapIcon.jsx';
 import axios from 'axios';
 import TextareaAutosize from 'react-textarea-autosize';
+import { axiosMyCommunityList } from '../../apis/Community.jsx';
 
 const FeedWritePage = (props) => {
   const navigate = useNavigate();
@@ -43,14 +44,22 @@ const FeedWritePage = (props) => {
   }, [openStatus, statusText]);
 
   useEffect(() => {
-    setHashTag(rawHashTag.split(/[#|,]/).map((t) => {
-      const text = t.trim();
-      if (text === '') {
-        return '';
-      }
-      return text.startsWith('#') ? text : '#' + text;
-    }));
+    setHashTag(
+      rawHashTag.split(/[#|,]/).map((t) => {
+        const text = t.trim();
+        if (text === '') {
+          return '';
+        }
+        return text.startsWith('#') ? text : '#' + text;
+      })
+    );
   }, [rawHashTag]);
+
+  useEffect(() => {
+    // axiosMyCommunityList().then((res) => {
+    //   console.log(res.data);
+    // });
+  }, []);
 
   const statusValue = (status) => {
     switch (status) {
@@ -69,7 +78,7 @@ const FeedWritePage = (props) => {
     if (text === '') {
       return;
     }
-    return <HashTag text={text} key={index}/>;
+    return <HashTag text={text} key={index} />;
   });
 
   const feedConfig = {
@@ -80,11 +89,11 @@ const FeedWritePage = (props) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     data: {
-      'postTitle': postTitle,
-      'postDescription': postContent,
-      'postHashtag': encodeURI(hashTag.join()),
-      'postStatus': openStatus,
-    }
+      postTitle: postTitle,
+      postDescription: postContent,
+      postHashtag: encodeURI(hashTag.join()),
+      postStatus: openStatus,
+    },
   };
 
   const imageConfig = {
@@ -99,29 +108,30 @@ const FeedWritePage = (props) => {
       formData.append('' + f.name, f);
     });
     formData.append('postId', postId);
-    await axios.post('http://localhost:8080/api/posts/image', formData,
-        imageConfig)
-    .then((res) => {
-      console.log(JSON.stringify(res.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    await axios
+      .post('http://localhost:8080/api/posts/image', formData, imageConfig)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const postingFeed = () => {
-    axios.request(feedConfig)
-    .then(async (resp) => {
-      console.log(resp);
-      // const json = JSON.parse(resp.data);
-      // console.log(json);
-      const postId = await resp.data.data.data;
-      console.log(postId);
-      await postingImage(await postId);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    axios
+      .request(feedConfig)
+      .then(async (resp) => {
+        console.log(resp);
+        // const json = JSON.parse(resp.data);
+        // console.log(json);
+        const postId = await resp.data.data.data;
+        console.log(postId);
+        await postingImage(await postId);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleChange = async (e) => {
@@ -130,112 +140,123 @@ const FeedWritePage = (props) => {
     setFile([...file, ...Array.from(e.target.files)]);
   };
   const removeFile = (key) => {
-    const filteredFile = file.filter(item => item !== key);
+    const filteredFile = file.filter((item) => item !== key);
     setFile(filteredFile);
   };
 
   return (
-      <FeedWriteWrapper>
-        <Header
-            left={
-              <HeaderButton
-                  color={Palette.TextPrimary}
-                  icon={<i className="bi bi-chevron-left"></i>}
-                  action={() => navigate(-1)}
-              />
+    <FeedWriteWrapper>
+      <Header
+        left={
+          <HeaderButton
+            color={Palette.TextPrimary}
+            icon={<i className="bi bi-chevron-left"></i>}
+            action={() => navigate(-1)}
+          />
+        }
+      />
+      <Main>
+        <CreatePostForm
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.dir(postTitle);
+            console.dir(postContent);
+            console.log(openStatus);
+            console.log(selectedCommunity);
+            console.log(hashTag);
+            if (postTitle.length > 0 && postContent.length > 0) {
+              postingFeed();
             }
-        />
-        <Main>
-          <CreatePostForm
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.dir(postTitle);
-                console.dir(postContent);
-                console.log(openStatus);
-                console.log(selectedCommunity);
-                console.log(hashTag);
-                if (postTitle.length > 0 && postContent.length > 0) {
-                  postingFeed();
-                }
-              }}
+          }}
+        >
+          <TitleInput
+            type="text"
+            name="title"
+            id="userTitle"
+            placeholder={'제목을 입력하세요'}
+            value={postTitle}
+            onChange={(e) => setPostTitle(e.target.value)}
+          />
+          <hr />
+          <PostStatusRadioGroup
+            label={statusText}
+            value={openStatus}
+            onChange={setOpenStatus}
           >
-            <input
-                style={{
-                  width: '100%', fontWeight: 'bold', fontSize: '2em',
-                  border: 'none'
+            <PostStatusRadio value="1" display="none">
+              <BootstrapIcon icon="bi-globe" />
+            </PostStatusRadio>
+            <PostStatusRadio value="2" display="none">
+              <BootstrapIcon icon="bi-people" />
+            </PostStatusRadio>
+            <PostStatusRadio value="3" display="none">
+              <BootstrapIcon icon="bi-eye-slash" />
+            </PostStatusRadio>
+          </PostStatusRadioGroup>
+          <hr />
+
+          <SelectWrapper
+            name="targetCommunity"
+            id="targetCommunity"
+            value={selectedCommunity}
+            onChange={(e) => {
+              setSelectedCommunity(e.target.value);
+            }}
+          >
+            <option value="0">커뮤니티 선택</option>
+            <option value="1">comm test1</option>
+            <option value="1">comm test1</option>
+            <option value="1">comm test1</option>
+          </SelectWrapper>
+          <hr />
+          <TextareaAutosize
+            name="content"
+            id="userContent"
+            minRows="15"
+            style={{ overflow: 'hidden' }}
+            placeholder={'내용을 입력하세요'}
+            value={postContent}
+            onChange={(e) => {
+              setPostContent(e.target.value);
+            }}
+          />
+
+          <ImageInput type="file" onChange={handleChange} id="file" multiple />
+          <ImageWrapper>
+            <div>
+              <UploadLabel htmlFor="file">+</UploadLabel>
+            </div>
+            {/*<img src={file}/>*/}
+            {file.map((item, key) => (
+              <div
+                key={key}
+                onClick={() => {
+                  removeFile(item);
                 }}
-                type="text" name="title" id="userTitle"
-                placeholder={'제목을 입력하세요'}
-                value={postTitle}
-                onChange={(e) => setPostTitle(e.target.value)}
-            />
-            <hr/>
-            <PostStatusRadioGroup label={statusText}
-                                  value={openStatus}
-                                  onChange={setOpenStatus}>
-              <PostStatusRadio value="1" display="none">
-                <BootstrapIcon
-                    icon="bi-globe"
-                />
-              </PostStatusRadio>
-              <PostStatusRadio value="2" display="none">
-                <BootstrapIcon
-                    icon="bi-people"
-                />
-              </PostStatusRadio>
-              <PostStatusRadio value="3" display="none">
-                <BootstrapIcon
-                    icon="bi-eye-slash"
-                />
-              </PostStatusRadio>
-            </PostStatusRadioGroup>
-            <hr/>
-
-            <SelectWrapper name="targetCommunity" id="targetCommunity"
-                           value={selectedCommunity}
-                           onChange={(e) => {
-                             setSelectedCommunity(e.target.value);
-                           }}
-            >
-              <option value="0">커뮤니티 선택</option>
-              <option value="1">comm test1</option>
-            </SelectWrapper>
-            <hr/>
-            <TextareaAutosize name="content" id="userContent" minRows="15"
-                              style={{overflow: 'hidden'}}
-                              placeholder={'내용을 입력하세요'}
-                              value={postContent}
-                              onChange={(e) => {
-                                setPostContent(e.target.value);
-                              }}
-            />
-
-            <ImageInput type="file" onChange={handleChange} id="file" multiple/>
-            <ImageWrapper>
-              <div>
-                <UploadLabel htmlFor="file">+</UploadLabel>
+              >
+                <ImagePreview src={URL.createObjectURL(item)} alt="" />
               </div>
-              {/*<img src={file}/>*/}
-              {file.map((item, key) => (
-                  <div key={key} onClick={() => {
-                    removeFile(item);
-                  }}>
-                    <ImagePreview src={URL.createObjectURL(item)} alt=""/>
-                  </div>
-              ))}
-            </ImageWrapper>
+            ))}
+          </ImageWrapper>
 
-            <HashtagInputWrapper>
-              <LabeledInput {...hashtagInput} />
-              <HashTagWrapper>{hashtagList}</HashTagWrapper>
-            </HashtagInputWrapper>
-            <Button text={'게시글 등록'} color={Palette.Primary}/>
-          </CreatePostForm>
-        </Main>
-        <Footer/>;
-      </FeedWriteWrapper>
+          <HashtagInputWrapper>
+            <LabeledInput {...hashtagInput} />
+            <HashTagWrapper>{hashtagList}</HashTagWrapper>
+          </HashtagInputWrapper>
+          <Button text={'게시글 등록'} color={Palette.Primary} />
+        </CreatePostForm>
+      </Main>
+      <Footer />;
+    </FeedWriteWrapper>
   );
 };
+
+const TitleInput = styled.input`
+  width: 100%;
+  /* fontWeight: 'bold'; */
+  font-size: 1.3rem;
+  border: none;
+`;
 
 const FeedWriteWrapper = styled.div``;
 
@@ -264,9 +285,7 @@ const HashTagWrapper = styled.div`
 const SelectWrapper = styled.select`
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border-color: ${
-      Palette.TextTertiary
-  };
+  border-color: ${Palette.TextTertiary};
 `;
 
 const CreatePostForm = styled.form`
@@ -303,9 +322,7 @@ const UploadLabel = styled.label`
   border-radius: 1rem;
   justify-content: center;
   align-items: center;
-  border: 0.25rem solid ${
-      Palette.Primary
-  };
+  border: 0.25rem solid ${Palette.Primary};
 `;
 
 const ImagePreview = styled.img`
