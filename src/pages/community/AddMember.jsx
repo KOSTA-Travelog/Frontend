@@ -27,7 +27,21 @@ const AddMember = (props) => {
     });
   }, [debouncedSearchText]);
 
+  const handleAddMember = (nickname) => {
+    axiosInsertCommunityMember(sessionStorage.getItem('communityId'), nickname)
+      .then(() => {
+        setSearchResult((prevResult) =>
+          prevResult.filter((member) => member.nickname !== nickname)
+        );
+      })
+      .catch((error) => {
+        console.error('Error adding member:', error);
+      });
+  };
+
   const searchResultList = searchResult.map((data) => {
+    // const isSameCommunity =
+    //   data['communityId'] == sessionStorage.getItem('communityId');
     return (
       <MemberProfile
         key={data['nickname']}
@@ -38,12 +52,7 @@ const AddMember = (props) => {
         buttonText={'추가'}
         buttonHeight={2}
         isButton={true}
-        action={() => {
-          axiosInsertCommunityMember(
-            sessionStorage.getItem('communityId'),
-            data['nickname']
-          );
-        }}
+        action={() => handleAddMember(data['nickname'])}
       />
     );
   });
@@ -56,7 +65,11 @@ const AddMember = (props) => {
             color={Palette.TextPrimary}
             icon={<i className="bi bi-chevron-left"></i>}
             // /community/detail
-            action={() => navigate(-1)}
+            action={() =>
+              navigate(
+                `/community/detail?id=${sessionStorage.getItem('communityId')}`
+              )
+            }
           />
         }
         right={

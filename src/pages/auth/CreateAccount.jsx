@@ -20,12 +20,19 @@ const CreateAccount = () => {
       isWritten: true,
       input: '',
     },
-    { key: 'password', text: 'password', isWritten: true, input: '' },
+    {
+      key: 'password',
+      text: 'password',
+      isWritten: true,
+      input: '',
+      type: 'password',
+    },
     {
       key: 'passwordCheck',
       text: 'confirm password',
       isWritten: true,
       input: '',
+      type: 'password',
     },
     {
       key: 'phoneNumber',
@@ -127,6 +134,7 @@ const CreateAccount = () => {
               key={data['key']}
               text={data['text']}
               isWritten={data['isWritten']}
+              type={data['type']}
             />
           ))}
           <SignUpBtnWrapper>

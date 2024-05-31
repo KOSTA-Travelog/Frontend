@@ -27,33 +27,37 @@ const EditUserData = () => {
     id: 'bio',
     item: '소개',
     editInput: true,
-    type: 'textArea',
+    inputStyle: 'textArea',
   };
   const nameItem = {
     id: 'name',
     item: '이름*',
     editInput: true,
-    type: 'input',
+    inputStyle: 'input',
   };
 
   const nicknameItem = {
     id: 'nickname',
     item: '닉네임*',
     editInput: true,
-    type: 'input',
+    inputStyle: 'input',
   };
 
-  const passwordItem = { item: '비밀번호*', text: 'password', type: 'input' };
+  const passwordItem = {
+    item: '비밀번호*',
+    text: 'password',
+    inputStyle: 'input',
+  };
 
   const CheckPasswordItem = {
     item: '비밀번호 확인*',
-    type: 'input',
+    inputStyle: 'input',
   };
 
   const phoneNumberItem = {
     item: '전화번호*',
     editInput: true,
-    type: 'input',
+    inputStyle: 'input',
   };
 
   useEffect(() => {
@@ -121,6 +125,7 @@ const EditUserData = () => {
           />
           <LabeledInput
             {...passwordItem}
+            type={'password'}
             text={password}
             onChange={async (e) => {
               setPassword(await hashingPassword(e.target.value));
@@ -128,6 +133,7 @@ const EditUserData = () => {
           />
           <LabeledInput
             {...CheckPasswordItem}
+            type={'password'}
             text={checkPassword}
             onChange={async (e) => {
               setCheckPassword(await hashingPassword(e.target.value));

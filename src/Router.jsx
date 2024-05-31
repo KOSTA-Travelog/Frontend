@@ -1,4 +1,4 @@
-import {createBrowserRouter} from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import FeedPage from './pages/feed/FeedPage.jsx';
 import Login from './pages/auth/Login.jsx';
@@ -23,72 +23,76 @@ import CurrentMember from './pages/community/CurrentMember.jsx';
 const Router = createBrowserRouter([
   {
     path: '/feed/:id',
-    element: <FeedPage/>,
+    element: <FeedPage />,
   },
   {
     path: '/',
-    element: <HomePage/>,
+    element: <HomePage />,
   },
   {
     path: '/auth/login',
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: '/auth/createAccount',
-    element: <CreateAccount/>,
+    element: <CreateAccount />,
   },
   {
     path: '/auth/findAccount',
-    element: <FindAccount/>,
+    element: <FindAccount />,
   },
   {
     path: '/auth/findPassword',
-    element: <FindPassword/>,
+    element: <FindPassword />,
   },
-  {
-    path: '/community/:userId',
-    element: <Community/>,
-  },
+  // {
+  //   path: '/community/user',
+  //   element: <Community />,
+  // },
   {
     path: '/community',
-    element: <CommunityForGuest/>,
+    element: `${JSON.parse(sessionStorage.getItem('userId')) != null}` ? (
+      <CommunityForGuest />
+    ) : (
+      <Community />
+    ),
   },
   {
     path: '/community/detail',
-    element: <CommunityDetail/>,
-    errorElement: <Error/>,
+    element: <CommunityDetail />,
+    errorElement: <Error />,
   },
   {
     path: '/community/write',
-    element: <CommunityWrite/>,
+    element: <CommunityWrite />,
   },
   {
     path: '/myPage/checkPassword',
-    element: <CheckPassword/>,
+    element: <CheckPassword />,
   },
   {
     path: '/myPage/deleteAccount',
-    element: <DeleteAccount/>,
+    element: <DeleteAccount />,
   },
   {
     path: '/myPage/profile',
-    element: <MyProfile/>,
+    element: <MyProfile />,
   },
   {
     path: '/myPage/edit',
-    element: <EditUserData/>,
+    element: <EditUserData />,
   },
   {
     path: '/community/edit',
-    element: <CommunityEdit/>,
+    element: <CommunityEdit />,
   },
   {
     path: '/feed/write',
-    element: <FeedWritePage/>,
+    element: <FeedWritePage />,
   },
   {
     path: '/community/addMember',
-    element: <AddMember/>,
+    element: <AddMember />,
   },
   // {
   //   path: '/community/addMember/:nickname',
@@ -97,13 +101,13 @@ const Router = createBrowserRouter([
   // },
   {
     path: '/community/currentMember',
-    element: <CurrentMember/>,
-    errorElement: <Error/>,
+    element: <CurrentMember />,
+    errorElement: <Error />,
   },
 
   {
     path: '*',
-    element: <NotFoundPage/>,
+    element: <NotFoundPage />,
   },
 ]);
 

@@ -4,7 +4,6 @@ import HeaderButton from '../../components/headerComponents/HeaderButton';
 import Palette from '../../styles/Palette';
 import { useNavigate } from 'react-router-dom';
 import Profile from '../../components/myPage/Profile';
-import { ProfileStatus } from '../../components/myPage/ProfileStatusItem';
 import Footer from '../../components/Footer';
 import PostImages from '../../components/communities/communityDetails/PostImages';
 import MyPageSetting from '../../components/myPage/MyPageSetting';
