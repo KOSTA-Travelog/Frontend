@@ -51,11 +51,11 @@ const Router = createBrowserRouter([
   // },
   {
     path: '/community',
-    element: `${JSON.parse(sessionStorage.getItem('userId')) != null}` ? (
+    element: //`${JSON.parse(sessionStorage.getItem('userId')) != null}` ? (
       <CommunityForGuest />
-    ) : (
-      <Community />
-    ),
+    //) : (
+    //  <Community />
+    //),
   },
   {
     path: '/community/detail',
